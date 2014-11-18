@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Cadastro de Questão</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<h:panelGrid columns="2">
+			<f:facet name="header">
+				Cadastro de Questões
+			</f:facet>
+
+			<h:outputLabel value="Questão:" />
+			<h:inputTextarea value="#{cadastroQuestaoBean.questao.titulo}"/>
+			<h:panelGroup>
+				<h:outputLabel value="Nº de Alternativas:" />
+				<h:selectOneMenu value="#{cadastroQuestaoBean.questao.numeroAlternativas}">
+					<f:selectItem itemValue="2" />
+					<f:selectItem itemValue="3" />
+					<f:selectItem itemValue="4" />
+					<f:selectItem itemValue="5" />
+				</h:selectOneMenu>
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<h:selectOneMenu value="#{cadastroQuestaoBean.questao.disciplina}">
+					<f:selectItems value="#{cadastroQuestaoBean.disciplinas}" 
+						var="disciplina" itemValue="#{disciplina}" itemLabel="#{disciplina.nome}"/>
+				</h:selectOneMenu>
+			</h:panelGroup>
+
+			<h:outputLabel value="a)" />
+			<h:inputTextarea rows="1" value="#{cadastroQuestaoBean.questao.alternativa1}"/>
+
+			<h:outputLabel value="b)" />
+			<h:inputTextarea rows="1" value="#{cadastroQuestaoBean.questao.alternativa2}"/>
+
+			<h:outputLabel value="c)" />
+			<h:inputTextarea rows="1" value="#{cadastroQuestaoBean.questao.alternativa3}" />
+
+			<h:outputLabel value="d)" />
+			<h:inputTextarea rows="1" value="#{cadastroQuestaoBean.questao.alternativa4}"/>
+
+			<h:outputLabel value="e)" />
+			<h:inputTextarea rows="1" value="#{cadastroQuestaoBean.questao.alternativa5}" />
+			
+			<h:commandButton value="Cadastrar" action="#{cadastroQuestaoBean.cadastrar}"/>
+			<h:commandButton value="Cancelar" action="index?faces-redirect=true"/>
+		</h:panelGrid>
+	</h:form>
+</h:body>
+
+</html>
