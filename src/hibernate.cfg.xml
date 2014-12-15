@@ -16,6 +16,6 @@
 		
 		<mapping class="br.com.rh.model.Prova"/>
 		<mapping class="br.com.rh.model.Questao"/>
-		<mapping class="br.com.rh.model.Disciplinas"/>
+		<mapping class="br.com.rh.model.Disciplina"/>
 	</session-factory>
 </hibernate-configuration>

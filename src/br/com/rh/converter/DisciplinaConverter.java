@@ -7,20 +7,20 @@ import javax.faces.convert.FacesConverter;
 
 import org.hibernate.Session;
 
-import br.com.rh.model.Disciplinas;
+import br.com.rh.model.Disciplina;
 import br.com.rh.util.HibernateUtil;
 
-@FacesConverter(forClass=Disciplinas.class)
+@FacesConverter(forClass=Disciplina.class)
 public class DisciplinaConverter implements Converter{
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		Disciplinas retorno = null;
+		Disciplina retorno = null;
 		
 		if(value != null){
 		Session session = HibernateUtil.getsessionSession();
 		
-		retorno = (Disciplinas) session.get(Disciplinas.class, new Integer(value));
+		retorno = (Disciplina) session.get(Disciplina.class, new Integer(value));
 		
 		session.close();
 		}
@@ -31,7 +31,7 @@ public class DisciplinaConverter implements Converter{
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if(value != null){
-			return ((Disciplinas) value).getId().toString();
+			return ((Disciplina) value).getId().toString();
 		}
 		return null;
 	}

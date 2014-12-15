@@ -2,6 +2,7 @@ package br.com.rh.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,7 +11,7 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table
-public class Disciplinas implements Serializable{
+public class Disciplina implements Serializable{
 	private Integer id;
 	private String nome;
 	
@@ -22,6 +23,7 @@ public class Disciplinas implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
+	@Column
 	public String getNome() {
 		return nome;
 	}
@@ -44,7 +46,7 @@ public class Disciplinas implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Disciplinas other = (Disciplinas) obj;
+		Disciplina other = (Disciplina) obj;
 		if (id != other.id)
 			return false;
 		if (nome == null) {

@@ -13,7 +13,7 @@ public class HibernateUtil {
 	static {
 		try{
 		Configuration configuration = new Configuration();
-		configuration.configure();
+		configuration.configure(); 
 		
 		ServiceRegistry serviceRegistry = new ServiceRegistryBuilder()
 			.applySettings(configuration.getProperties()).buildServiceRegistry();

@@ -18,7 +18,7 @@ public class Questao implements Serializable{
 	private String titulo, alternativa1, alternativa2, 
 	alternativa3, alternativa4, alternativa5, numeroAlternativas;
 	private Prova prova;
-	private Disciplinas disciplina; 
+	private Disciplina disciplina; 
 
 	@Id 
 	@GeneratedValue
@@ -97,11 +97,11 @@ public class Questao implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="disciplina_id")
-	public Disciplinas getDisciplina() {
+	public Disciplina getDisciplina() {
 		return disciplina;
 	}
 
-	public void setDisciplina(Disciplinas disciplina) {
+	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
 	}
 	

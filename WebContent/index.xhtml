@@ -9,14 +9,25 @@
 </h:head>
 
 <h:body>
-<h:form>
-	<h:panelGrid>
-		<f:facet name="header">Gerador de prova</f:facet>
+	<h:form>
+		<h:panelGrid>
+			<f:facet name="header">Gerador de prova</f:facet>
 
-		<h:commandButton value="Cadastrar Disciplina" action="CadastroDisciplina?faces-redirect=true"/>
-		<h:commandButton value="Cadastrar Questão" action="CadastroQuestao?faces-redirect=true"/>
-		<h:commandButton value="Gerar Prova" action="GerarProva?faces-redirect=true"/>
-	</h:panelGrid>
+			<h:panelGroup>
+				<h:commandButton value="Cadastrar Disciplinas"
+					action="CadastroDisciplina?faces-redirect=true" />
+				<h:commandButton value="Listar/Alterar Disciplinas" />
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<h:commandButton value="Cadastrar Questões"
+					action="CadastroQuestao?faces-redirect=true" />
+				<h:commandButton value="Listar/Alterar Questões" />
+			</h:panelGroup>
+
+			<h:commandButton value="Gerar Prova"
+				action="GerarProva?faces-redirect=true" />
+		</h:panelGrid>
 	</h:form>
 </h:body>
 </html>

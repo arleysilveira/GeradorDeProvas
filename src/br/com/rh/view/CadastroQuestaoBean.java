@@ -10,14 +10,14 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 
-import br.com.rh.model.Disciplinas;
+import br.com.rh.model.Disciplina;
 import br.com.rh.model.Questao;
 import br.com.rh.util.HibernateUtil;
 
 @ManagedBean
 public class CadastroQuestaoBean {
 	private Questao questao;
-	private List<Disciplinas> disciplinas = new ArrayList<Disciplinas>();
+	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 	
 	public CadastroQuestaoBean(){
 		this.questao = new Questao();
@@ -28,7 +28,7 @@ public class CadastroQuestaoBean {
 	public void init(){
 		Session session = HibernateUtil.getsessionSession();
 		
-		this.disciplinas = session.createCriteria(Disciplinas.class)
+		this.disciplinas = session.createCriteria(Disciplina.class)
 				.addOrder(Order.asc("nome"))
 				.list();
 		
@@ -55,11 +55,11 @@ public class CadastroQuestaoBean {
 		this.questao = questao;
 	}
 
-	public List<Disciplinas> getDisciplinas() {
+	public List<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}
 
-	public void setDisciplinas(List<Disciplinas> disciplinas) {
+	public void setDisciplinas(List<Disciplina> disciplinas) {
 		this.disciplinas = disciplinas;
 	}
 	

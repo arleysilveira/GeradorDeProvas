@@ -8,15 +8,15 @@ import javax.faces.context.FacesContext;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import br.com.rh.model.Disciplinas;
+import br.com.rh.model.Disciplina;
 import br.com.rh.util.HibernateUtil;
 
 @ManagedBean
 public class CadastroDisciplinasBean {
-	private Disciplinas disciplina;
+	private Disciplina disciplina;
 
 	public CadastroDisciplinasBean() {
-		this.disciplina = new Disciplinas();
+		this.disciplina = new Disciplina();
 	}
 
 	public void cadastrar() {
@@ -34,7 +34,7 @@ public class CadastroDisciplinasBean {
 
 			trx.commit();
 			session.close();
-			this.disciplina = new Disciplinas();
+			this.disciplina = new Disciplina();
 			this.adicionaMensagem(null, FacesMessage.SEVERITY_INFO, "Cadastro concluído",
 					"Cadastro efetuado com sucesso");
 		}
@@ -47,11 +47,11 @@ public class CadastroDisciplinasBean {
 		context.addMessage(clientId, message);
 	}
 
-	public Disciplinas getDisciplina() {
+	public Disciplina getDisciplina() {
 		return disciplina;
 	}
 
-	public void setDisciplina(Disciplinas disciplina) {
+	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
 	}
 
