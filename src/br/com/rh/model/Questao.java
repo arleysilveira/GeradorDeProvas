@@ -17,7 +17,7 @@ public class Questao implements Serializable{
 	private Integer id;
 	private String titulo, alternativa1, alternativa2, 
 	alternativa3, alternativa4, alternativa5, numeroAlternativas;
-	private Prova prova;
+	//private Prova prova;
 	private Disciplina disciplina; 
 
 	@Id 
@@ -86,7 +86,7 @@ public class Questao implements Serializable{
 		this.alternativa5 = alternativa5;
 	}
 
-	@Column
+	@Column(name="numero_alternativas")
 	public String getNumeroAlternativas() {
 		return numeroAlternativas;
 	}
@@ -105,7 +105,7 @@ public class Questao implements Serializable{
 		this.disciplina = disciplina;
 	}
 	
-	@ManyToOne
+/*	@ManyToOne
 	@JoinColumn(name="prova_id")
 	public Prova getProva() {
 		return prova;
@@ -115,7 +115,7 @@ public class Questao implements Serializable{
 
 	public void setProva(Prova prova) {
 		this.prova = prova;
-	}
+	}*/
 
 	@Override
 	public int hashCode() {
@@ -138,7 +138,7 @@ public class Questao implements Serializable{
 				* result
 				+ ((numeroAlternativas == null) ? 0 : numeroAlternativas
 						.hashCode());
-		result = prime * result + ((prova == null) ? 0 : prova.hashCode());
+		//result = prime * result + ((prova == null) ? 0 : prova.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		return result;
 	}
@@ -189,11 +189,11 @@ public class Questao implements Serializable{
 				return false;
 		} else if (!numeroAlternativas.equals(other.numeroAlternativas))
 			return false;
-		if (prova == null) {
+		/*if (prova == null) {
 			if (other.prova != null)
 				return false;
 		} else if (!prova.equals(other.prova))
-			return false;
+			return false;*/
 		if (titulo == null) {
 			if (other.titulo != null)
 				return false;
