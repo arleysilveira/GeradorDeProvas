@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class Questao implements Serializable{
 	private Integer id;
 	private String titulo, alternativa1, alternativa2, 
-	alternativa3, alternativa4, alternativa5, numeroAlternativas;
+	alternativa3, alternativa4, alternativa5, numeroAlternativas, dificuldade;
 	//private Prova prova;
 	private Disciplina disciplina; 
 
@@ -105,6 +105,8 @@ public class Questao implements Serializable{
 		this.disciplina = disciplina;
 	}
 	
+	
+	
 /*	@ManyToOne
 	@JoinColumn(name="prova_id")
 	public Prova getProva() {
@@ -116,6 +118,14 @@ public class Questao implements Serializable{
 	public void setProva(Prova prova) {
 		this.prova = prova;
 	}*/
+
+	public String getDificuldade() {
+		return dificuldade;
+	}
+
+	public void setDificuldade(String dificuldade) {
+		this.dificuldade = dificuldade;
+	}
 
 	@Override
 	public int hashCode() {
@@ -132,13 +142,14 @@ public class Questao implements Serializable{
 		result = prime * result
 				+ ((alternativa5 == null) ? 0 : alternativa5.hashCode());
 		result = prime * result
+				+ ((dificuldade == null) ? 0 : dificuldade.hashCode());
+		result = prime * result
 				+ ((disciplina == null) ? 0 : disciplina.hashCode());
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime
 				* result
 				+ ((numeroAlternativas == null) ? 0 : numeroAlternativas
 						.hashCode());
-		//result = prime * result + ((prova == null) ? 0 : prova.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		return result;
 	}
@@ -177,23 +188,26 @@ public class Questao implements Serializable{
 				return false;
 		} else if (!alternativa5.equals(other.alternativa5))
 			return false;
+		if (dificuldade == null) {
+			if (other.dificuldade != null)
+				return false;
+		} else if (!dificuldade.equals(other.dificuldade))
+			return false;
 		if (disciplina == null) {
 			if (other.disciplina != null)
 				return false;
 		} else if (!disciplina.equals(other.disciplina))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (numeroAlternativas == null) {
 			if (other.numeroAlternativas != null)
 				return false;
 		} else if (!numeroAlternativas.equals(other.numeroAlternativas))
 			return false;
-		/*if (prova == null) {
-			if (other.prova != null)
-				return false;
-		} else if (!prova.equals(other.prova))
-			return false;*/
 		if (titulo == null) {
 			if (other.titulo != null)
 				return false;
