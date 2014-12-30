@@ -6,7 +6,7 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost/GeradorDeProva</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost/GeradorDeProvas</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password">root</property>
 
@@ -17,5 +17,7 @@
 		<mapping class="br.com.rh.model.Prova"/>
 		<mapping class="br.com.rh.model.Questao"/>
 		<mapping class="br.com.rh.model.Disciplina"/>
+		<mapping class="br.com.rh.model.Cargo"/>
+		<mapping class="br.com.rh.model.Funcao"/>
 	</session-factory>
 </hibernate-configuration>

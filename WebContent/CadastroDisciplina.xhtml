@@ -17,12 +17,12 @@
 
 		<h:outputLabel value="Disciplina: " />
 		<h:panelGroup>
-			<h:inputText id="nome" value="#{cadastroDisciplinasBean.disciplina.nome}" />
+			<h:inputText id="nome" value="#{cadastroDisciplinaBean.disciplina.nome}" />
 			<h:message for="nome"/>
 		</h:panelGroup>
 		
-		<h:commandButton value="Cadastrar" action="#{cadastroDisciplinasBean.cadastrar}"/>
-		<h:commandButton value="Cancelar" action="index?faces-redirect=true"/>
+		<h:commandButton value="Cadastrar" action="#{cadastroDisciplinaBean.cadastrar}"/>
+		<h:commandButton value="Voltar" action="index?faces-redirect=true"/>
 	</h:panelGrid>
 	</h:form>
 </h:body>

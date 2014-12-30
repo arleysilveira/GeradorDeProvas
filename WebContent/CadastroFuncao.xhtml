@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -9,18 +9,25 @@
 </h:head>
 
 <h:body>
+<h:messages />
 	<h:form id="frm">
 	<h:panelGrid columns="2">
 		<f:facet name="header">Cadastro de Funções</f:facet>
 
 		<h:outputLabel value="Função: " />
 		<h:panelGroup>
-			<h:inputText id="nome" value="#{cadastroDisciplinasBean.disciplina.nome}" />
+			<h:inputText id="nome" value="#{cadastroFuncaoBean.funcao.nome}" />
 			<h:message for="nome"/>
 		</h:panelGroup>
 		
-		<h:commandButton value="Cadastrar" action="#{cadastroDisciplinasBean.cadastrar}"/>
-		<h:commandButton value="Cancelar" action="index?faces-redirect=true"/>
+		<h:outputLabel value="Cargo:"/>
+			<h:selectOneMenu value="#{cadastroFuncaoBean.funcao.cargo}" >
+				<f:selectItems value="#{cadastroFuncaoBean.cargos}"
+					var="cargo" itemValue="#{cargo}" itemLabel="#{cargo.nome}"/>
+			</h:selectOneMenu>
+		
+		<h:commandButton value="Cadastrar" action="#{cadastroFuncaoBean.cadastrar}"/>
+		<h:commandButton value="Voltar" action="index?faces-redirect=true"/>
 	</h:panelGrid>
 	</h:form>
 </h:body>
