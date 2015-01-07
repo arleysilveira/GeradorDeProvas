@@ -2,15 +2,15 @@ package br.com.rh.view;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-
-import org.hibernate.Session;
-
 import br.com.rh.model.Disciplina;
+import br.com.rh.repository.Disciplinas;
 import br.com.rh.util.FacesUtil;
+import br.com.rh.util.Repositorios;
 
 @ManagedBean
 public class CadastroDisciplinaBean {
 	private Disciplina disciplina;
+	private Repositorios repositorios = new Repositorios();
 
 	public CadastroDisciplinaBean() {
 		this.disciplina = new Disciplina();
@@ -24,11 +24,8 @@ public class CadastroDisciplinaBean {
 			FacesUtil.mensagemDetalhada("frm:nome", FacesMessage.SEVERITY_ERROR, "Nome incompleto",
 					"A disciplina deve possuir no mínimo 5 letras");
 		} else {
-			
-			
-			Session session = (Session) FacesUtil.getRequestAttribute("session");
-
-			session.merge(this.disciplina);
+			Disciplinas disciplinas = this.repositorios.getDisciplinas();
+			disciplinas.guardar(this.disciplina);
 
 			this.disciplina = new Disciplina();
 			FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Cadastro concluído");
@@ -43,4 +40,14 @@ public class CadastroDisciplinaBean {
 		this.disciplina = disciplina;
 	}
 
+	public Repositorios getRepositorios() {
+		return repositorios;
+	}
+
+	public void setRepositorios(Repositorios repositorios) {
+		this.repositorios = repositorios;
+	}
+
+	
+	
 }

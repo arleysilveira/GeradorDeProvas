@@ -7,31 +7,27 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 
-import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-
 import br.com.rh.model.Cargo;
 import br.com.rh.model.Funcao;
+import br.com.rh.repository.Cargos;
+import br.com.rh.repository.Funcoes;
 import br.com.rh.util.FacesUtil;
+import br.com.rh.util.Repositorios;
 
 @ManagedBean
 public class CadastroFuncaoBean {
 	private List<Cargo> cargos = new ArrayList<Cargo>();
 	private Funcao funcao;
-	private Session session;
+	private Repositorios repositorios = new Repositorios();
 	
 	public CadastroFuncaoBean(){
 		this.funcao = new Funcao();
 	}
 	
-	@SuppressWarnings("unchecked")
 	@PostConstruct
 	public void init(){
-		this.session = (Session) FacesUtil.getRequestAttribute("session");
-		
-		this.cargos = session.createCriteria(Cargo.class)
-				.addOrder(Order.asc("nome"))
-				.list();
+		Cargos cargos = this.repositorios.getCargos();
+		this.cargos = cargos.listarTodos();
 	}
 	
 	
@@ -43,8 +39,8 @@ public class CadastroFuncaoBean {
 			FacesUtil.mensagemDetalhada("frm:nome", FacesMessage.SEVERITY_ERROR, "Nome incompleto",
 					"A função deve possuir no mínimo 5 letras");
 		} else {
-			this.session = (Session) FacesUtil.getRequestAttribute("session");
-			session.merge(this.funcao);
+			Funcoes funcao = this.repositorios.getFuncoes();
+			funcao.guardar(this.funcao);
 
 			this.funcao = new Funcao();
 			FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Cadastro concluído");

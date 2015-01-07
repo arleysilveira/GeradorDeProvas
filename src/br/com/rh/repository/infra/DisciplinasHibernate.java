@@ -24,4 +24,21 @@ public class DisciplinasHibernate implements Disciplinas {
 				.list();
 	}
 
+	@Override
+	public Disciplina porCodigo(Integer codigo) {
+		return (Disciplina) session.get(Disciplina.class, codigo);
+	}
+
+	@Override
+	public Disciplina guardar(Disciplina disciplina) {
+		return (Disciplina) this.session.merge(disciplina);
+	}
+
+	@Override
+	public void excluir(Disciplina disciplina) {
+		this.session.delete(disciplina);
+	}
+
+	
+	
 }

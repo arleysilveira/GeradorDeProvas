@@ -6,44 +6,41 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
-import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-
-import br.com.rh.model.Cargo;
 import br.com.rh.model.Disciplina;
+import br.com.rh.model.Funcao;
 import br.com.rh.model.Questao;
-import br.com.rh.util.FacesUtil;
+import br.com.rh.repository.Disciplinas;
+import br.com.rh.repository.Funcoes;
+import br.com.rh.repository.Questoes;
+import br.com.rh.util.Repositorios;
 
 @ManagedBean
 public class CadastroQuestaoBean {
 	private Questao questao;
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
-	private List<Cargo> cargos = new ArrayList<Cargo>();
-	private Session session;
+	private List<Funcao> funcoes = new ArrayList<Funcao>();
+	private Repositorios repositorios = new Repositorios();
 	
 	public CadastroQuestaoBean(){
 		this.questao = new Questao();
 	}
 	
-	@SuppressWarnings("unchecked")
 	@PostConstruct
 	public void init(){
-		this.session = (Session) FacesUtil.getRequestAttribute("session");		
+		Disciplinas disciplinas = this.repositorios.getDisciplinas();
+		this.disciplinas = disciplinas.listarTodas();
 		
-		this.disciplinas = session.createCriteria(Disciplina.class)
-				.addOrder(Order.asc("nome"))
-				.list();
-		
-		this.cargos = session.createCriteria(Cargo.class)
-				.addOrder(Order.asc("nome"))
-				.list();
-		
+		Funcoes funcoes = this.repositorios.getFuncoes();
+		this.funcoes = funcoes.listarTodas();
 	}
 
 	public void cadastrar(){
-		this.session = (Session) FacesUtil.getRequestAttribute("session");
-		session.merge(this.questao);
+		Questoes questoes = this.repositorios.getQuestoes();
+		questoes.guardar(this.questao);
+		
+		this.questao = new Questao();
 	}
+	
 	
 	public Questao getQuestao() {
 		return questao;
@@ -61,14 +58,22 @@ public class CadastroQuestaoBean {
 		this.disciplinas = disciplinas;
 	}
 
-	public List<Cargo> getCargos() {
-		return cargos;
+	public List<Funcao> getFuncoes() {
+		return funcoes;
 	}
 
-	public void setCargos(List<Cargo> cargos) {
-		this.cargos = cargos;
+	public void setFuncoes(List<Funcao> funcoes) {
+		this.funcoes = funcoes;
 	}
-	
+
+	public Repositorios getRepositorios() {
+		return repositorios;
+	}
+
+	public void setRepositorios(Repositorios repositorios) {
+		this.repositorios = repositorios;
+	}
+
 	
 	
 }

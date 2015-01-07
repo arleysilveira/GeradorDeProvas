@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Table
 public class Questao implements Serializable{
 	private Integer id;
-	private String titulo, alternativa1, alternativa2, 
+	private String titulo, alternativa1, alternativa2, alternativaCorreta,
 	alternativa3, alternativa4, alternativa5, numeroAlternativas, dificuldade;
 	//private Prova prova;
 	private Disciplina disciplina; 
@@ -107,6 +107,7 @@ public class Questao implements Serializable{
 	
 	
 	
+	
 /*	@ManyToOne
 	@JoinColumn(name="prova_id")
 	public Prova getProva() {
@@ -118,6 +119,15 @@ public class Questao implements Serializable{
 	public void setProva(Prova prova) {
 		this.prova = prova;
 	}*/
+
+	@Column(name="alternativa_correta")
+	public String getAlternativaCorreta() {
+		return alternativaCorreta;
+	}
+
+	public void setAlternativaCorreta(String alternativaCorreta) {
+		this.alternativaCorreta = alternativaCorreta;
+	}
 
 	public String getDificuldade() {
 		return dificuldade;
@@ -141,6 +151,10 @@ public class Questao implements Serializable{
 				+ ((alternativa4 == null) ? 0 : alternativa4.hashCode());
 		result = prime * result
 				+ ((alternativa5 == null) ? 0 : alternativa5.hashCode());
+		result = prime
+				* result
+				+ ((alternativaCorreta == null) ? 0 : alternativaCorreta
+						.hashCode());
 		result = prime * result
 				+ ((dificuldade == null) ? 0 : dificuldade.hashCode());
 		result = prime * result
@@ -187,6 +201,11 @@ public class Questao implements Serializable{
 			if (other.alternativa5 != null)
 				return false;
 		} else if (!alternativa5.equals(other.alternativa5))
+			return false;
+		if (alternativaCorreta == null) {
+			if (other.alternativaCorreta != null)
+				return false;
+		} else if (!alternativaCorreta.equals(other.alternativaCorreta))
 			return false;
 		if (dificuldade == null) {
 			if (other.dificuldade != null)
