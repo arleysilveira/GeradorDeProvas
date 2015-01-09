@@ -19,7 +19,7 @@ public class QuestoesHibernate implements Questoes{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Questao> listarTodas() {
-		return session.createCriteria(Questao.class).addOrder(Order.asc("nome")).list();
+		return session.createCriteria(Questao.class).addOrder(Order.asc("titulo")).list();
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class QuestoesHibernate implements Questoes{
 
 	@Override
 	public void excluir(Questao questao) {
-		session.delete(questao);
+		this.session.delete(questao);
 	}
 	
 }

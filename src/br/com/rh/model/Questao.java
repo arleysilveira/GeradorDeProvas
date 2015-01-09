@@ -18,6 +18,7 @@ public class Questao implements Serializable{
 	private String titulo, alternativa1, alternativa2, alternativaCorreta,
 	alternativa3, alternativa4, alternativa5, numeroAlternativas, dificuldade;
 	//private Prova prova;
+	private Funcao funcao;
 	private Disciplina disciplina; 
 
 	@Id 
@@ -104,8 +105,15 @@ public class Questao implements Serializable{
 	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
 	}
-	
-	
+	@ManyToOne
+	@JoinColumn(name="id_funcao")
+	public Funcao getFuncao() {
+		return funcao;
+	}
+
+	public void setFuncao(Funcao funcao) {
+		this.funcao = funcao;
+	}
 	
 	
 /*	@ManyToOne
@@ -119,6 +127,7 @@ public class Questao implements Serializable{
 	public void setProva(Prova prova) {
 		this.prova = prova;
 	}*/
+
 
 	@Column(name="alternativa_correta")
 	public String getAlternativaCorreta() {
@@ -159,6 +168,7 @@ public class Questao implements Serializable{
 				+ ((dificuldade == null) ? 0 : dificuldade.hashCode());
 		result = prime * result
 				+ ((disciplina == null) ? 0 : disciplina.hashCode());
+		result = prime * result + ((funcao == null) ? 0 : funcao.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime
 				* result
@@ -216,6 +226,11 @@ public class Questao implements Serializable{
 			if (other.disciplina != null)
 				return false;
 		} else if (!disciplina.equals(other.disciplina))
+			return false;
+		if (funcao == null) {
+			if (other.funcao != null)
+				return false;
+		} else if (!funcao.equals(other.funcao))
 			return false;
 		if (id == null) {
 			if (other.id != null)

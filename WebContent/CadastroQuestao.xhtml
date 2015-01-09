@@ -21,6 +21,7 @@
 
 			<h:outputLabel value="Disciplina:" />
 			<h:selectOneMenu value="#{cadastroQuestaoBean.questao.disciplina}">
+				<f:selectItem itemLabel="Selecione" itemValue="" />
 				<f:selectItems value="#{cadastroQuestaoBean.disciplinas}"
 					var="disciplina" itemValue="#{disciplina}"
 					itemLabel="#{disciplina.nome}" />
@@ -35,7 +36,8 @@
 			</h:selectOneMenu>
 
 			<h:outputLabel value="Funções:"/>
-			<h:selectOneMenu>
+			<h:selectOneMenu value="#{cadastroQuestaoBean.questao.funcao}">
+				<f:selectItem itemLabel="Selecione" itemValue="" />
 				<f:selectItems value="#{cadastroQuestaoBean.funcoes}" var="funcao"
 					itemLabel="#{funcao.nome}" itemValue="#{funcao}" />
 			</h:selectOneMenu>

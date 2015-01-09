@@ -11,18 +11,18 @@
 </h:head>
 
 <h:body>
-	<h:outputLabel value="Lista de Disciplinas"/>
+	<h:outputLabel value="Lista de Questões"/>
 	<h:form>
 		<ol>
-			<ui:repeat var="disciplina"
-				value="#{listarAlterarDisciplinaBean.disciplinas}">
-				<li>#{disciplina.nome}
+			<ui:repeat var="questao"
+				value="#{listarAlterarQuestaoBean.questoes}">
+				<li>#{questao.titulo}
 					<h:commandButton value="Alterar"/>
 					<h:commandButton value="Excluir"
-						action="#{listarAlterarDisciplinaBean.excluir}">
+						action="#{listarAlterarQuestaoBean.deletar}">
 						<f:setPropertyActionListener
-							target="#{listarAlterarDisciplinaBean.disciplinaSelecionada}"
-							value="#{disciplina}" />
+							target="#{listarAlterarQuestaoBean.questaoSelecionada}"
+							value="#{questao}" />
 					</h:commandButton>
 				</li>
 			</ui:repeat>

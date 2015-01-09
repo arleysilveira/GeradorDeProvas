@@ -35,7 +35,7 @@ public class FuncoesHibernate implements Funcoes{
 
 	@Override
 	public Funcao porCodigo(Integer codigo) {
-		return (Funcao) this.session.get(Funcao.class, codigo);
+		return (Funcao) session.get(Funcao.class, codigo);
 	}
 
 	
