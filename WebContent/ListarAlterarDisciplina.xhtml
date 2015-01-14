@@ -7,29 +7,42 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Insert title here</title>
+	<title>Disciplinas</title>
+	
+	<h:outputStylesheet library="css" name="sistema.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="listar-alterar-excluir.css"></h:outputStylesheet>
 </h:head>
 
 <h:body>
-	<h:outputLabel value="Lista de Disciplinas"/>
-	<h:form>
-		<ol>
-			<ui:repeat var="disciplina"
-				value="#{listarAlterarDisciplinaBean.disciplinas}">
-				<li>#{disciplina.nome}
-					<h:commandButton value="Alterar"/>
-					<h:commandButton value="Excluir"
-						action="#{listarAlterarDisciplinaBean.excluir}">
-						<f:setPropertyActionListener
-							target="#{listarAlterarDisciplinaBean.disciplinaSelecionada}"
-							value="#{disciplina}" />
-					</h:commandButton>
-				</li>
-			</ui:repeat>
-		</ol>
-		<h:commandButton value="Voltar" action="index?faces-redirect=true"/>
+	<h1>Disciplinas</h1>
+
+	<h:form id="frm">
+		<h:dataTable var="disciplina" value="#{listarAlterarDisciplinaBean.disciplinas}" width="20%"
+		styleClass="grid" headerClass="cabecalho" rowClasses="cor-sim, cor-nao" 
+		columnClasses="disciplina-funcao, operacoes">
+			
+			<h:column>
+				<f:facet name="header">Disciplina</f:facet>
+				
+				<h:outputText value="#{disciplina.nome}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Operações</f:facet>
+				<h:link outcome="CadastroDisciplina">
+					<h:graphicImage value="/imagens/editar.png"/>
+					<f:param name="codigo" value="#{disciplina.id}"/>
+				</h:link>
+				
+				<h:commandLink action="#{listarAlterarDisciplinaBean.excluir}">
+					<h:graphicImage value="/imagens/excluir.png"/>
+					<f:setPropertyActionListener target="#{listarAlterarDisciplinaBean.disciplinaSelecionada}" 
+					value="#{disciplina}"/>
+				</h:commandLink>
+			</h:column>
+			
+		</h:dataTable>
 	</h:form>
-	
 	
 </h:body>
 

@@ -7,13 +7,13 @@ import br.com.rh.util.HibernateUtil;
 
 
 public class TesteHibernate {
-	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		Session session = HibernateUtil.getsessionSession();
 		
-		List<Questao> provas = session.createCriteria(Questao.class).list();
+		@SuppressWarnings("unchecked")
+		List<Questao> questoes = session.createCriteria(Questao.class).list();
 		
-		for(Questao p : provas){
+		for(Questao p : questoes){
 			System.out.println(p.getTitulo()+"-");
 		}
 		
