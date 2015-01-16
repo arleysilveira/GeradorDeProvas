@@ -5,24 +5,21 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import org.hibernate.Session;
+import br.com.rh.model.Questao;
+import br.com.rh.repository.Questoes;
+import br.com.rh.util.Repositorios;
 
-import br.com.rh.model.Cargo;
-import br.com.rh.util.HibernateUtil;
-
-@FacesConverter(forClass=Cargo.class)
-public class CargoConverter implements Converter{
+@FacesConverter(forClass=Questao.class)
+public class QuestaoConverter implements Converter{
+	private Repositorios repositorios = new Repositorios();
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		Cargo retorno = null;
+		Questao retorno = null;
 		
-		if(value != null){
-		Session session = HibernateUtil.getsessionSession();
-		
-		retorno = (Cargo) session.get(Cargo.class, new Integer(value));
-		
-		session.close();
+		if(value !=null && value.equals("")){
+			Questoes questoes = repositorios.getQuestoes();
+			retorno = questoes.porCodigo(new Integer(value));
 		}
 		
 		return retorno;
@@ -30,8 +27,8 @@ public class CargoConverter implements Converter{
 
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
-		if(value != null){
-			Integer codigo = ((Cargo) value).getId();
+		if(value!=null){
+			Integer codigo = ((Questao) value).getId();
 			return codigo == null ? "" : codigo.toString();
 		}
 		return null;

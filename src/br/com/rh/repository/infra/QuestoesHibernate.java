@@ -31,5 +31,11 @@ public class QuestoesHibernate implements Questoes{
 	public void excluir(Questao questao) {
 		this.session.delete(questao);
 	}
+
+	@Override
+	public Questao porCodigo(Integer codigo) {
+		return (Questao) session.get(Questao.class, codigo);
+
+	}
 	
 }

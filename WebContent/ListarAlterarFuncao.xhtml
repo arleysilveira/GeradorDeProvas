@@ -6,27 +6,45 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Insert title here</title>
+	<title>Funções</title>
+	
+	<h:outputStylesheet library="css" name="sistema.css"/>
+	<h:outputStylesheet library="css" name="listar-alterar-excluir.css"></h:outputStylesheet>
 </h:head>
 
 <h:body>
-	<h:outputLabel value="Lista de Funções" />
-	<h:form>
-		<ol>
-			<ui:repeat var="funcao" value="#{listarAlterarFuncaoBean.funcoes}">
-				<li>#{funcao.nome} - 
-					<h:commandButton value="Alterar" />
-					<h:commandButton value="Excluir"
-						action="#{listarAlterarFuncaoBean.excluir}">
-						<f:setPropertyActionListener
-							target="#{listarAlterarFuncaoBean.funcaoSelecionada}"
-							value="#{funcao}" />
-					</h:commandButton>
-				</li>
-			</ui:repeat>
-		</ol>
-		<h:commandButton value="Voltar" action="inicio"/>
+	<h1>Lista de Funções</h1>
+	
+	<h:form id="frm">
+	<h:dataTable width="20%" var="funcao" value="#{listarAlterarFuncaoBean.funcoes}" 
+		styleClass="grid" columnClasses="disciplina-funcao, operacoes" rowClasses="cor-sim, cor-nao"
+		headerClass="cabecalho">
+		
+		<h:column >
+			<f:facet name="header">Funções</f:facet>
+			
+			<h:outputText value="#{funcao.nome}"/>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Operações</f:facet>
+			
+			<h:link outcome="CadastroFuncao">
+				<h:graphicImage value="/imagens/editar.png"/>
+				<f:param name="codigo" value="#{funcao.id}" />
+			</h:link>
+			
+			<h:commandLink action="#{listarAlterarFuncaoBean.excluir}">
+				<h:graphicImage value="/imagens/excluir.png"/>
+				<f:setPropertyActionListener target="#{listarAlterarFuncaoBean.funcaoSelecionada}" value="#{funcao}"/>
+			</h:commandLink>
+			
+		</h:column>
+	
+		</h:dataTable>
+		<h:button value="Tela Inicial" outcome="inicio"/>
 	</h:form>
+	
 </h:body>
 
 </html>

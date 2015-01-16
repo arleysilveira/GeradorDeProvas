@@ -18,7 +18,7 @@ public class FuncaoConverter implements Converter {
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 	Funcao retorno = null;
 		
-		if(value != null){
+		if(value != null && !value.equals("")){
 			Funcoes funcoes = repositorios.getFuncoes();
 			retorno = funcoes.porCodigo(new Integer(value));
 		}
@@ -29,7 +29,8 @@ public class FuncaoConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if(value != null){
-			return ((Funcao) value).getId().toString();
+			Integer codigo = ((Funcao) value).getId();
+			return codigo == null ? "" : codigo.toString();
 		}
 		return null;
 	}

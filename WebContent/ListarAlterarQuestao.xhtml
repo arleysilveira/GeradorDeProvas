@@ -7,30 +7,47 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Insert title here</title>
+	<title>Lista de Questões</title>
+	
+	<h:outputStylesheet library="css" name="sistema.css"/>
+	<h:outputStylesheet library="css" name="listar-alterar-excluir.css"/>
 </h:head>
 
 <h:body>
-	<h:outputLabel value="Lista de Questões"/>
-	<h:form>
-		<ol>
-			<ui:repeat var="questao"
-				value="#{listarAlterarQuestaoBean.questoes}">
-				<li>#{questao.titulo}
-					<h:commandButton value="Alterar"/>
-					<h:commandButton value="Excluir"
-						action="#{listarAlterarQuestaoBean.deletar}">
-						<f:setPropertyActionListener
-							target="#{listarAlterarQuestaoBean.questaoSelecionada}"
-							value="#{questao}" />
-					</h:commandButton>
-				</li>
-			</ui:repeat>
-		</ol>
-		<h:commandButton value="Voltar" action="inicio"/>
+	<h1>Lista de Questões</h1>
+	
+	<h:form id="frm">
+	
+		<h:dataTable var="questao" value="#{listarAlterarQuestaoBean.questoes}" width="80%" 
+		styleClass="grid" columnClasses="codigo, disciplina-funcao, operacoes" rowClasses="cor-sim, cor-nao"
+		headerClass="cabecalho">
+			
+			<h:column>
+				<f:facet name="header">Codigo</f:facet>
+				<h:outputText value="#{questao.id}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Questão</f:facet>
+				<h:outputText value="#{questao.titulo}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Operações</f:facet>
+				<h:link outcome="CadastroQuestao">
+					<f:param name="codigo" value="#{questao.id}"/>
+					<h:graphicImage value="/imagens/editar.png"/>
+				</h:link>
+				
+				<h:commandLink action="#{listarAlterarQuestaoBean.excluir}">
+					<f:setPropertyActionListener target="#{listarAlterarQuestaoBean.questaoSelecionada}" value="#{questao}"/>
+					<h:graphicImage value="/imagens/excluir.png"/>									
+				</h:commandLink>
+			</h:column>
+		</h:dataTable>
+		<h:button value="Voltar" outcome="inicio"/>
 	</h:form>
-	
-	
+		
 </h:body>
 
 </html>

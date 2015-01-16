@@ -19,9 +19,10 @@ public class DisciplinaConverter implements Converter {
 			String value) {
 		Disciplina retorno = null;
 
-		if (value != null) {
+		if (value != null && !value.equals("")) {
 			Disciplinas disciplinas = repositorios.getDisciplinas();
 			retorno = disciplinas.porCodigo(new Integer(value));
+			
 		}
 
 		return retorno;
@@ -31,7 +32,8 @@ public class DisciplinaConverter implements Converter {
 	public String getAsString(FacesContext context, UIComponent component,
 			Object value) {
 		if (value != null) {
-			return ((Disciplina) value).getId().toString();
+			Integer codigo = ((Disciplina) value).getId();
+			return codigo == null ? "" : codigo.toString();
 		}
 		return null;
 	}

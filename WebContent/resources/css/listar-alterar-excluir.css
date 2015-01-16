@@ -1,12 +1,18 @@
+td.codigo {
+	width: 5%;
+	text-align: center;
+}
+
 td.disciplina-funcao {
-	width: 150px;
+	width: 70%;
 	text-align: center;
 }
 
 td.operacoes { 
-	width: 50px;
+	width: 5%;
 	text-align: center;
 }
+
 
 .grid .receita {
 	color: #0000ff;

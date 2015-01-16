@@ -1,10 +1,12 @@
 package br.com.rh.view;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 import br.com.rh.model.Disciplina;
 import br.com.rh.model.Funcao;
@@ -14,8 +16,10 @@ import br.com.rh.repository.Funcoes;
 import br.com.rh.repository.Questoes;
 import br.com.rh.util.Repositorios;
 
+@SuppressWarnings("serial")
 @ManagedBean
-public class CadastroQuestaoBean {
+@ViewScoped
+public class CadastroQuestaoBean implements Serializable{
 	private Questao questao;
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 	private List<Funcao> funcoes = new ArrayList<Funcao>();
@@ -48,6 +52,9 @@ public class CadastroQuestaoBean {
 
 	public void setQuestao(Questao questao) {
 		this.questao = questao;
+		if(this.questao == null){
+			this.questao = new Questao();
+		}
 	}
 
 	public List<Disciplina> getDisciplinas() {

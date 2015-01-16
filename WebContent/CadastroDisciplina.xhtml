@@ -4,6 +4,10 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
+	<f:metadata>
+			<f:viewParam name="codigo" value="#{cadastroDisciplinaBean.disciplina}"/>
+	</f:metadata>
+
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Cadastro de Disciplinas</title>
@@ -22,8 +26,11 @@
 		</h:panelGroup>
 
 		
-		<h:commandButton value="Cadastrar" action="#{cadastroDisciplinaBean.cadastrar}"/>
-		<h:commandButton value="Voltar" action="inicio"/>
+		<h:commandButton value="Salvar" action="#{cadastroDisciplinaBean.cadastrar}"/>
+		<h:panelGroup>
+			<h:button value="Tela Inicial" outcome="inicio"/>
+			<h:button value="Lista de Disciplinas" outcome="ListarAlterarDisciplina"/>
+		</h:panelGroup>
 	</h:panelGrid>
 	</h:form>
 </h:body>

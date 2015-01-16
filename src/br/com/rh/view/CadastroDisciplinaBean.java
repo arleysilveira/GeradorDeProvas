@@ -1,14 +1,20 @@
 package br.com.rh.view;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
 import br.com.rh.model.Disciplina;
 import br.com.rh.repository.Disciplinas;
 import br.com.rh.util.FacesUtil;
 import br.com.rh.util.Repositorios;
 
+@SuppressWarnings("serial")
 @ManagedBean
-public class CadastroDisciplinaBean {
+@ViewScoped
+public class CadastroDisciplinaBean implements Serializable{
 	private Disciplina disciplina;
 	private Repositorios repositorios = new Repositorios();
 
@@ -38,6 +44,9 @@ public class CadastroDisciplinaBean {
 
 	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
+		if(this.disciplina == null){
+			this.disciplina = new Disciplina();
+		}
 	}
 
 	public Repositorios getRepositorios() {

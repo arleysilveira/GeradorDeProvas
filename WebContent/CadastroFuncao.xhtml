@@ -3,9 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:metadata>
+	<f:viewParam value="#{cadastroFuncaoBean.funcao}" name="codigo"/>
+</f:metadata>
+
+
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Insert title here</title>
+	<title>Cadastro de Função</title>
 </h:head>
 
 <h:body>
@@ -26,8 +32,11 @@
 					var="cargo" itemValue="#{cargo}" itemLabel="#{cargo.nome}"/>
 			</h:selectOneMenu>
 		
-		<h:commandButton value="Cadastrar" action="#{cadastroFuncaoBean.cadastrar}"/>
-		<h:commandButton value="Voltar" action="inicio"/>
+		<h:commandButton value="Salvar" action="#{cadastroFuncaoBean.cadastrar}"/>
+		<h:panelGroup>
+			<h:button value="Tela Inicial" outcome="inicio"/>
+			<h:button value="Lista de Funções" outcome="ListarAlterarFuncao"/>
+		</h:panelGroup>
 	</h:panelGrid>
 	</h:form>
 </h:body>

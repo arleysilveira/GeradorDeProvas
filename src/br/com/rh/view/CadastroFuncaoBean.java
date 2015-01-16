@@ -1,11 +1,13 @@
 package br.com.rh.view;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 import br.com.rh.model.Cargo;
 import br.com.rh.model.Funcao;
@@ -14,8 +16,10 @@ import br.com.rh.repository.Funcoes;
 import br.com.rh.util.FacesUtil;
 import br.com.rh.util.Repositorios;
 
+@SuppressWarnings("serial")
 @ManagedBean
-public class CadastroFuncaoBean {
+@ViewScoped
+public class CadastroFuncaoBean implements Serializable{
 	private List<Cargo> cargos = new ArrayList<Cargo>();
 	private Funcao funcao;
 	private Repositorios repositorios = new Repositorios();
@@ -53,6 +57,9 @@ public class CadastroFuncaoBean {
 
 	public void setFuncao(Funcao funcao) {
 		this.funcao = funcao;
+		if(this.funcao == null){
+			this.funcao = new Funcao();
+		}
 	}
 
 	public List<Cargo> getCargos() {

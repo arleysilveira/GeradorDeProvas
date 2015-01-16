@@ -2,14 +2,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
+
+	
+	<f:metadata>
+			<f:viewParam name="codigo" value="#{cadastroQuestaoBean.questao}"/>
+	</f:metadata>
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Cadastro de Questão</title>
 </h:head>
 
 <h:body>
+#{cadastroQuestaoBean.questao.titulo}
 	<h:form>
 		<h:panelGrid columns="2">
 			<f:facet name="header">
@@ -74,9 +79,12 @@
 			<h:outputLabel value="Alternativa Correta:" />
 			<h:inputText value="#{cadastroQuestaoBean.questao.alternativaCorreta}"/>
 
-			<h:commandButton value="Cadastrar"
+			<h:commandButton value="Salvar"
 				action="#{cadastroQuestaoBean.cadastrar}" />
-			<h:commandButton value="Voltar" action="inicio" />
+			<h:panelGroup>
+				<h:button value="Tela Inicial" outcome="inicio" />
+				<h:button value="Lista de Questões" outcome="ListarAlterarQuestao" />
+			</h:panelGroup>
 		</h:panelGrid>
 	</h:form>
 </h:body>

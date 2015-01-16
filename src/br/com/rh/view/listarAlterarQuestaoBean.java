@@ -1,5 +1,6 @@
 package br.com.rh.view;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +15,9 @@ import br.com.rh.util.Repositorios;
  * @author arley
  *
  */
+@SuppressWarnings("serial")
 @ManagedBean
-public class listarAlterarQuestaoBean {
+public class listarAlterarQuestaoBean implements Serializable {
 	private Questao  questaoSelecionada;
 	private Repositorios repositorios = new Repositorios();
 	private List<Questao> questoes = new ArrayList<Questao>();
@@ -27,7 +29,7 @@ public class listarAlterarQuestaoBean {
 		this.questoes = questoes.listarTodas();
 	}
 	
-	public void deletar(){
+	public void excluir(){
 		this.questoes.remove(this.questaoSelecionada);
 		Questoes questoes = this.repositorios.getQuestoes();
 		questoes.excluir(this.questaoSelecionada);

@@ -1,5 +1,6 @@
 package br.com.rh.view;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +13,9 @@ import br.com.rh.repository.Funcoes;
 import br.com.rh.util.FacesUtil;
 import br.com.rh.util.Repositorios;
 
+@SuppressWarnings("serial")
 @ManagedBean
-public class ListarAlterarFuncaoBean {
+public class ListarAlterarFuncaoBean implements Serializable{
 	private List<Funcao> funcoes = new ArrayList<Funcao>();
 	private Funcao funcaoSelecionada;
 	private Repositorios repositorios = new Repositorios();
