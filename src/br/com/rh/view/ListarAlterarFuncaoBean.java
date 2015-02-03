@@ -27,11 +27,10 @@ public class ListarAlterarFuncaoBean implements Serializable{
 	}
 	
 	public void excluir() {
-		this.funcoes.remove(this.funcaoSelecionada);
-		
 		Funcoes funcao = this.repositorios.getFuncoes();
 		funcao.excluir(this.funcaoSelecionada);
 		FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Função Excluída com sucesso");
+		init();
 	}
 
 	public List<Funcao> getFuncoes() {

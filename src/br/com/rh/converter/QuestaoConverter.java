@@ -17,7 +17,7 @@ public class QuestaoConverter implements Converter{
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		Questao retorno = null;
 		
-		if(value !=null && value.equals("")){
+		if(value !=null && !value.equals("")){
 			Questoes questoes = repositorios.getQuestoes();
 			retorno = questoes.porCodigo(new Integer(value));
 		}

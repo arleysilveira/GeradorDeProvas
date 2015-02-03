@@ -37,6 +37,7 @@
 			<h:commandLink action="#{listarAlterarFuncaoBean.excluir}">
 				<h:graphicImage value="/imagens/excluir.png"/>
 				<f:setPropertyActionListener target="#{listarAlterarFuncaoBean.funcaoSelecionada}" value="#{funcao}"/>
+				<f:ajax render="@form"/>
 			</h:commandLink>
 			
 		</h:column>

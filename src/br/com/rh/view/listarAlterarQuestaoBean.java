@@ -30,9 +30,9 @@ public class listarAlterarQuestaoBean implements Serializable {
 	}
 	
 	public void excluir(){
-		this.questoes.remove(this.questaoSelecionada);
 		Questoes questoes = this.repositorios.getQuestoes();
 		questoes.excluir(this.questaoSelecionada);
+		init();
 	}
 
 	public List<Questao> getQuestoes() {

@@ -49,14 +49,6 @@ public class CadastroDisciplinaBean implements Serializable{
 		}
 	}
 
-	public Repositorios getRepositorios() {
-		return repositorios;
-	}
-
-	public void setRepositorios(Repositorios repositorios) {
-		this.repositorios = repositorios;
-	}
-
 	
 	
 }

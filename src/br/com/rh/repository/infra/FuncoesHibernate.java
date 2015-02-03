@@ -19,6 +19,8 @@ public class FuncoesHibernate implements Funcoes{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Funcao> listarTodas() {
+		/*Query query = session.createQuery("from Funcao F order by F.nome");
+		return query.list();*/
 		return session.createCriteria(Funcao.class).addOrder(Order.asc("nome")).list();
 	}
 

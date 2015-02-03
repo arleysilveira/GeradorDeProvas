@@ -9,6 +9,74 @@
 </h:head>
 
 <h:body>
-	
+	<!-- Primeira Disciplina -->
+	<h:outputText
+		value="#{gerarProvaBean.prova.disciplinaSelecionada.nome}" />
+	<h:form>
+		<h:dataTable width="80%"
+			value="#{gerarProvaBean.questoesSelecionadas}" var="questao"
+			border="1">
+			<h:column>
+				<h:outputText value="#{questao.titulo}" />
+			</h:column>
+
+			<h:column>
+				<h:commandButton value="Modificar"
+					action="#{gerarProvaBean.modificarQuestao}">
+					<f:setPropertyActionListener
+						target="#{gerarProvaBean.questaoModificada}" value="#{questao}" />
+				</h:commandButton>
+			</h:column>
+
+		</h:dataTable>
+
+		<br />
+
+		<!-- Segunda Disciplina -->
+		<h:outputText
+			value="#{gerarProvaBean.prova2.disciplinaSelecionada.nome}" />
+
+		<h:dataTable width="80%"
+			value="#{gerarProvaBean.questoesSelecionadas2}" var="questao"
+			border="1">
+			<h:column>
+				<h:outputText value="#{questao.titulo}" />
+			</h:column>
+
+			<h:column>
+				<h:commandButton value="Modificar"
+					action="#{gerarProvaBean.modificarQuestao2}">
+					<f:setPropertyActionListener
+						target="#{gerarProvaBean.questaoModificada}" value="#{questao}" />
+				</h:commandButton>
+			</h:column>
+
+		</h:dataTable>
+
+		<br />
+
+		<!-- Terceira Disciplina -->
+		<h:outputText value="#{gerarProvaBean.prova3.funcaoSelecionada.nome}" />
+
+		<h:dataTable width="80%"
+			value="#{gerarProvaBean.questoesSelecionadas3}" var="questao"
+			border="1">
+			<h:column>
+				<h:outputText value="#{questao.titulo}" />
+			</h:column>
+
+			<h:column>
+				<h:commandButton value="Modificar"
+					action="#{gerarProvaBean.modificarQuestao3}">
+					<f:setPropertyActionListener
+						target="#{gerarProvaBean.questaoModificada}" value="#{questao}" />
+				</h:commandButton>
+			</h:column>
+
+		</h:dataTable>
+		
+		<h:commandButton value="Gerar Prova"/>
+		<h:button value="Voltar" outcome="GerarProva"/>
+	</h:form>
 </h:body>
 </html>

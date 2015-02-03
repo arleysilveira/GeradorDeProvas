@@ -25,11 +25,10 @@ public class ListarAlterarDisciplinaBean {
 	}
 	
 	public void excluir(){
-		this.disciplinas.remove(this.disciplinaSelecionada);
-		
 		Disciplinas disciplinas = this.repositorios.getDisciplinas();
 		disciplinas.excluir(this.disciplinaSelecionada);
 		FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Disciplina Excluída com sucesso");
+		init();
 		
 	}
 

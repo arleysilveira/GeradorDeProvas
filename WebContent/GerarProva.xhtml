@@ -13,35 +13,50 @@
 		<h:panelGrid columns="2">
 			<f:facet name="header">Gerar Prova</f:facet>
 
-			<h:outputLabel value="Nº de Disciplinas:" />
-			<h:selectOneMenu>
-				<f:selectItem itemValue="1" />
-				<f:selectItem itemValue="2" />
-				<f:selectItem itemValue="3" />
-				<f:selectItem itemValue="4" />
-				<f:selectItem itemValue="5" />
-				<f:selectItem itemValue="6" />
-				<f:selectItem itemValue="7" />
-				<f:selectItem itemValue="8" />
-				<f:selectItem itemValue="9" />
-				<f:selectItem itemValue="10" />
-			</h:selectOneMenu>
-
 			<h:panelGroup>
 				<h:outputLabel value="Nº de Questões: " />
-				<h:inputText size="2"/>
+				<h:inputText value="#{gerarProvaBean.prova.numeroQuestoes}"  size="2"/>
 			</h:panelGroup>
 
 			<h:panelGroup>
 				<h:outputLabel value="Disciplina: " />
-				<h:selectOneMenu>
+				<h:selectOneMenu value="#{gerarProvaBean.prova.disciplinaSelecionada}">
 					<f:selectItems value="#{gerarProvaBean.disciplinas}"
 						var="disciplina" itemValue="#{disciplina}" itemLabel="#{disciplina.nome}"/>
 				</h:selectOneMenu>
 			</h:panelGroup>
 			
-			<h:commandButton value="Cadastrar"/>
-			<h:commandButton value="Cancelar" action="inicio"/>
+			
+			<h:panelGroup>
+				<h:outputLabel value="Nº de Questões: " />
+				<h:inputText size="2" value="#{gerarProvaBean.prova2.numeroQuestoes}" />
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<h:outputLabel value="Disciplina: " />
+				<h:selectOneMenu value="#{gerarProvaBean.prova2.disciplinaSelecionada}" >
+					<f:selectItems value="#{gerarProvaBean.disciplinas}"
+						var="disciplina" itemValue="#{disciplina}" itemLabel="#{disciplina.nome}"/>
+				</h:selectOneMenu>
+			</h:panelGroup>
+			
+			
+			<h:panelGroup>
+				<h:outputLabel value="Nº de Questões: " />
+				<h:inputText size="2" value="#{gerarProvaBean.prova3.numeroQuestoes}"/>
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<h:outputLabel value="Função: " />
+				<h:selectOneMenu value="#{gerarProvaBean.prova3.funcaoSelecionada}">
+					<f:selectItems value="#{gerarProvaBean.funcoes}"
+						var="funcao" itemValue="#{funcao}" itemLabel="#{funcao.nome}"/>
+				</h:selectOneMenu>
+			</h:panelGroup>
+
+			<h:commandButton value="Gerar Prova" action="#{gerarProvaBean.listarQuestoes}"/>
+			
+			<h:button value="Cancelar" outcome="inicio"/>
 		</h:panelGrid>
 
 	</h:form>

@@ -41,7 +41,8 @@
 				
 				<h:commandLink action="#{listarAlterarQuestaoBean.excluir}">
 					<f:setPropertyActionListener target="#{listarAlterarQuestaoBean.questaoSelecionada}" value="#{questao}"/>
-					<h:graphicImage value="/imagens/excluir.png"/>									
+					<h:graphicImage value="/imagens/excluir.png"/>
+					<f:ajax render="@form"/>									
 				</h:commandLink>
 			</h:column>
 		</h:dataTable>

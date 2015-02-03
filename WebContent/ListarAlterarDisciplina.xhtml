@@ -17,7 +17,8 @@
 
 <h:body>
 	<h1>Disciplinas</h1>
-
+	
+<h:messages/>
 	<h:form id="frm">
 		<h:dataTable var="disciplina" value="#{listarAlterarDisciplinaBean.disciplinas}" width="20%"
 		styleClass="grid" headerClass="cabecalho" rowClasses="cor-sim, cor-nao" 
@@ -40,6 +41,7 @@
 					<h:graphicImage value="/imagens/excluir.png"/>
 					<f:setPropertyActionListener target="#{listarAlterarDisciplinaBean.disciplinaSelecionada}" 
 					value="#{disciplina}"/>
+					<f:ajax render="@form"/>
 				</h:commandLink>
 			</h:column>
 			
