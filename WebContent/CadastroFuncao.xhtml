@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <f:metadata>
 	<f:viewParam value="#{cadastroFuncaoBean.funcao}" name="codigo"/>
@@ -15,29 +16,29 @@
 </h:head>
 
 <h:body>
-<h:messages />
+<p:messages />
 	<h:form id="frm">
-	<h:panelGrid columns="2">
+	<p:panelGrid columns="2">
 		<f:facet name="header">Cadastro de Funções</f:facet>
 
-		<h:outputLabel value="Função: " />
+		<p:outputLabel value="Função: " />
 		<h:panelGroup>
-			<h:inputText id="nome" value="#{cadastroFuncaoBean.funcao.nome}" />
-			<h:message for="nome"/>
+			<p:inputText id="nome" value="#{cadastroFuncaoBean.funcao.nome}" />
+			<p:message for="nome"/>
 		</h:panelGroup>
 		
-		<h:outputLabel value="Cargo:"/>
-			<h:selectOneMenu value="#{cadastroFuncaoBean.funcao.cargo}" >
+		<p:outputLabel value="Cargo:"/>
+			<p:selectOneMenu value="#{cadastroFuncaoBean.funcao.cargo}" >
 				<f:selectItems value="#{cadastroFuncaoBean.cargos}"
 					var="cargo" itemValue="#{cargo}" itemLabel="#{cargo.nome}"/>
-			</h:selectOneMenu>
+			</p:selectOneMenu>
 		
-		<h:commandButton value="Salvar" action="#{cadastroFuncaoBean.cadastrar}"/>
+		<p:commandButton value="Salvar" action="#{cadastroFuncaoBean.cadastrar}" ajax="@this" icon="ui-icon-disk"/>
 		<h:panelGroup>
-			<h:button value="Tela Inicial" outcome="inicio"/>
-			<h:button value="Lista de Funções" outcome="ListarAlterarFuncao"/>
+			<p:button value="Tela Inicial" outcome="inicio" icon="ui-icon-home"/>
+			<p:button value="Lista de Funções" outcome="ListarAlterarFuncao" icon="ui-icon-grip-solid-horizontal"/>
 		</h:panelGroup>
-	</h:panelGrid>
+	</p:panelGrid>
 	</h:form>
 </h:body>
 

@@ -9,15 +9,6 @@ td.disciplina-funcao {
 }
 
 td.operacoes { 
-	width: 5%;
+	width: 20%;
 	text-align: center;
-}
-
-
-.grid .receita {
-	color: #0000ff;
-}
-
-.grid .despesa {
-	color: #c23030;
 }

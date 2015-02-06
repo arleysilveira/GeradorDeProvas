@@ -2,12 +2,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
-	
-	<f:metadata>
-			<f:viewParam name="codigo" value="#{cadastroQuestaoBean.questao}"/>
-	</f:metadata>
+
+<f:metadata>
+	<f:viewParam name="codigo" value="#{cadastroQuestaoBean.questao}" />
+</f:metadata>
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Cadastro de Questão</title>
@@ -16,86 +17,87 @@
 <h:body>
 
 	<h:form id="frm">
-		<h:panelGrid columns="2" id="panel">
+		<p:panelGrid columns="2" id="panel">
 			<f:facet name="header">
 				Cadastro de Questões
 			</f:facet>
 
-			<h:outputLabel value="Questão:" />
-			<h:inputTextarea value="#{cadastroQuestaoBean.questao.titulo}" />
+			<p:outputLabel value="Questão:" />
+			<p:inputTextarea value="#{cadastroQuestaoBean.questao.titulo}" />
 
-			<h:outputLabel value="Disciplina:" />
-			<h:selectOneMenu value="#{cadastroQuestaoBean.questao.disciplina}">
+			<p:outputLabel value="Disciplina:" />
+			<p:selectOneMenu value="#{cadastroQuestaoBean.questao.disciplina}">
 				<f:selectItem itemLabel="Selecione" itemValue="" />
 				<f:selectItems value="#{cadastroQuestaoBean.disciplinas}"
 					var="disciplina" itemValue="#{disciplina}"
 					itemLabel="#{disciplina.nome}" />
-			</h:selectOneMenu>
+			</p:selectOneMenu>
 
-			<h:outputLabel value="Dificuldade:" />
-			<h:selectOneMenu value="#{cadastroQuestaoBean.questao.dificuldade}">
+			<p:outputLabel value="Dificuldade:" />
+			<p:selectOneMenu value="#{cadastroQuestaoBean.questao.dificuldade}">
 				<f:selectItem itemLabel="Fácil" itemValue="F" />
 				<f:selectItem itemLabel="Médio" itemValue="M" />
 				<f:selectItem itemLabel="Difícil" itemValue="D" />
-			</h:selectOneMenu>
+			</p:selectOneMenu>
 
-			<h:outputLabel value="Funções:"/>
-			<h:selectOneMenu value="#{cadastroQuestaoBean.questao.funcao}">
+			<p:outputLabel value="Funções:" />
+			<p:selectOneMenu value="#{cadastroQuestaoBean.questao.funcao}">
 				<f:selectItem itemLabel="Selecione" itemValue="" />
 				<f:selectItems value="#{cadastroQuestaoBean.funcoes}" var="funcao"
 					itemLabel="#{funcao.nome}" itemValue="#{funcao}" />
-			</h:selectOneMenu>
-				
-			<h:outputLabel value="Nº de Alternativas:" />
-			
-			<h:selectOneRadio
-			value="#{cadastroQuestaoBean.questao.numeroAlternativas}">
-				<f:ajax render="frm:panel" execute="@form"/>
-				<f:selectItem itemValue="2" itemLabel="2"/>
-				<f:selectItem itemValue="5" itemLabel="5"/>
-			
-			</h:selectOneRadio>
+			</p:selectOneMenu>
 
-			<h:outputLabel value="a)" 
-			rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 2 or cadastroQuestaoBean.questao.numeroAlternativas == 5}"/>
-			<h:inputTextarea rows="1"
-				value="#{cadastroQuestaoBean.questao.alternativa1}" 
+			<p:outputLabel value="Nº de Alternativas:" />
+
+			<p:selectOneRadio
+				value="#{cadastroQuestaoBean.questao.numeroAlternativas}">
+				<f:ajax render="frm:panel" execute="@form" />
+				<f:selectItem itemValue="2" itemLabel="2" />
+				<f:selectItem itemValue="5" itemLabel="5" />
+
+			</p:selectOneRadio>
+
+			<p:outputLabel value="a)"
+				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 2 or cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
+			<p:inputTextarea rows="1"
+				value="#{cadastroQuestaoBean.questao.alternativa1}"
 				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 2 or cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
 
-			<h:outputLabel value="b)" 
-			rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 2 or cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
-			<h:inputTextarea rows="1"
-				value="#{cadastroQuestaoBean.questao.alternativa2}" 
-				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 2 or cadastroQuestaoBean.questao.numeroAlternativas == 5}"/>
+			<p:outputLabel value="b)"
+				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 2 or cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
+			<p:inputTextarea rows="1"
+				value="#{cadastroQuestaoBean.questao.alternativa2}"
+				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 2 or cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
 
-			<h:outputLabel value="c)" 
-			rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}"/>
-			<h:inputTextarea rows="1"
-				value="#{cadastroQuestaoBean.questao.alternativa3}" 
-				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}"/>
+			<p:outputLabel value="c)"
+				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
+			<p:inputTextarea rows="1"
+				value="#{cadastroQuestaoBean.questao.alternativa3}"
+				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
 
-			<h:outputLabel value="d)"
-			rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}"/>
-			<h:inputTextarea rows="1"
-				value="#{cadastroQuestaoBean.questao.alternativa4}" 
-				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}"/>
+			<p:outputLabel value="d)"
+				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
+			<p:inputTextarea rows="1"
+				value="#{cadastroQuestaoBean.questao.alternativa4}"
+				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
 
-			<h:outputLabel value="e)"
-			rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}"/>
-			<h:inputTextarea rows="1"
-				value="#{cadastroQuestaoBean.questao.alternativa5}" 
-				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}"/>
-				
-			<h:outputLabel value="Alternativa Correta:" />
-			<h:inputText value="#{cadastroQuestaoBean.questao.alternativaCorreta}"/>
+			<p:outputLabel value="e)"
+				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
+			<p:inputTextarea rows="1"
+				value="#{cadastroQuestaoBean.questao.alternativa5}"
+				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
 
-			<h:commandButton value="Salvar"
-				action="#{cadastroQuestaoBean.cadastrar}" />
-			<h:panelGroup>
-				<h:button value="Tela Inicial" outcome="inicio" />
-				<h:button value="Lista de Questões" outcome="ListarAlterarQuestao" />
-			</h:panelGroup>
-		</h:panelGrid>
+			<p:outputLabel value="Alternativa Correta:" />
+			<p:inputText
+				value="#{cadastroQuestaoBean.questao.alternativaCorreta}" />
+
+			<f:facet name="footer">
+				<p:commandButton value="Salvar"
+					action="#{cadastroQuestaoBean.cadastrar}" icon="ui-icon-disk" ajax="@this"/>
+				<p:button value="Tela Inicial" outcome="inicio" icon="ui-icon-home"/>
+				<p:button value="Lista de Questões" outcome="ListarAlterarQuestao" icon="ui-icon-grip-solid-horizontal" />
+			</f:facet>
+		</p:panelGrid>
 	</h:form>
 </h:body>
 

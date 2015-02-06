@@ -2,11 +2,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
-	<f:metadata>
-			<f:viewParam name="codigo" value="#{cadastroDisciplinaBean.disciplina}"/>
-	</f:metadata>
+<f:metadata>
+	<f:viewParam name="codigo" value="#{cadastroDisciplinaBean.disciplina}" />
+</f:metadata>
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -14,24 +15,28 @@
 </h:head>
 
 <h:body>
-<h:messages/>
-<h:form id="frm">
-	<h:panelGrid columns="2">
-		<f:facet name="header">Cadastro de Disciplinas</f:facet>
+<div align="center" style="margin-top: 70px">
+	<h:messages />
+	<h:form id="frm">
+		<p:panelGrid columns="2">
+			<f:facet name="header">Cadastro de Disciplinas</f:facet>
 
-		<h:outputLabel value="Disciplina: " />
-		<h:panelGroup>
-			<h:inputText id="nome" value="#{cadastroDisciplinaBean.disciplina.nome}" />
-			<h:message for="nome"/>
-		</h:panelGroup>
+			<p:outputLabel value="Disciplina: " />
+			<h:panelGroup>
+				<p:inputText id="nome"
+					value="#{cadastroDisciplinaBean.disciplina.nome}" />
+				<h:message for="nome" />
+			</h:panelGroup>
 
-		
-		<h:commandButton value="Salvar" action="#{cadastroDisciplinaBean.cadastrar}"/>
-		<h:panelGroup>
-			<h:button value="Tela Inicial" outcome="inicio"/>
-			<h:button value="Lista de Disciplinas" outcome="ListarAlterarDisciplina"/>
-		</h:panelGroup>
-	</h:panelGrid>
+			<f:facet name="footer">
+				<p:commandButton value="Salvar" icon="ui-icon-disk"
+					action="#{cadastroDisciplinaBean.cadastrar}" ajax="@this"/>
+				<p:button value="Tela Inicial" outcome="inicio" icon="ui-icon-home"/>
+				<p:button value="Lista de Disciplinas"
+					outcome="ListarAlterarDisciplina"  icon="ui-icon-grip-solid-horizontal"/>
+			</f:facet>
+		</p:panelGrid>
 	</h:form>
+	</div>
 </h:body>
 </html>

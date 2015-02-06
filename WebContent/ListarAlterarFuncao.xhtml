@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Funções</title>
@@ -14,19 +14,19 @@
 
 <h:body>
 	<h1>Lista de Funções</h1>
-	
+	<div style="margin: 0px 20px">
 	<h:form id="frm">
-	<h:dataTable width="20%" var="funcao" value="#{listarAlterarFuncaoBean.funcoes}" 
+	<p:dataTable width="20%" var="funcao" value="#{listarAlterarFuncaoBean.funcoes}" 
 		styleClass="grid" columnClasses="disciplina-funcao, operacoes" rowClasses="cor-sim, cor-nao"
 		headerClass="cabecalho">
 		
-		<h:column >
+		<p:column >
 			<f:facet name="header">Funções</f:facet>
 			
 			<h:outputText value="#{funcao.nome}"/>
-		</h:column>
+		</p:column>
 		
-		<h:column>
+		<p:column styleClass="operacoes">
 			<f:facet name="header">Operações</f:facet>
 			
 			<h:link outcome="CadastroFuncao">
@@ -40,12 +40,13 @@
 				<f:ajax render="@form"/>
 			</h:commandLink>
 			
-		</h:column>
+		</p:column>
 	
-		</h:dataTable>
-		<h:button value="Tela Inicial" outcome="inicio"/>
+		</p:dataTable>
+		<br/>
+		<p:button value="Tela Inicial" outcome="inicio" icon="ui-icon-home"/>
 	</h:form>
-	
+	</div>
 </h:body>
 
 </html>

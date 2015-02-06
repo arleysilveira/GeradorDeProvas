@@ -3,52 +3,61 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Lista de Questões</title>
-	
-	<h:outputStylesheet library="css" name="sistema.css"/>
-	<h:outputStylesheet library="css" name="listar-alterar-excluir.css"/>
+
+	<h:outputStylesheet library="css" name="sistema.css" />
+	<h:outputStylesheet library="css" name="listar-alterar-excluir.css" />
 </h:head>
 
 <h:body>
 	<h1>Lista de Questões</h1>
+	<div style="margin: 0 20px">
+		<h:form id="frm">
+
+			<p:dataTable var="questao"
+				value="#{listarAlterarQuestaoBean.questoes}" width="80%"
+				styleClass="grid"
+				columnClasses="codigo, disciplina-funcao, operacoes"
+				rowClasses="cor-sim, cor-nao" headerClass="cabecalho">
+
+				<p:column>
+					<f:facet name="header">Codigo</f:facet>
+					<h:outputText value="#{questao.id}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Questão</f:facet>
+					<h:outputText value="#{questao.titulo}" />
+				</p:column>
+
+				<p:column styleClass="operacoes">
+					<f:facet name="header">Operações</f:facet>
+					<h:link outcome="CadastroQuestao">
+						<f:param name="codigo" value="#{questao.id}" />
+						<h:graphicImage value="/imagens/editar.png" />
+					</h:link>
+
+					<h:commandLink action="#{listarAlterarQuestaoBean.excluir}">
+						<f:setPropertyActionListener
+							target="#{listarAlterarQuestaoBean.questaoSelecionada}"
+							value="#{questao}" />
+						<h:graphicImage value="/imagens/excluir.png" />
+						<f:ajax render="@form" />
+					</h:commandLink>
+				</p:column>
+			</p:dataTable>
+			<br />
+			<p:button value="Tela Inicial" outcome="inicio"
+				icon="ui-icon-home" />
+
+		</h:form>
+	</div>
 	
-	<h:form id="frm">
-	
-		<h:dataTable var="questao" value="#{listarAlterarQuestaoBean.questoes}" width="80%" 
-		styleClass="grid" columnClasses="codigo, disciplina-funcao, operacoes" rowClasses="cor-sim, cor-nao"
-		headerClass="cabecalho">
-			
-			<h:column>
-				<f:facet name="header">Codigo</f:facet>
-				<h:outputText value="#{questao.id}"/>
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">Questão</f:facet>
-				<h:outputText value="#{questao.titulo}"/>
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">Operações</f:facet>
-				<h:link outcome="CadastroQuestao">
-					<f:param name="codigo" value="#{questao.id}"/>
-					<h:graphicImage value="/imagens/editar.png"/>
-				</h:link>
-				
-				<h:commandLink action="#{listarAlterarQuestaoBean.excluir}">
-					<f:setPropertyActionListener target="#{listarAlterarQuestaoBean.questaoSelecionada}" value="#{questao}"/>
-					<h:graphicImage value="/imagens/excluir.png"/>
-					<f:ajax render="@form"/>									
-				</h:commandLink>
-			</h:column>
-		</h:dataTable>
-		<h:button value="Voltar" outcome="inicio"/>
-	</h:form>
-		
 </h:body>
 
 </html>
