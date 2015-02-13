@@ -23,6 +23,7 @@ public class CadastroDisciplinaBean implements Serializable{
 	}
 
 	public void cadastrar() {
+		System.out.println(System.getProperty("user.dir"));
 		if (this.disciplina.getNome() == "") {
 			FacesUtil.mensagemDetalhada("frm:nome", FacesMessage.SEVERITY_ERROR, "Campo Obrigatório",
 					"Favor informar o nome da disciplina");

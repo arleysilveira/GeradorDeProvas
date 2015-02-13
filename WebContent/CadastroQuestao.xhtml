@@ -17,14 +17,15 @@
 <h:body>
 
 	<h:form id="frm">
-		<p:panelGrid columns="2" id="panel">
+		<p:panelGrid columns="2">
 			<f:facet name="header">
-				Cadastro de Questões
-			</f:facet>
-
+					Cadastro de Questões
+				</f:facet>
 			<p:outputLabel value="Questão:" />
-			<p:inputTextarea value="#{cadastroQuestaoBean.questao.titulo}" />
+			<p:editor value="#{cadastroQuestaoBean.questao.titulo}" />
+		</p:panelGrid>
 
+		<p:panelGrid columns="2" id="panel">
 			<p:outputLabel value="Disciplina:" />
 			<p:selectOneMenu value="#{cadastroQuestaoBean.questao.disciplina}">
 				<f:selectItem itemLabel="Selecione" itemValue="" />
@@ -47,27 +48,27 @@
 					itemLabel="#{funcao.nome}" itemValue="#{funcao}" />
 			</p:selectOneMenu>
 
-			<p:outputLabel value="Nº de Alternativas:" />
+			<p:outputLabel value="Tipo de Questão" />
 
 			<p:selectOneRadio
 				value="#{cadastroQuestaoBean.questao.numeroAlternativas}">
-				<f:ajax render="frm:panel" execute="@form" />
-				<f:selectItem itemValue="2" itemLabel="2" />
-				<f:selectItem itemValue="5" itemLabel="5" />
+				<f:ajax execute="frm:panel" render="frm:panel" />
+				<f:selectItem itemValue="2" itemLabel="Verdadeiro/Falso" />
+				<f:selectItem itemValue="5" itemLabel="Alternativas" />
+				<f:selectItem itemValue="1" itemLabel="Subjetiva" />
 
 			</p:selectOneRadio>
-
 			<p:outputLabel value="a)"
-				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 2 or cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
+				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
 			<p:inputTextarea rows="1"
 				value="#{cadastroQuestaoBean.questao.alternativa1}"
-				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 2 or cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
+				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
 
 			<p:outputLabel value="b)"
-				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 2 or cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
+				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
 			<p:inputTextarea rows="1"
 				value="#{cadastroQuestaoBean.questao.alternativa2}"
-				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 2 or cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
+				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
 
 			<p:outputLabel value="c)"
 				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
@@ -87,18 +88,25 @@
 				value="#{cadastroQuestaoBean.questao.alternativa5}"
 				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
 
-			<p:outputLabel value="Alternativa Correta:" />
+			<p:outputLabel value="Alternativa Correta:"
+				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
 			<p:inputText
-				value="#{cadastroQuestaoBean.questao.alternativaCorreta}" />
+				value="#{cadastroQuestaoBean.questao.alternativaCorreta}"
+				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
 
 			<f:facet name="footer">
 				<p:commandButton value="Salvar"
-					action="#{cadastroQuestaoBean.cadastrar}" icon="ui-icon-disk" ajax="@this"/>
-				<p:button value="Tela Inicial" outcome="inicio" icon="ui-icon-home"/>
-				<p:button value="Lista de Questões" outcome="ListarAlterarQuestao" icon="ui-icon-grip-solid-horizontal" />
+					action="#{cadastroQuestaoBean.cadastrar}" icon="ui-icon-disk"
+					ajax="@this" />
+				<p:button value="Tela Inicial" outcome="inicio" icon="ui-icon-home" />
+				<p:button value="Lista de Questões" outcome="ListarAlterarQuestao"
+					icon="ui-icon-grip-solid-horizontal" />
 			</f:facet>
 		</p:panelGrid>
+		<p:fileUpload  fileUploadListener="#{cadastroQuestaoBean.testeFile}" />
 	</h:form>
+	<p:messages  severity="info" escape="false" showDetail="true" 
+                 autoUpdate="true" closable="true"/>
 </h:body>
 
 </html>

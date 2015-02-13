@@ -39,14 +39,14 @@
 					<f:facet name="header">Operações</f:facet>
 					<h:link outcome="CadastroQuestao">
 						<f:param name="codigo" value="#{questao.id}" />
-						<h:graphicImage value="/imagens/editar.png" />
+						<h:graphicImage value="/resources/imagens/editar.png" />
 					</h:link>
 
 					<h:commandLink action="#{listarAlterarQuestaoBean.excluir}">
 						<f:setPropertyActionListener
 							target="#{listarAlterarQuestaoBean.questaoSelecionada}"
 							value="#{questao}" />
-						<h:graphicImage value="/imagens/excluir.png" />
+						<h:graphicImage value="/resources/imagens/excluir.png" />
 						<f:ajax render="@form" />
 					</h:commandLink>
 				</p:column>

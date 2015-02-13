@@ -35,12 +35,12 @@
 			<p:column styleClass="operacoes">
 				<f:facet name="header">Operações</f:facet>
 				<h:link outcome="CadastroDisciplina">
-					<h:graphicImage value="/imagens/editar.png"/>
+					<h:graphicImage value="/resources/imagens/editar.png"/>
 					<f:param name="codigo" value="#{disciplina.id}"/>
 				</h:link>
 				
 				<h:commandLink action="#{listarAlterarDisciplinaBean.excluir}">
-					<h:graphicImage value="/imagens/excluir.png"/>
+					<h:graphicImage value="/resources/imagens/excluir.png"/>
 					<f:setPropertyActionListener target="#{listarAlterarDisciplinaBean.disciplinaSelecionada}" 
 					value="#{disciplina}"/>
 					<f:ajax render="@form"/>

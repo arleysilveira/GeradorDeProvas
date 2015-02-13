@@ -30,12 +30,12 @@
 			<f:facet name="header">Operações</f:facet>
 			
 			<h:link outcome="CadastroFuncao">
-				<h:graphicImage value="/imagens/editar.png"/>
+				<h:graphicImage value="/resources/imagens/editar.png"/>
 				<f:param name="codigo" value="#{funcao.id}" />
 			</h:link>
 			
 			<h:commandLink action="#{listarAlterarFuncaoBean.excluir}">
-				<h:graphicImage value="/imagens/excluir.png"/>
+				<h:graphicImage value="/resources/imagens/excluir.png"/>
 				<f:setPropertyActionListener target="#{listarAlterarFuncaoBean.funcaoSelecionada}" value="#{funcao}"/>
 				<f:ajax render="@form"/>
 			</h:commandLink>
