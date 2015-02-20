@@ -17,7 +17,7 @@
 			value="#{gerarProvaBean.questoesSelecionadas}" var="questao"
 			border="1">
 			<h:column>
-				<h:outputText value="#{questao.titulo}" />
+				<h:outputText value="#{questao.titulo}" escape="false"/>
 			</h:column>
 
 			<h:column>
@@ -40,7 +40,7 @@
 			value="#{gerarProvaBean.questoesSelecionadas2}" var="questao"
 			border="1">
 			<h:column>
-				<h:outputText value="#{questao.titulo}" />
+				<h:outputText value="#{questao.titulo}" escape="false"/>
 			</h:column>
 
 			<h:column>
@@ -62,7 +62,7 @@
 			value="#{gerarProvaBean.questoesSelecionadas3}" var="questao"
 			border="1">
 			<h:column>
-				<h:outputText value="#{questao.titulo}" />
+				<h:outputText value="#{questao.titulo}" escape="false" />
 			</h:column>
 
 			<h:column>

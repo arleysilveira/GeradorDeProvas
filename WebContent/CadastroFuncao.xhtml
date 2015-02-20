@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <f:metadata>
-	<f:viewParam value="#{cadastroFuncaoBean.funcao}" name="codigo"/>
+	<f:viewParam value="#{cadastroFuncaoBean.funcao}" name="codigo" />
 </f:metadata>
 
 
@@ -16,30 +16,35 @@
 </h:head>
 
 <h:body>
-<p:messages />
-	<h:form id="frm">
-	<p:panelGrid columns="2">
-		<f:facet name="header">Cadastro de Funções</f:facet>
+	<div align="center" style="margin-top: 70px">
+		<p:messages />
+		<h:form id="frm">
+			<p:panelGrid columns="2">
+				<f:facet name="header">Cadastro de Funções</f:facet>
 
-		<p:outputLabel value="Função: " />
-		<h:panelGroup>
-			<p:inputText id="nome" value="#{cadastroFuncaoBean.funcao.nome}" />
-			<p:message for="nome"/>
-		</h:panelGroup>
-		
-		<p:outputLabel value="Cargo:"/>
-			<p:selectOneMenu value="#{cadastroFuncaoBean.funcao.cargo}" >
-				<f:selectItems value="#{cadastroFuncaoBean.cargos}"
-					var="cargo" itemValue="#{cargo}" itemLabel="#{cargo.nome}"/>
-			</p:selectOneMenu>
-		
-		<p:commandButton value="Salvar" action="#{cadastroFuncaoBean.cadastrar}" ajax="@this" icon="ui-icon-disk"/>
-		<h:panelGroup>
-			<p:button value="Tela Inicial" outcome="inicio" icon="ui-icon-home"/>
-			<p:button value="Lista de Funções" outcome="ListarAlterarFuncao" icon="ui-icon-grip-solid-horizontal"/>
-		</h:panelGroup>
-	</p:panelGrid>
-	</h:form>
+				<p:outputLabel value="Função: " />
+				<h:panelGroup>
+					<p:inputText id="nome" value="#{cadastroFuncaoBean.funcao.nome}" />
+					<p:message for="nome" />
+				</h:panelGroup>
+
+				<p:outputLabel value="Cargo:" />
+				<p:selectOneMenu value="#{cadastroFuncaoBean.funcao.cargo}">
+					<f:selectItems value="#{cadastroFuncaoBean.cargos}" var="cargo"
+						itemValue="#{cargo}" itemLabel="#{cargo.nome}" />
+				</p:selectOneMenu>
+
+				<p:commandButton value="Salvar"
+					action="#{cadastroFuncaoBean.cadastrar}" ajax="@this"
+					icon="ui-icon-disk" />
+				<h:panelGroup>
+					<p:button value="Tela Inicial" outcome="inicio" icon="ui-icon-home" />
+					<p:button value="Lista de Funções" outcome="ListarAlterarFuncao"
+						icon="ui-icon-grip-solid-horizontal" />
+				</h:panelGroup>
+			</p:panelGrid>
+		</h:form>
+	</div>
 </h:body>
 
 </html>

@@ -39,8 +39,9 @@
 					<f:param name="codigo" value="#{disciplina.id}"/>
 				</h:link>
 				
+				
 				<h:commandLink action="#{listarAlterarDisciplinaBean.excluir}">
-					<h:graphicImage value="/resources/imagens/excluir.png"/>
+					<p:graphicImage  value="/resources/imagens/excluir.png"/>
 					<f:setPropertyActionListener target="#{listarAlterarDisciplinaBean.disciplinaSelecionada}" 
 					value="#{disciplina}"/>
 					<f:ajax render="@form"/>

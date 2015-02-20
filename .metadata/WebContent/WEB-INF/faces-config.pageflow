@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14150476842591" configfile="/GeradorPerguntas/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="*" id="pf14210686907203" outlinks="pf14210686907204" path="*"/>
-  <nodes xsi:type="pageflow:PFPage" name="Index.xhtml" id="pf14210686907205" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14210686907204" path="/Index.xhtml"/>
-  <links id="pf14210686907204" target="pf14210686907205" source="pf14210686907203" outcome="inicio" redirect="true"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" id="pf14244604002990" outlinks="pf14244604002991" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" id="pf14244604002992" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14244604002991" path="/index.xhtml"/>
+  <links id="pf14244604002991" target="pf14244604002992" source="pf14244604002990" outcome="inicio" redirect="true"/>
 </pageflow:Pageflow>

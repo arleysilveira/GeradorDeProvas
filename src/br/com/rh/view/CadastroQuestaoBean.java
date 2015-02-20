@@ -1,6 +1,5 @@
 package br.com.rh.view;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
@@ -10,11 +9,9 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import org.apache.commons.fileupload.FileItem;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -28,7 +25,7 @@ import br.com.rh.util.Repositorios;
 
 @SuppressWarnings("serial")
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class CadastroQuestaoBean implements Serializable{
 	private Questao questao;
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
@@ -50,11 +47,13 @@ public class CadastroQuestaoBean implements Serializable{
 		
 	}
 
-	public void cadastrar() throws IOException{
+	public void cadastrar() {
+		verificaTipoQuestao();
 		Questoes questoes = this.repositorios.getQuestoes();
 		questoes.guardar(this.questao);
 		
 		this.questao = new Questao();
+		
 	}
 	
 	public void testeFile(FileUploadEvent event) throws IOException{
@@ -68,6 +67,16 @@ public class CadastroQuestaoBean implements Serializable{
 	    FileOutputStream fos = new FileOutputStream(caminho);  
 	    fos.write(conteudo);  
 	    fos.close();  
+	}
+	
+	private void verificaTipoQuestao(){
+		if(this.questao.getNumeroAlternativas().equals("2")){
+			this.questao.setAlternativa1("1"); //Representa Verdadeira
+			this.questao.setAlternativa2("0"); //Representa o Falsa
+			this.questao.setAlternativa3(null);
+			this.questao.setAlternativa4(null);
+			this.questao.setAlternativa5(null);
+		}
 	}
 	
 	
@@ -113,7 +122,7 @@ public class CadastroQuestaoBean implements Serializable{
 	public void setFile(UploadedFile file) {
 		this.file = file;
 	}
-
+	
 	
 	
 }

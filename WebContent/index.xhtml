@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="css" name="geral.css"></h:outputStylesheet>
+	<title>Gerador de Prova</title>
+</h:head>
+
+<h:body>
+	<div align="center" style="margin-top: 100px">
+		<h:form>
+			<p:panelGrid columns="2">
+				<f:facet name="header">Gerador de prova</f:facet>
+
+				<p:button value="Cadastrar Disciplinas" outcome="CadastroDisciplina" styleClass="botao"
+					icon="ui-icon-plusthick" />
+				<p:button value="Alterar/Excluir Disciplinas" styleClass="botao"
+					outcome="ListarAlterarDisciplina" />
+
+				<p:button value="Cadastrar Funções" outcome="CadastroFuncao" styleClass="botao"
+					icon="ui-icon-plusthick"/>
+				<p:button value="Alterar/Excluir Funções" styleClass="botao"
+					outcome="ListarAlterarFuncao" />
+
+				<p:button value="Cadastrar Questões" outcome="CadastroQuestao"  styleClass="botao"
+					icon="ui-icon-plusthick"/>
+				<p:button value="Alterar/Excluir Questões" styleClass="botao"
+					outcome="ListarAlterarQuestao.xhtml" />
+
+			</p:panelGrid>
+			<br />
+			<p:commandButton value="Gerar Prova"
+				action="GerarProva?faces-redirect=true" />
+		</h:form>
+	</div>
+</h:body>
+</html>

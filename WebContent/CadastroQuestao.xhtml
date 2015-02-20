@@ -17,14 +17,11 @@
 <h:body>
 
 	<h:form id="frm">
-		<p:panelGrid columns="2">
-			<f:facet name="header">
-					Cadastro de Questões
-				</f:facet>
-			<p:outputLabel value="Questão:" />
-			<p:editor value="#{cadastroQuestaoBean.questao.titulo}" />
-		</p:panelGrid>
+		<p:outputLabel value="Questão:" />
+		<p:editor value="#{cadastroQuestaoBean.questao.titulo}" />
 
+
+<p:panelGrid columns="2" >
 		<p:panelGrid columns="2" id="panel">
 			<p:outputLabel value="Disciplina:" />
 			<p:selectOneMenu value="#{cadastroQuestaoBean.questao.disciplina}">
@@ -50,14 +47,18 @@
 
 			<p:outputLabel value="Tipo de Questão" />
 
-			<p:selectOneRadio
+			<p:selectOneRadio immediate="true"
 				value="#{cadastroQuestaoBean.questao.numeroAlternativas}">
-				<f:ajax execute="frm:panel" render="frm:panel" />
 				<f:selectItem itemValue="2" itemLabel="Verdadeiro/Falso" />
 				<f:selectItem itemValue="5" itemLabel="Alternativas" />
 				<f:selectItem itemValue="1" itemLabel="Subjetiva" />
+				<p:ajax execute="@form" update="alternativas" />
 
 			</p:selectOneRadio>
+
+		</p:panelGrid>
+
+		<p:panelGrid columns="2" id="alternativas">
 			<p:outputLabel value="a)"
 				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
 			<p:inputTextarea rows="1"
@@ -88,11 +89,18 @@
 				value="#{cadastroQuestaoBean.questao.alternativa5}"
 				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
 
-			<p:outputLabel value="Alternativa Correta:"
-				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
+			<p:outputLabel value="Alternativa Correta:" 
+				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas != 1 and 
+				cadastroQuestaoBean.questao.numeroAlternativas != null}"/>
 			<p:inputText
 				value="#{cadastroQuestaoBean.questao.alternativaCorreta}"
 				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
+				
+			<p:selectOneRadio value="#{cadastroQuestaoBean.questao.alternativaCorreta}"
+				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 2}">
+				<f:selectItem itemValue="1" itemLabel="Verdadeiro"/>
+				<f:selectItem itemValue="0" itemLabel="Falso"/>
+			</p:selectOneRadio>
 
 			<f:facet name="footer">
 				<p:commandButton value="Salvar"
@@ -103,10 +111,9 @@
 					icon="ui-icon-grip-solid-horizontal" />
 			</f:facet>
 		</p:panelGrid>
-		<p:fileUpload  fileUploadListener="#{cadastroQuestaoBean.testeFile}" />
+</p:panelGrid>
 	</h:form>
-	<p:messages  severity="info" escape="false" showDetail="true" 
-                 autoUpdate="true" closable="true"/>
+
 </h:body>
 
 </html>
