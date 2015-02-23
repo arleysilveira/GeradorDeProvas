@@ -40,19 +40,28 @@ public class QuestoesHibernate implements Questoes{
 		return (Questao) session.get(Questao.class, codigo);
 
 	}
-
+	
+	//Gera uma lista das questões especificadas pela view GerarProvaBean já embaralhada
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Questao> listarEspecificas(String consulta, Integer numeroDeQuestoes) {
+	public List<Questao> listarEspecificas(String consulta, String numeroDeQuestoes) {
 		Query query = session.createQuery(consulta);
-		//query.setFirstResult(1);
 		List<Questao> teste = new ArrayList<Questao>();
 		teste = query.list();
 		Collections.shuffle(teste);
-		query.setMaxResults(numeroDeQuestoes);
+		query.setMaxResults(Integer.parseInt(numeroDeQuestoes));
 		
 		return teste;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Questao selecionarQuestaoSubjetiva(String consulta){
+		Query query = session.createQuery(consulta);
+		List<Questao> subjetivas = new ArrayList<Questao>();
+		subjetivas = query.list();
+		Collections.shuffle(subjetivas);
 		
+		return subjetivas.get(0);
 		
 	}
 	

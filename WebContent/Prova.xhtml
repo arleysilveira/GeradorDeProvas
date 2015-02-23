@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Insert title here</title>
@@ -10,8 +11,7 @@
 
 <h:body>
 	<!-- Primeira Disciplina -->
-	<h:outputText
-		value="#{gerarProvaBean.prova.disciplinaSelecionada.nome}" />
+		<h3>#{gerarProvaBean.prova.disciplinaSelecionada.nome}</h3>
 	<h:form>
 		<h:dataTable width="80%"
 			value="#{gerarProvaBean.questoesSelecionadas}" var="questao"
@@ -33,8 +33,7 @@
 		<br />
 
 		<!-- Segunda Disciplina -->
-		<h:outputText
-			value="#{gerarProvaBean.prova2.disciplinaSelecionada.nome}" />
+			<h3>#{gerarProvaBean.prova2.disciplinaSelecionada.nome}</h3>
 
 		<h:dataTable width="80%"
 			value="#{gerarProvaBean.questoesSelecionadas2}" var="questao"
@@ -56,7 +55,7 @@
 		<br />
 
 		<!-- Terceira Disciplina -->
-		<h:outputText value="#{gerarProvaBean.prova3.funcaoSelecionada.nome}" />
+		<h3> #{gerarProvaBean.prova3.funcaoSelecionada.nome} </h3>
 
 		<h:dataTable width="80%"
 			value="#{gerarProvaBean.questoesSelecionadas3}" var="questao"
@@ -74,9 +73,11 @@
 			</h:column>
 
 		</h:dataTable>
+		#{gerarProvaBean.questaoSubjetiva.titulo}
 		
 		<h:commandButton value="Gerar Prova"/>
 		<h:button value="Voltar" outcome="GerarProva"/>
 	</h:form>
+	
 </h:body>
 </html>

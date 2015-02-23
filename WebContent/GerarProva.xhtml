@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Gerar Prova</title>
@@ -10,55 +11,64 @@
 
 <h:body>
 	<h:form>
-		<h:panelGrid columns="2">
-			<f:facet name="header">Gerar Prova</f:facet>
+		<div align="center" style="margin-top: 70px">
+			<p:panelGrid columns="2">
+				<f:facet name="header">Gerar Prova</f:facet>
 
-			<h:panelGroup>
-				<h:outputLabel value="Nº de Questões: " />
-				<h:inputText value="#{gerarProvaBean.prova.numeroQuestoes}"  size="2"/>
-			</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Nº de Questões: " />
+					<p:inputText value="#{gerarProvaBean.prova.numeroQuestoes}"
+						size="2" />
+				</h:panelGroup>
 
-			<h:panelGroup>
-				<h:outputLabel value="Disciplina: " />
-				<h:selectOneMenu value="#{gerarProvaBean.prova.disciplinaSelecionada}">
-					<f:selectItems value="#{gerarProvaBean.disciplinas}"
-						var="disciplina" itemValue="#{disciplina}" itemLabel="#{disciplina.nome}"/>
-				</h:selectOneMenu>
-			</h:panelGroup>
-			
-			
-			<h:panelGroup>
-				<h:outputLabel value="Nº de Questões: " />
-				<h:inputText size="2" value="#{gerarProvaBean.prova2.numeroQuestoes}" />
-			</h:panelGroup>
+				<h:panelGroup>
+					<p:selectOneMenu
+						value="#{gerarProvaBean.prova.disciplinaSelecionada}" label="dddd">
+						<f:selectItems value="#{gerarProvaBean.disciplinas}"
+							var="disciplina" itemValue="#{disciplina}"
+							itemLabel="#{disciplina.nome}" />
+					</p:selectOneMenu>
+				</h:panelGroup>
 
-			<h:panelGroup>
-				<h:outputLabel value="Disciplina: " />
-				<h:selectOneMenu value="#{gerarProvaBean.prova2.disciplinaSelecionada}" >
-					<f:selectItems value="#{gerarProvaBean.disciplinas}"
-						var="disciplina" itemValue="#{disciplina}" itemLabel="#{disciplina.nome}"/>
-				</h:selectOneMenu>
-			</h:panelGroup>
-			
-			
-			<h:panelGroup>
-				<h:outputLabel value="Nº de Questões: " />
-				<h:inputText size="2" value="#{gerarProvaBean.prova3.numeroQuestoes}"/>
-			</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Nº de Questões: " />
+					<p:inputText size="2"
+						value="#{gerarProvaBean.prova2.numeroQuestoes}" />
+				</h:panelGroup>
 
-			<h:panelGroup>
-				<h:outputLabel value="Função: " />
-				<h:selectOneMenu value="#{gerarProvaBean.prova3.funcaoSelecionada}">
-					<f:selectItems value="#{gerarProvaBean.funcoes}"
-						var="funcao" itemValue="#{funcao}" itemLabel="#{funcao.nome}"/>
-				</h:selectOneMenu>
-			</h:panelGroup>
+				<h:panelGroup>
+					<p:selectOneMenu
+						value="#{gerarProvaBean.prova2.disciplinaSelecionada}">
+						<f:selectItems value="#{gerarProvaBean.disciplinas}"
+							var="disciplina" itemValue="#{disciplina}"
+							itemLabel="#{disciplina.nome}" />
+					</p:selectOneMenu>
+				</h:panelGroup>
 
-			<h:commandButton value="Gerar Prova" action="#{gerarProvaBean.listarQuestoes}"/>
-			
-			<h:button value="Cancelar" outcome="inicio"/>
-		</h:panelGrid>
+				<h:panelGroup>
+					<p:outputLabel value="Nº de Questões: " />
+					<p:inputText size="2"
+						value="#{gerarProvaBean.prova3.numeroQuestoes}" />
+				</h:panelGroup>
 
+				<h:panelGroup>
+					<p:selectOneMenu value="#{gerarProvaBean.prova3.funcaoSelecionada}">
+						<f:selectItems value="#{gerarProvaBean.funcoes}" var="funcao"
+							itemValue="#{funcao}" itemLabel="#{funcao.nome}" />
+					</p:selectOneMenu>
+				</h:panelGroup>
+
+				<p:outputLabel value="Possui Questão Subjetiva?" />
+				<p:selectBooleanCheckbox value="#{gerarProvaBean.subjetiva}"/>
+				<f:facet name="footer">
+					<p:commandButton value="Gerar Prova"
+						action="#{gerarProvaBean.listarQuestoes}" ajax="@this"
+						icon="ui-icon-document" />
+
+					<p:button value="Cancelar" outcome="inicio" icon="ui-icon-cancel" />
+				</f:facet>
+			</p:panelGrid>
+		</div>
 	</h:form>
 </h:body>
 

@@ -23,7 +23,7 @@ import br.com.rh.util.Repositorios;
 @SessionScoped
 public class GerarProvaBean implements Serializable {
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
-	private List<Questao> questoes;
+	private List<Questao> questoes = new ArrayList<Questao>();
 	private List<Questao> questoes2 = new ArrayList<Questao>();
 	private List<Questao> questoes3 = new ArrayList<Questao>();
 	private List<Funcao> funcoes = new ArrayList<Funcao>();
@@ -32,7 +32,8 @@ public class GerarProvaBean implements Serializable {
 	private List<Questao> questoesSelecionadas2 = new ArrayList<Questao>();
 	private List<Questao> questoesSelecionadas3 = new ArrayList<Questao>();
 	private Prova prova, prova2, prova3;
-	private Questao questaoModificada;
+	private Questao questaoModificada, questaoSubjetiva;
+	private Boolean subjetiva = false;
 
 	public GerarProvaBean() {
 		this.prova = new Prova();
@@ -51,24 +52,28 @@ public class GerarProvaBean implements Serializable {
 	}
 
 	public String listarQuestoes() {
-		this.questoes = new ArrayList<Questao>();
-		this.questoes.clear();
 		Questoes questoes = repositorios.getQuestoes();
 
 		String consulta = "from Questao Q where disciplina_id="
-				+ this.prova.getDisciplinaSelecionada().getId().toString();
+				+ this.prova.getDisciplinaSelecionada().getId().toString()+" and numero_alternativas != 1";
 		this.questoes = questoes.listarEspecificas(consulta,
-				(Integer.parseInt(this.prova.getNumeroQuestoes())));
+				(this.prova.getNumeroQuestoes()));
 
-		String consulta1 = "from Questao Q where disciplina_id="
-				+ this.prova2.getDisciplinaSelecionada().getId().toString();
-		this.questoes2 = questoes.listarEspecificas(consulta1,
-				(Integer.parseInt(this.prova2.getNumeroQuestoes())));
+		consulta = "from Questao Q where disciplina_id="
+				+ this.prova2.getDisciplinaSelecionada().getId().toString()+" and numero_alternativas != 1";
+		this.questoes2 = questoes.listarEspecificas(consulta,
+				(this.prova2.getNumeroQuestoes()));
 
-		String consulta2 = "from Questao Q where id_funcao="
+		consulta = "from Questao Q where id_funcao="
 				+ this.prova3.getFuncaoSelecionada().getId().toString();
-		this.questoes3 = questoes.listarEspecificas(consulta2,
-				(Integer.parseInt(this.prova3.getNumeroQuestoes())));
+		this.questoes3 = questoes.listarEspecificas(consulta,
+				(this.prova3.getNumeroQuestoes()));
+		
+		if(this.subjetiva == true){
+			System.out.println("teste");
+			consulta = "from Questao Q where numero_alternativas=1";
+			this.questaoSubjetiva = questoes.selecionarQuestaoSubjetiva(consulta);
+		}
 
 		questoesSelecionadas.clear();
 		questoesSelecionadas2.clear();
@@ -88,7 +93,8 @@ public class GerarProvaBean implements Serializable {
 
 		return "Prova.xhtml?faces-redirect=true";
 	}
-
+	
+	//Função para modificar a Questão
 	public void modificarQuestao(){
 		int posicaoQuestao = this.questoesSelecionadas.indexOf(this.questaoModificada);
 		Random r = new Random();
@@ -213,4 +219,22 @@ public class GerarProvaBean implements Serializable {
 		this.questaoModificada = questaoModificada;
 	}
 
+	public Questao getQuestaoSubjetiva() {
+		return questaoSubjetiva;
+	}
+
+	public void setQuestaoSubjetiva(Questao questaoSubjetiva) {
+		this.questaoSubjetiva = questaoSubjetiva;
+	}
+
+	public Boolean getSubjetiva() {
+		return subjetiva;
+	}
+
+	public void setSubjetiva(Boolean subjetiva) {
+		this.subjetiva = subjetiva;
+	}
+
+	
+	
 }

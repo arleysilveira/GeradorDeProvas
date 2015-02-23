@@ -2,11 +2,9 @@ package br.com.rh.view;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
 
 import br.com.rh.model.Questao;
 import br.com.rh.repository.Questoes;
@@ -16,18 +14,7 @@ import br.com.rh.util.Repositorios;
 public class ProvaBean {
 	private List<Questao> questoes = new ArrayList<Questao>();
 	private Repositorios Repositorios = new Repositorios();
-	
-	
-	
-	
-	
-	public ProvaBean() {
-		
-		 
-			
-		System.out.println();
-	}
-	
+
 	@PostConstruct
 	public void init(){
 		Questoes questoes = Repositorios.getQuestoes();
