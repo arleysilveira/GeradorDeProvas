@@ -36,6 +36,7 @@ public class GerarProvaBean implements Serializable {
 	private Prova prova, prova2, prova3;
 	private Questao questaoModificada, questaoSubjetiva;
 	private Boolean subjetiva = false;
+	private int numeroFixo;
 
 	public GerarProvaBean() {
 		this.prova = new Prova();
@@ -108,16 +109,12 @@ public class GerarProvaBean implements Serializable {
 		int posicaoQuestao = this.questoesSelecionadas
 				.indexOf(this.questaoModificada);
 		Random r;
-		int H, L, numeroSorteado = posicaoQuestao;
-		
-		while(numeroSorteado == posicaoQuestao){
+		int numeroSorteado = numeroFixo;
+		while(numeroFixo == numeroSorteado){
 			r = new Random();
-			H = this.questoes.size();
-			L = 0;
-			numeroSorteado = r.nextInt(H);
-			System.out.println("Numero= "+numeroSorteado);
-			
+			numeroSorteado = r.nextInt(this.questoes.size());
 		}
+		numeroFixo = numeroSorteado;
 		this.questoesSelecionadas.set(posicaoQuestao,
 				this.questoes.get(numeroSorteado));
 	}
@@ -125,22 +122,28 @@ public class GerarProvaBean implements Serializable {
 	public void modificarQuestao2() {
 		int posicaoQuestao = this.questoesSelecionadas2
 				.indexOf(this.questaoModificada);
-		Random r = new Random();
-		final int H = this.questoes2.size();
-		final int L = 0;
-		int numeroSorteado = (int) (r.nextDouble() * (H - L)) + L;
-		this.questoesSelecionadas2.set(posicaoQuestao,
+		Random r;
+		int numeroSorteado = numeroFixo;
+		while(numeroFixo == numeroSorteado){
+			r = new Random();
+			numeroSorteado = r.nextInt(this.questoes.size());
+		}
+		numeroFixo = numeroSorteado;
+		this.questoesSelecionadas.set(posicaoQuestao,
 				this.questoes2.get(numeroSorteado));
 	}
 
 	public void modificarQuestao3() {
 		int posicaoQuestao = this.questoesSelecionadas3
 				.indexOf(this.questaoModificada);
-		Random r = new Random();
-		final int H = this.questoes3.size();
-		final int L = 0;
-		int numeroSorteado = (int) (r.nextDouble() * (H - L)) + L;
-		this.questoesSelecionadas3.set(posicaoQuestao,
+		Random r;
+		int numeroSorteado = numeroFixo;
+		while(numeroFixo == numeroSorteado){
+			r = new Random();
+			numeroSorteado = r.nextInt(this.questoes.size());
+		}
+		numeroFixo = numeroSorteado;
+		this.questoesSelecionadas.set(posicaoQuestao,
 				this.questoes3.get(numeroSorteado));
 	}
 
