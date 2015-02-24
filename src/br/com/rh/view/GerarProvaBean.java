@@ -23,10 +23,12 @@ import br.com.rh.util.Repositorios;
 @SessionScoped
 public class GerarProvaBean implements Serializable {
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
+	private List<Funcao> funcoes = new ArrayList<Funcao>();
+
 	private List<Questao> questoes = new ArrayList<Questao>();
 	private List<Questao> questoes2 = new ArrayList<Questao>();
 	private List<Questao> questoes3 = new ArrayList<Questao>();
-	private List<Funcao> funcoes = new ArrayList<Funcao>();
+
 	private Repositorios repositorios = new Repositorios();
 	private List<Questao> questoesSelecionadas = new ArrayList<Questao>();
 	private List<Questao> questoesSelecionadas2 = new ArrayList<Questao>();
@@ -55,24 +57,31 @@ public class GerarProvaBean implements Serializable {
 		Questoes questoes = repositorios.getQuestoes();
 
 		String consulta = "from Questao Q where disciplina_id="
-				+ this.prova.getDisciplinaSelecionada().getId().toString()+" and numero_alternativas != 1";
+				+ this.prova.getDisciplinaSelecionada().getId().toString()
+				+ " and numero_alternativas != 1 " + "and dificuldade='"
+				+ this.prova.getDificuldade()+"'";
 		this.questoes = questoes.listarEspecificas(consulta,
 				(this.prova.getNumeroQuestoes()));
 
 		consulta = "from Questao Q where disciplina_id="
-				+ this.prova2.getDisciplinaSelecionada().getId().toString()+" and numero_alternativas != 1";
+				+ this.prova2.getDisciplinaSelecionada().getId().toString()
+				+ " and numero_alternativas != 1" + "and dificuldade='"
+				+ this.prova2.getDificuldade()+"'";
 		this.questoes2 = questoes.listarEspecificas(consulta,
 				(this.prova2.getNumeroQuestoes()));
 
 		consulta = "from Questao Q where id_funcao="
-				+ this.prova3.getFuncaoSelecionada().getId().toString();
+				+ this.prova3.getFuncaoSelecionada().getId().toString()
+				+ " and numero_alternativas != 1" + "and dificuldade='"
+				+ this.prova3.getDificuldade()+"'";
+		;
 		this.questoes3 = questoes.listarEspecificas(consulta,
 				(this.prova3.getNumeroQuestoes()));
-		
-		if(this.subjetiva == true){
-			System.out.println("teste");
+
+		if (this.subjetiva == true) {
 			consulta = "from Questao Q where numero_alternativas=1";
-			this.questaoSubjetiva = questoes.selecionarQuestaoSubjetiva(consulta);
+			this.questaoSubjetiva = questoes
+					.selecionarQuestaoSubjetiva(consulta);
 		}
 
 		questoesSelecionadas.clear();
@@ -93,33 +102,46 @@ public class GerarProvaBean implements Serializable {
 
 		return "Prova.xhtml?faces-redirect=true";
 	}
-	
-	//Função para modificar a Questão
-	public void modificarQuestao(){
-		int posicaoQuestao = this.questoesSelecionadas.indexOf(this.questaoModificada);
-		Random r = new Random();
-		final int H = this.questoes.size();
-		final int L = 0 ;
-		int numeroSorteado = (int)( r.nextDouble() * ( H-L )) + L;
-		this.questoesSelecionadas.set(posicaoQuestao, this.questoes.get(numeroSorteado));
+
+	// Função para modificar a Questão
+	public void modificarQuestao() {
+		int posicaoQuestao = this.questoesSelecionadas
+				.indexOf(this.questaoModificada);
+		Random r;
+		int H, L, numeroSorteado = posicaoQuestao;
+		
+		while(numeroSorteado == posicaoQuestao){
+			r = new Random();
+			H = this.questoes.size();
+			L = 0;
+			numeroSorteado = r.nextInt(H);
+			System.out.println("Numero= "+numeroSorteado);
+			
+		}
+		this.questoesSelecionadas.set(posicaoQuestao,
+				this.questoes.get(numeroSorteado));
 	}
-	
-	public void modificarQuestao2(){
-		int posicaoQuestao = this.questoesSelecionadas2.indexOf(this.questaoModificada);
+
+	public void modificarQuestao2() {
+		int posicaoQuestao = this.questoesSelecionadas2
+				.indexOf(this.questaoModificada);
 		Random r = new Random();
 		final int H = this.questoes2.size();
-		final int L = 0 ;
-		int numeroSorteado = (int)( r.nextDouble() * ( H-L )) + L;
-		this.questoesSelecionadas2.set(posicaoQuestao, this.questoes2.get(numeroSorteado));
+		final int L = 0;
+		int numeroSorteado = (int) (r.nextDouble() * (H - L)) + L;
+		this.questoesSelecionadas2.set(posicaoQuestao,
+				this.questoes2.get(numeroSorteado));
 	}
-	
-	public void modificarQuestao3(){
-		int posicaoQuestao = this.questoesSelecionadas3.indexOf(this.questaoModificada);
+
+	public void modificarQuestao3() {
+		int posicaoQuestao = this.questoesSelecionadas3
+				.indexOf(this.questaoModificada);
 		Random r = new Random();
 		final int H = this.questoes3.size();
-		final int L = 0 ;
-		int numeroSorteado = (int)( r.nextDouble() * ( H-L )) + L;
-		this.questoesSelecionadas3.set(posicaoQuestao, this.questoes3.get(numeroSorteado));
+		final int L = 0;
+		int numeroSorteado = (int) (r.nextDouble() * (H - L)) + L;
+		this.questoesSelecionadas3.set(posicaoQuestao,
+				this.questoes3.get(numeroSorteado));
 	}
 
 	// Getters and Setters
@@ -235,6 +257,4 @@ public class GerarProvaBean implements Serializable {
 		this.subjetiva = subjetiva;
 	}
 
-	
-	
 }

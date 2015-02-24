@@ -23,10 +23,15 @@
 
 				<h:panelGroup>
 					<p:selectOneMenu
-						value="#{gerarProvaBean.prova.disciplinaSelecionada}" label="dddd">
+						value="#{gerarProvaBean.prova.disciplinaSelecionada}" >
 						<f:selectItems value="#{gerarProvaBean.disciplinas}"
 							var="disciplina" itemValue="#{disciplina}"
 							itemLabel="#{disciplina.nome}" />
+					</p:selectOneMenu>
+					<p:selectOneMenu value="#{gerarProvaBean.prova.dificuldade}">
+						<f:selectItem itemValue="F" itemLabel="Fácil"/>
+						<f:selectItem itemValue="M" itemLabel="Médio"/>
+						<f:selectItem itemValue="D" itemLabel="Difícil"/>
 					</p:selectOneMenu>
 				</h:panelGroup>
 
@@ -43,6 +48,12 @@
 							var="disciplina" itemValue="#{disciplina}"
 							itemLabel="#{disciplina.nome}" />
 					</p:selectOneMenu>
+					
+					<p:selectOneMenu value="#{gerarProvaBean.prova2.dificuldade}">
+						<f:selectItem itemValue="F" itemLabel="Fácil"/>
+						<f:selectItem itemValue="M" itemLabel="Médio"/>
+						<f:selectItem itemValue="D" itemLabel="Difícil"/>
+					</p:selectOneMenu>
 				</h:panelGroup>
 
 				<h:panelGroup>
@@ -55,6 +66,11 @@
 					<p:selectOneMenu value="#{gerarProvaBean.prova3.funcaoSelecionada}">
 						<f:selectItems value="#{gerarProvaBean.funcoes}" var="funcao"
 							itemValue="#{funcao}" itemLabel="#{funcao.nome}" />
+					</p:selectOneMenu>
+					<p:selectOneMenu value="#{gerarProvaBean.prova3.dificuldade}">
+						<f:selectItem itemValue="F" itemLabel="Fácil"/>
+						<f:selectItem itemValue="M" itemLabel="Médio"/>
+						<f:selectItem itemValue="D" itemLabel="Difícil"/>
 					</p:selectOneMenu>
 				</h:panelGroup>
 

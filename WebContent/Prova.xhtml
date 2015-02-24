@@ -11,72 +11,73 @@
 
 <h:body>
 	<!-- Primeira Disciplina -->
-		<h3>#{gerarProvaBean.prova.disciplinaSelecionada.nome}</h3>
+		
 	<h:form>
-		<h:dataTable width="80%"
+		<p:dataTable width="80%"
 			value="#{gerarProvaBean.questoesSelecionadas}" var="questao"
 			border="1">
-			<h:column>
+			<f:facet name="header">#{gerarProvaBean.prova.disciplinaSelecionada.nome}</f:facet>
+			<p:column>
+			
 				<h:outputText value="#{questao.titulo}" escape="false"/>
-			</h:column>
+			</p:column>
 
-			<h:column>
-				<h:commandButton value="Modificar"
+			<p:column>
+				<p:commandButton value="Modificar" ajax="@this"
 					action="#{gerarProvaBean.modificarQuestao}">
 					<f:setPropertyActionListener
 						target="#{gerarProvaBean.questaoModificada}" value="#{questao}" />
-				</h:commandButton>
-			</h:column>
+				</p:commandButton>
+			</p:column>
 
-		</h:dataTable>
+		</p:dataTable>
 
 		<br />
 
 		<!-- Segunda Disciplina -->
-			<h3>#{gerarProvaBean.prova2.disciplinaSelecionada.nome}</h3>
-
-		<h:dataTable width="80%"
+		<p:dataTable width="80%"
 			value="#{gerarProvaBean.questoesSelecionadas2}" var="questao"
 			border="1">
-			<h:column>
+			<f:facet name="header">#{gerarProvaBean.prova2.disciplinaSelecionada.nome}</f:facet>
+			<p:column>
 				<h:outputText value="#{questao.titulo}" escape="false"/>
-			</h:column>
+			</p:column>
 
-			<h:column>
-				<h:commandButton value="Modificar"
+			<p:column>
+				<p:commandButton value="Modificar" ajax="@this"
 					action="#{gerarProvaBean.modificarQuestao2}">
 					<f:setPropertyActionListener
 						target="#{gerarProvaBean.questaoModificada}" value="#{questao}" />
-				</h:commandButton>
-			</h:column>
+				</p:commandButton>
+			</p:column>
 
-		</h:dataTable>
+		</p:dataTable>
 
 		<br />
 
 		<!-- Terceira Disciplina -->
-		<h3> #{gerarProvaBean.prova3.funcaoSelecionada.nome} </h3>
-
-		<h:dataTable width="80%"
+		<p:dataTable width="80%"
 			value="#{gerarProvaBean.questoesSelecionadas3}" var="questao"
 			border="1">
-			<h:column>
+			<f:facet name="header">#{gerarProvaBean.prova3.funcaoSelecionada.nome}</f:facet>
+			<p:column>
 				<h:outputText value="#{questao.titulo}" escape="false" />
-			</h:column>
+			</p:column>
 
-			<h:column>
-				<h:commandButton value="Modificar"
+			<p:column>
+				<p:commandButton value="Modificar" ajax="@this"
 					action="#{gerarProvaBean.modificarQuestao3}">
 					<f:setPropertyActionListener
 						target="#{gerarProvaBean.questaoModificada}" value="#{questao}" />
-				</h:commandButton>
-			</h:column>
+				</p:commandButton>
+			</p:column>
 
-		</h:dataTable>
+		</p:dataTable>
 		#{gerarProvaBean.questaoSubjetiva.titulo}
+		<br/>
 		
-		<h:commandButton value="Gerar Prova"/>
-		<h:button value="Voltar" outcome="GerarProva"/>
+		<p:commandButton value="Gerar Prova" ajax="@this"/>
+		<p:button value="Voltar" outcome="GerarProva"/>
 	</h:form>
 	
 </h:body>

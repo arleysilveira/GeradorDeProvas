@@ -7,6 +7,7 @@ public class Prova implements Serializable {
 	private String numeroQuestoes;
 	private Disciplina disciplinaSelecionada;
 	private Funcao funcaoSelecionada;
+	private String dificuldade;
 	
 	
 	public String getNumeroQuestoes() {
@@ -27,6 +28,12 @@ public class Prova implements Serializable {
 	}
 	public void setFuncaoSelecionada(Funcao funcaoSelecionada) {
 		this.funcaoSelecionada = funcaoSelecionada;
+	}
+	public String getDificuldade() {
+		return dificuldade;
+	}
+	public void setDificuldade(String dificuldade) {
+		this.dificuldade = dificuldade;
 	}
 
 	
