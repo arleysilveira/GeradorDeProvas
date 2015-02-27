@@ -19,12 +19,13 @@
 			<f:facet name="header">#{gerarProvaBean.prova.disciplinaSelecionada.nome}</f:facet>
 			<p:column>
 			
-				<h:outputText value="#{questao.titulo}" escape="false"/>
+				<h:outputText id="questao" value="#{questao.titulo}" escape="false"/>
 			</p:column>
 
 			<p:column>
 				<p:commandButton value="Modificar" ajax="@this"
 					action="#{gerarProvaBean.modificarQuestao}">
+					<p:ajax execute="@this" update="questao"/>
 					<f:setPropertyActionListener
 						target="#{gerarProvaBean.questaoModificada}" value="#{questao}" />
 				</p:commandButton>
@@ -40,12 +41,13 @@
 			border="1">
 			<f:facet name="header">#{gerarProvaBean.prova2.disciplinaSelecionada.nome}</f:facet>
 			<p:column>
-				<h:outputText value="#{questao.titulo}" escape="false"/>
+				<h:outputText id="questao2" value="#{questao.titulo}" escape="false"/>
 			</p:column>
 
 			<p:column>
-				<p:commandButton value="Modificar" ajax="@this"
+				<p:commandButton value="Modificar" 
 					action="#{gerarProvaBean.modificarQuestao2}">
+					<p:ajax execute="@this" update="questao2"/>
 					<f:setPropertyActionListener
 						target="#{gerarProvaBean.questaoModificada}" value="#{questao}" />
 				</p:commandButton>
@@ -61,12 +63,13 @@
 			border="1">
 			<f:facet name="header">#{gerarProvaBean.prova3.funcaoSelecionada.nome}</f:facet>
 			<p:column>
-				<h:outputText value="#{questao.titulo}" escape="false" />
+				<h:outputText id="questao3" value="#{questao.titulo}" escape="false" />
 			</p:column>
 
 			<p:column>
-				<p:commandButton value="Modificar" ajax="@this"
+				<p:commandButton value="Modificar" 
 					action="#{gerarProvaBean.modificarQuestao3}">
+					<p:ajax execute="@this" update="questao3"/>
 					<f:setPropertyActionListener
 						target="#{gerarProvaBean.questaoModificada}" value="#{questao}" />
 				</p:commandButton>

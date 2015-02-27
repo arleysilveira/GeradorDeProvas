@@ -7,3 +7,9 @@ thead{
 	height: 40px;
 	font-size: 20px;
 }
+
+.caixa {
+	color: red;
+	margin: 5px 5px 5px 10px;
+}
+

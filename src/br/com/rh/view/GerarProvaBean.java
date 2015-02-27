@@ -25,9 +25,9 @@ public class GerarProvaBean implements Serializable {
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 	private List<Funcao> funcoes = new ArrayList<Funcao>();
 
-	private List<Questao> questoes = new ArrayList<Questao>();
-	private List<Questao> questoes2 = new ArrayList<Questao>();
-	private List<Questao> questoes3 = new ArrayList<Questao>();
+	private String[] questoesFaceis = new String[3];
+	private String[] questoesMedias = new String[3];
+	private String[] questoesDifíceis = new String[3];
 
 	private Repositorios repositorios = new Repositorios();
 	private List<Questao> questoesSelecionadas = new ArrayList<Questao>();
@@ -37,6 +37,8 @@ public class GerarProvaBean implements Serializable {
 	private Questao questaoModificada, questaoSubjetiva;
 	private Boolean subjetiva = false;
 	private int numeroFixo;
+	
+	
 
 	public GerarProvaBean() {
 		this.prova = new Prova();
@@ -56,95 +58,51 @@ public class GerarProvaBean implements Serializable {
 
 	public String listarQuestoes() {
 		Questoes questoes = repositorios.getQuestoes();
+		this.questoesSelecionadas = questoes.listarPorDisciplina(
+				questoesFaceis[0], questoesMedias[0], questoesDifíceis[0],
+				prova.getDisciplinaSelecionada().getId().toString());
+		this.questoesSelecionadas2 = questoes.listarPorDisciplina(
+				questoesFaceis[1], questoesMedias[1], questoesDifíceis[1],
+				prova2.getDisciplinaSelecionada().getId().toString());
+		this.questoesSelecionadas3 = questoes.listarEspecificas(
+				questoesFaceis[2], questoesMedias[2], questoesDifíceis[2],
+				prova3.getFuncaoSelecionada().getId().toString());
 
-		String consulta = "from Questao Q where disciplina_id="
-				+ this.prova.getDisciplinaSelecionada().getId().toString()
-				+ " and numero_alternativas != 1 " + "and dificuldade='"
-				+ this.prova.getDificuldade()+"'";
-		this.questoes = questoes.listarEspecificas(consulta,
-				(this.prova.getNumeroQuestoes()));
-
-		consulta = "from Questao Q where disciplina_id="
-				+ this.prova2.getDisciplinaSelecionada().getId().toString()
-				+ " and numero_alternativas != 1" + "and dificuldade='"
-				+ this.prova2.getDificuldade()+"'";
-		this.questoes2 = questoes.listarEspecificas(consulta,
-				(this.prova2.getNumeroQuestoes()));
-
-		consulta = "from Questao Q where id_funcao="
-				+ this.prova3.getFuncaoSelecionada().getId().toString()
-				+ " and numero_alternativas != 1" + "and dificuldade='"
-				+ this.prova3.getDificuldade()+"'";
-		;
-		this.questoes3 = questoes.listarEspecificas(consulta,
-				(this.prova3.getNumeroQuestoes()));
-
-		if (this.subjetiva == true) {
-			consulta = "from Questao Q where numero_alternativas=1";
-			this.questaoSubjetiva = questoes
-					.selecionarQuestaoSubjetiva(consulta);
-		}
-
-		questoesSelecionadas.clear();
-		questoesSelecionadas2.clear();
-		questoesSelecionadas3.clear();
-
-		for (int i = 0; i < Integer.parseInt(this.prova.getNumeroQuestoes()); i++) {
-			questoesSelecionadas.add(this.questoes.get(i));
-		}
-
-		for (int i = 0; i < Integer.parseInt(this.prova2.getNumeroQuestoes()); i++) {
-			questoesSelecionadas2.add(this.questoes2.get(i));
-		}
-
-		for (int i = 0; i < Integer.parseInt(this.prova3.getNumeroQuestoes()); i++) {
-			questoesSelecionadas3.add(this.questoes3.get(i));
-		}
-
+		System.out.println(questoesFaceis[0]+questoesMedias[0]+ questoesDifíceis[0]);
+		
 		return "Prova.xhtml?faces-redirect=true";
 	}
 
 	// Função para modificar a Questão
 	public void modificarQuestao() {
+		Questoes questoes = repositorios.getQuestoes();
 		int posicaoQuestao = this.questoesSelecionadas
 				.indexOf(this.questaoModificada);
-		Random r;
-		int numeroSorteado = numeroFixo;
-		while(numeroFixo == numeroSorteado){
-			r = new Random();
-			numeroSorteado = r.nextInt(this.questoes.size());
-		}
-		numeroFixo = numeroSorteado;
+
 		this.questoesSelecionadas.set(posicaoQuestao,
-				this.questoes.get(numeroSorteado));
+				questoes.modificarQuestaoDisciplina(this.getQuestaoModificada().getDisciplina().getId().toString(),
+						this.questaoModificada.getDificuldade(), this.questaoModificada.getId()));
 	}
 
 	public void modificarQuestao2() {
+		Questoes questoes = repositorios.getQuestoes();
 		int posicaoQuestao = this.questoesSelecionadas2
 				.indexOf(this.questaoModificada);
-		Random r;
-		int numeroSorteado = numeroFixo;
-		while(numeroFixo == numeroSorteado){
-			r = new Random();
-			numeroSorteado = r.nextInt(this.questoes.size());
-		}
-		numeroFixo = numeroSorteado;
-		this.questoesSelecionadas.set(posicaoQuestao,
-				this.questoes2.get(numeroSorteado));
+
+		this.questoesSelecionadas2.set(posicaoQuestao,
+				questoes.modificarQuestaoDisciplina(this.getQuestaoModificada().getDisciplina().getId().toString(),
+						this.questaoModificada.getDificuldade(), this.questaoModificada.getId()));
+		
 	}
 
 	public void modificarQuestao3() {
+		Questoes questoes = repositorios.getQuestoes();
 		int posicaoQuestao = this.questoesSelecionadas3
 				.indexOf(this.questaoModificada);
-		Random r;
-		int numeroSorteado = numeroFixo;
-		while(numeroFixo == numeroSorteado){
-			r = new Random();
-			numeroSorteado = r.nextInt(this.questoes.size());
-		}
-		numeroFixo = numeroSorteado;
-		this.questoesSelecionadas.set(posicaoQuestao,
-				this.questoes3.get(numeroSorteado));
+
+		this.questoesSelecionadas3.set(posicaoQuestao,
+				questoes.modificarQuestaoDisciplina(this.getQuestaoModificada().getDisciplina().getId().toString(),
+						this.questaoModificada.getDificuldade(), this.questaoModificada.getId()));
 	}
 
 	// Getters and Setters
@@ -164,13 +122,6 @@ public class GerarProvaBean implements Serializable {
 		this.prova = prova;
 	}
 
-	public List<Questao> getQuestoes() {
-		return questoes;
-	}
-
-	public void setQuestoes(List<Questao> questoes) {
-		this.questoes = questoes;
-	}
 
 	public List<Funcao> getFuncoes() {
 		return funcoes;
@@ -178,14 +129,6 @@ public class GerarProvaBean implements Serializable {
 
 	public void setFuncoes(List<Funcao> funcoes) {
 		this.funcoes = funcoes;
-	}
-
-	public List<Questao> getQuestoes2() {
-		return questoes2;
-	}
-
-	public void setQuestoes2(List<Questao> questoes2) {
-		this.questoes2 = questoes2;
 	}
 
 	public Prova getProva2() {
@@ -204,13 +147,6 @@ public class GerarProvaBean implements Serializable {
 		this.prova3 = prova3;
 	}
 
-	public List<Questao> getQuestoes3() {
-		return questoes3;
-	}
-
-	public void setQuestoes3(List<Questao> questoes3) {
-		this.questoes3 = questoes3;
-	}
 
 	public List<Questao> getQuestoesSelecionadas() {
 		return questoesSelecionadas;
@@ -258,6 +194,30 @@ public class GerarProvaBean implements Serializable {
 
 	public void setSubjetiva(Boolean subjetiva) {
 		this.subjetiva = subjetiva;
+	}
+
+	public String[] getQuestoesFaceis() {
+		return questoesFaceis;
+	}
+
+	public void setQuestoesFaceis(String[] questoesFaceis) {
+		this.questoesFaceis = questoesFaceis;
+	}
+
+	public String[] getQuestoesMedias() {
+		return questoesMedias;
+	}
+
+	public void setQuestoesMedias(String[] questoesMedias) {
+		this.questoesMedias = questoesMedias;
+	}
+
+	public String[] getQuestoesDifíceis() {
+		return questoesDifíceis;
+	}
+
+	public void setQuestoesDifíceis(String[] questoesDifíceis) {
+		this.questoesDifíceis = questoesDifíceis;
 	}
 
 }

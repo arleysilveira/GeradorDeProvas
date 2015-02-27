@@ -6,6 +6,8 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="css" name="geral.css" />
+
 	<title>Gerar Prova</title>
 </h:head>
 
@@ -16,66 +18,68 @@
 				<f:facet name="header">Gerar Prova</f:facet>
 
 				<h:panelGroup>
-					<p:outputLabel value="Nº de Questões: " />
-					<p:inputText value="#{gerarProvaBean.prova.numeroQuestoes}"
-						size="2" />
-				</h:panelGroup>
-
-				<h:panelGroup>
-					<p:selectOneMenu
-						value="#{gerarProvaBean.prova.disciplinaSelecionada}" >
+					<p:outputLabel value="Disciplina: " />
+					<p:selectOneMenu styleClass="caixa"
+						value="#{gerarProvaBean.prova.disciplinaSelecionada}">
 						<f:selectItems value="#{gerarProvaBean.disciplinas}"
 							var="disciplina" itemValue="#{disciplina}"
 							itemLabel="#{disciplina.nome}" />
 					</p:selectOneMenu>
-					<p:selectOneMenu value="#{gerarProvaBean.prova.dificuldade}">
-						<f:selectItem itemValue="F" itemLabel="Fácil"/>
-						<f:selectItem itemValue="M" itemLabel="Médio"/>
-						<f:selectItem itemValue="D" itemLabel="Difícil"/>
-					</p:selectOneMenu>
 				</h:panelGroup>
 
 				<h:panelGroup>
-					<p:outputLabel value="Nº de Questões: " />
-					<p:inputText size="2"
-						value="#{gerarProvaBean.prova2.numeroQuestoes}" />
+					<p:outputLabel value=" Fácil: " />
+					<p:inputText size="1" value="#{gerarProvaBean.questoesFaceis[0]}"/>
+
+					<p:outputLabel value=" Médio: " />
+					<p:inputText size="1" value="#{gerarProvaBean.questoesMedias[0]}"/>
+
+					<p:outputLabel value=" Difícil: " />
+					<p:inputText size="1" value="#{gerarProvaBean.questoesDifíceis[0]}"/>
 				</h:panelGroup>
 
 				<h:panelGroup>
-					<p:selectOneMenu
+					<p:outputLabel value="Disciplina: " />
+					<p:selectOneMenu styleClass="caixa"
 						value="#{gerarProvaBean.prova2.disciplinaSelecionada}">
 						<f:selectItems value="#{gerarProvaBean.disciplinas}"
 							var="disciplina" itemValue="#{disciplina}"
 							itemLabel="#{disciplina.nome}" />
 					</p:selectOneMenu>
-					
-					<p:selectOneMenu value="#{gerarProvaBean.prova2.dificuldade}">
-						<f:selectItem itemValue="F" itemLabel="Fácil"/>
-						<f:selectItem itemValue="M" itemLabel="Médio"/>
-						<f:selectItem itemValue="D" itemLabel="Difícil"/>
-					</p:selectOneMenu>
 				</h:panelGroup>
 
 				<h:panelGroup>
-					<p:outputLabel value="Nº de Questões: " />
-					<p:inputText size="2"
-						value="#{gerarProvaBean.prova3.numeroQuestoes}" />
+					<p:outputLabel value=" Fácil: " />
+					<p:inputText size="1" value="#{gerarProvaBean.questoesFaceis[1]}"/>
+
+					<p:outputLabel value=" Médio: " />
+					<p:inputText size="1"  value="#{gerarProvaBean.questoesMedias[1]}"/>
+
+					<p:outputLabel value=" Difícil: " />
+					<p:inputText size="1" value="#{gerarProvaBean.questoesDifíceis[1]}"/>
 				</h:panelGroup>
 
 				<h:panelGroup>
-					<p:selectOneMenu value="#{gerarProvaBean.prova3.funcaoSelecionada}">
+					<p:outputLabel value="Função: " />
+					<p:selectOneMenu value="#{gerarProvaBean.prova3.funcaoSelecionada}" styleClass="caixa">
 						<f:selectItems value="#{gerarProvaBean.funcoes}" var="funcao"
 							itemValue="#{funcao}" itemLabel="#{funcao.nome}" />
 					</p:selectOneMenu>
-					<p:selectOneMenu value="#{gerarProvaBean.prova3.dificuldade}">
-						<f:selectItem itemValue="F" itemLabel="Fácil"/>
-						<f:selectItem itemValue="M" itemLabel="Médio"/>
-						<f:selectItem itemValue="D" itemLabel="Difícil"/>
-					</p:selectOneMenu>
+				</h:panelGroup>
+
+				<h:panelGroup>
+					<p:outputLabel value=" Fácil: " />
+					<p:inputText size="1" value="#{gerarProvaBean.questoesFaceis[2]}" />
+
+					<p:outputLabel value=" Médio: " />
+					<p:inputText size="1" value="#{gerarProvaBean.questoesMedias[2]}" />
+
+					<p:outputLabel value=" Difícil: " />
+					<p:inputText size="1" value="#{gerarProvaBean.questoesDifíceis[2]}" />
 				</h:panelGroup>
 
 				<p:outputLabel value="Possui Questão Subjetiva?" />
-				<p:selectBooleanCheckbox value="#{gerarProvaBean.subjetiva}"/>
+				<p:selectBooleanCheckbox value="#{gerarProvaBean.subjetiva}" />
 				<f:facet name="footer">
 					<p:commandButton value="Gerar Prova"
 						action="#{gerarProvaBean.listarQuestoes}" ajax="@this"
