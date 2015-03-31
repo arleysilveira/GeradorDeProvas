@@ -23,9 +23,8 @@
 			</p:column>
 
 			<p:column>
-				<p:commandButton value="Modificar" ajax="@this"
+				<p:commandButton value="Modificar" update="questao"
 					action="#{gerarProvaBean.modificarQuestao}">
-					<p:ajax execute="@this" update="questao"/>
 					<f:setPropertyActionListener
 						target="#{gerarProvaBean.questaoModificada}" value="#{questao}" />
 				</p:commandButton>
@@ -45,9 +44,8 @@
 			</p:column>
 
 			<p:column>
-				<p:commandButton value="Modificar" 
+				<p:commandButton value="Modificar" update="questao2"
 					action="#{gerarProvaBean.modificarQuestao2}">
-					<p:ajax execute="@this" update="questao2"/>
 					<f:setPropertyActionListener
 						target="#{gerarProvaBean.questaoModificada}" value="#{questao}" />
 				</p:commandButton>
@@ -58,7 +56,7 @@
 		<br />
 
 		<!-- Terceira Disciplina -->
-		<p:dataTable width="80%"
+		<p:dataTable width="80%" id="tabela"
 			value="#{gerarProvaBean.questoesSelecionadas3}" var="questao"
 			border="1">
 			<f:facet name="header">#{gerarProvaBean.prova3.funcaoSelecionada.nome}</f:facet>
@@ -67,9 +65,8 @@
 			</p:column>
 
 			<p:column>
-				<p:commandButton value="Modificar" 
+				<p:commandButton value="Modificar" update="questao3"
 					action="#{gerarProvaBean.modificarQuestao3}">
-					<p:ajax execute="@this" update="questao3"/>
 					<f:setPropertyActionListener
 						target="#{gerarProvaBean.questaoModificada}" value="#{questao}" />
 				</p:commandButton>

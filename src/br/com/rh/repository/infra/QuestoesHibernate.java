@@ -15,11 +15,11 @@ import br.com.rh.repository.Questoes;
 public class QuestoesHibernate implements Questoes {
 
 	private Session session;
-
+	
 	public QuestoesHibernate(Session session) {
 		this.session = session;
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Questao> listarTodas() {
@@ -40,7 +40,6 @@ public class QuestoesHibernate implements Questoes {
 	@Override
 	public Questao porCodigo(Integer codigo) {
 		return (Questao) session.get(Questao.class, codigo);
-
 	}
 
 	// Gera uma lista das questões especificadas pela view GerarProvaBean já
@@ -133,6 +132,7 @@ public class QuestoesHibernate implements Questoes {
 			query = session
 					.createQuery("from Questao where dificuldade='M' and disciplina_id='"
 							+ disciplina + "'");
+			
 			query.setMaxResults(Integer.parseInt(numeroQuestoesMedias));
 			questoesMedias = query.list();
 			for (int i = 0; i < questoesMedias.size(); i++) {
@@ -155,35 +155,84 @@ public class QuestoesHibernate implements Questoes {
 		}
 
 		Collections.shuffle(todasQuestoes);
+		List<Questao> questoesFinais = new ArrayList<Questao>();
+		
+		int[] contador = new int[2];
+		for(Questao questao : todasQuestoes){
+			if(questao.getNumeroAlternativas().equals("1") && contador[0] <= 2){
+				contador[0]++;
+				questoesFinais.add(questao);
+				todasQuestoes.remove(questao);
+			} else if(questao.getNumeroAlternativas().equals("2") && contador[1] <= 1){
+				contador[1]++;
+				questoesFinais.add(questao);
+				todasQuestoes.remove(questao);
+			} else if(questao.getNumeroAlternativas().equals("5") && contador[2] == 0){
+				contador[2]++;
+				questoesFinais.add(questao);
+				todasQuestoes.remove(questao);
+			}
+		}
+		
+		//Falta fazer a modificação
 
 		return todasQuestoes;
 	}
 
 	@SuppressWarnings("unchecked")
-	public Questao modificarQuestaoDisciplina(String disciplina,
+	public Questao modificarQuestaoDisciplina(String idDisciplina,
 			String dificuldade, int idQuestao) {
 		List<Questao> todasQuestoes = new ArrayList<Questao>();
 		Query query = session.createQuery("from Questao where disciplina_id='"
-				+ disciplina + "' and dificuldade='" + dificuldade+"'");
+				+ idDisciplina + "' and dificuldade='" + dificuldade+"'");
 		todasQuestoes = query.list();
 		
 		
 		Random r;
-		int idSorteado, idFixo = idQuestao, iTeste = 0;
+		int idSorteado, idFixo = idQuestao, idTeste = 0;
 		idSorteado = idFixo;
 		int contador = 0;
 		while (idFixo == idSorteado) {
 			r = new Random();
-			iTeste = r.nextInt(todasQuestoes.size());
-			idSorteado = todasQuestoes.get(iTeste).getId();
-			contador++;
+			idTeste = r.nextInt(todasQuestoes.size());
+			idSorteado = todasQuestoes.get(idTeste).getId();
 			if(contador >= 10){
 				System.out.println("======Loop======" + contador);
 				break;
 			}
+			contador++;
 		}
 		idFixo = idSorteado;
-		Questao questaoSorteada = todasQuestoes.get(iTeste);
+		Questao questaoSorteada = todasQuestoes.get(idTeste);
+		return questaoSorteada;
+				
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Questao modificarQuestaoFuncao(String idFuncao,
+			String dificuldade, int idQuestao) {
+		List<Questao> todasQuestoes = new ArrayList<Questao>();
+		Query query = session.createQuery("from Questao where id_funcao='"
+				+ idFuncao + "' and dificuldade='" + dificuldade+"'");
+		todasQuestoes = query.list();
+		
+		
+		Random r;
+		int idSorteado, idFixo = idQuestao, idTeste = 0;
+		idSorteado = idFixo;
+		int contador = 0;
+		while (idFixo == idSorteado) {
+			r = new Random();
+			idTeste = r.nextInt(todasQuestoes.size());
+			idSorteado = todasQuestoes.get(idTeste).getId();
+			if(contador >= 10){
+				System.out.println("======Loop======" + contador);
+				break;
+			}
+			contador++;
+		}
+		idFixo = idSorteado;
+		Questao questaoSorteada = todasQuestoes.get(idTeste);
 		return questaoSorteada;
 				
 	}

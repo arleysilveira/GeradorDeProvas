@@ -14,7 +14,7 @@
 <h:body>
 	<h:form>
 		<div align="center" style="margin-top: 70px">
-			<p:panelGrid columns="2">
+			<p:panelGrid columns="3">
 				<f:facet name="header">Gerar Prova</f:facet>
 
 				<h:panelGroup>
@@ -37,6 +37,17 @@
 					<p:outputLabel value=" Difícil: " />
 					<p:inputText size="1" value="#{gerarProvaBean.questoesDifíceis[0]}"/>
 				</h:panelGroup>
+				
+				<h:panelGroup>
+					<p:outputLabel value=" V/F: " />
+					<p:inputText size="1"  />
+
+					<p:outputLabel value=" Subj: " />
+					<p:inputText size="1"  />
+
+					<p:outputLabel value=" Alternat: " />
+					<p:inputText size="1" />
+				</h:panelGroup>
 
 				<h:panelGroup>
 					<p:outputLabel value="Disciplina: " />
@@ -58,6 +69,17 @@
 					<p:outputLabel value=" Difícil: " />
 					<p:inputText size="1" value="#{gerarProvaBean.questoesDifíceis[1]}"/>
 				</h:panelGroup>
+				
+				<h:panelGroup>
+					<p:outputLabel value=" V/F: " />
+					<p:inputText size="1"  />
+
+					<p:outputLabel value=" Subj: " />
+					<p:inputText size="1"  />
+
+					<p:outputLabel value=" Alternat: " />
+					<p:inputText size="1" />
+				</h:panelGroup>
 
 				<h:panelGroup>
 					<p:outputLabel value="Função: " />
@@ -76,8 +98,20 @@
 
 					<p:outputLabel value=" Difícil: " />
 					<p:inputText size="1" value="#{gerarProvaBean.questoesDifíceis[2]}" />
+				
 				</h:panelGroup>
+				
+				<h:panelGroup>
+					<p:outputLabel value=" V/F: " />
+					<p:inputText size="1"  />
 
+					<p:outputLabel value=" Subj: " />
+					<p:inputText size="1"  />
+
+					<p:outputLabel value=" Alternat: " />
+					<p:inputText size="1" />
+				</h:panelGroup>
+					
 				<p:outputLabel value="Possui Questão Subjetiva?" />
 				<p:selectBooleanCheckbox value="#{gerarProvaBean.subjetiva}" />
 				<f:facet name="footer">

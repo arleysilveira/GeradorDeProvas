@@ -23,6 +23,9 @@ public interface Questoes {
 
 	public void excluir(Questao questao);
 	
-	public Questao modificarQuestaoDisciplina(String disciplina,
+	public Questao modificarQuestaoDisciplina(String idDisciplina,
+			String dificuldade, int idQuestao);
+	
+	public Questao modificarQuestaoFuncao(String idFuncao,
 			String dificuldade, int idQuestao);
 }

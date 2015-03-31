@@ -3,7 +3,6 @@ package br.com.rh.view;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -28,15 +27,18 @@ public class GerarProvaBean implements Serializable {
 	private String[] questoesFaceis = new String[3];
 	private String[] questoesMedias = new String[3];
 	private String[] questoesDifíceis = new String[3];
+	
+	
 
 	private Repositorios repositorios = new Repositorios();
+	
 	private List<Questao> questoesSelecionadas = new ArrayList<Questao>();
 	private List<Questao> questoesSelecionadas2 = new ArrayList<Questao>();
 	private List<Questao> questoesSelecionadas3 = new ArrayList<Questao>();
+	
 	private Prova prova, prova2, prova3;
 	private Questao questaoModificada, questaoSubjetiva;
 	private Boolean subjetiva = false;
-	private int numeroFixo;
 	
 	
 
@@ -101,7 +103,7 @@ public class GerarProvaBean implements Serializable {
 				.indexOf(this.questaoModificada);
 
 		this.questoesSelecionadas3.set(posicaoQuestao,
-				questoes.modificarQuestaoDisciplina(this.getQuestaoModificada().getDisciplina().getId().toString(),
+				questoes.modificarQuestaoFuncao(this.getQuestaoModificada().getFuncao().getId().toString(),
 						this.questaoModificada.getDificuldade(), this.questaoModificada.getId()));
 	}
 
