@@ -12,7 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import org.primefaces.event.FileUploadEvent;
+//import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 import br.com.rh.model.Disciplina;
@@ -56,7 +56,7 @@ public class CadastroQuestaoBean implements Serializable{
 		
 	}
 	
-	public void testeFile(FileUploadEvent event) throws IOException{
+/*	public void testeFile(FileUploadEvent event) throws IOException{
 	    byte[] conteudo = event.getFile().getContents();  
 	    String localPath = System.getProperty("user.dir");  
 	    
@@ -67,7 +67,7 @@ public class CadastroQuestaoBean implements Serializable{
 	    FileOutputStream fos = new FileOutputStream(caminho);  
 	    fos.write(conteudo);  
 	    fos.close();  
-	}
+	}*/
 	
 	private void verificaTipoQuestao(){
 		if(this.questao.getNumeroAlternativas().equals("2")){

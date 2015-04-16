@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -48,8 +49,8 @@ public class QuestoesHibernate implements Questoes {
 	@Override
 	public List<Questao> listarEspecificas(String numeroQuestoesFaceis,
 			String numeroQuestoesMedias, String numeroQuestoesDificeis,
-			String funcao) {
-		List<Questao> todasQuestoes = new ArrayList<Questao>();
+			String funcao, int numVerdFalsa, int numSubj, int numAlter) {
+		List<Questao> todasQuestoes = new CopyOnWriteArrayList<Questao>();
 		List<Questao> questoesFaceis = new ArrayList<Questao>();
 		List<Questao> questoesMedias = new ArrayList<Questao>();
 		List<Questao> questoesDificeis = new ArrayList<Questao>();
@@ -91,8 +92,52 @@ public class QuestoesHibernate implements Questoes {
 			}
 
 		}
+		
+		Collections.shuffle(todasQuestoes);
+		List<Questao> questoesFinais = new ArrayList<Questao>();
 
-		return todasQuestoes;
+		int[] contador = new int[3];
+		for(Questao questao : todasQuestoes){
+			if(questao.getNumeroAlternativas().equals("1") && contador[0] < numSubj){
+				contador[0]++;
+				questoesFinais.add(questao);
+				todasQuestoes.remove(questao);
+			} else if(questao.getNumeroAlternativas().equals("2") && contador[1] < numVerdFalsa){
+				contador[1]++;
+				questoesFinais.add(questao);
+				todasQuestoes.remove(questao);
+			} else if(questao.getNumeroAlternativas().equals("5") && contador[2] < numAlter){
+				contador[2]++;
+				questoesFinais.add(questao);
+				todasQuestoes.remove(questao);
+			}
+		}
+		
+		for (Questao questao : todasQuestoes){
+			if(contador[0] < numSubj){
+				contador[0]++;
+				query = session.createQuery("from Questao where dificuldade='"+questao.getDificuldade()+"' and numero_alternativas=1");
+				Questao resultado = (Questao) query.list().get(0);
+				questoesFinais.add(resultado);
+				todasQuestoes.remove(questao);
+			} else if(contador[1] < numVerdFalsa){
+				contador[1]++;
+				query = session.createQuery("from Questao where dificuldade='"+questao.getDificuldade()+"' and numero_alternativas=2");
+				Questao resultado = (Questao) query.list().get(0);
+				questoesFinais.add(resultado);
+				todasQuestoes.remove(questao);
+			} else if(contador[2] < numAlter){
+				contador[2]++;
+				query = session.createQuery("from Questao where dificuldade='"+questao.getDificuldade()+"' and numero_alternativas=5");
+				Questao resultado = (Questao) query.list().get(0);
+				questoesFinais.add(resultado);
+				todasQuestoes.remove(questao);
+			}
+		}
+		
+		
+
+		return questoesFinais;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -109,8 +154,8 @@ public class QuestoesHibernate implements Questoes {
 	@SuppressWarnings("unchecked")
 	public List<Questao> listarPorDisciplina(String numeroQuestoesFaceis,
 			String numeroQuestoesMedias, String numeroQuestoesDificeis,
-			String disciplina) {
-		List<Questao> todasQuestoes = new ArrayList<Questao>();
+			String disciplina, int numVerdFalsa, int numSubj, int numAlter) {
+		List<Questao> todasQuestoes = new CopyOnWriteArrayList<Questao>();
 		List<Questao> questoesFaceis = new ArrayList<Questao>();
 		List<Questao> questoesMedias = new ArrayList<Questao>();
 		List<Questao> questoesDificeis = new ArrayList<Questao>();
@@ -156,27 +201,47 @@ public class QuestoesHibernate implements Questoes {
 
 		Collections.shuffle(todasQuestoes);
 		List<Questao> questoesFinais = new ArrayList<Questao>();
-		
-		int[] contador = new int[2];
+
+		int[] contador = new int[3];
 		for(Questao questao : todasQuestoes){
-			if(questao.getNumeroAlternativas().equals("1") && contador[0] <= 2){
+			if(questao.getNumeroAlternativas().equals("1") && contador[0] < numSubj){
 				contador[0]++;
 				questoesFinais.add(questao);
 				todasQuestoes.remove(questao);
-			} else if(questao.getNumeroAlternativas().equals("2") && contador[1] <= 1){
+			} else if(questao.getNumeroAlternativas().equals("2") && contador[1] < numVerdFalsa){
 				contador[1]++;
 				questoesFinais.add(questao);
 				todasQuestoes.remove(questao);
-			} else if(questao.getNumeroAlternativas().equals("5") && contador[2] == 0){
+			} else if(questao.getNumeroAlternativas().equals("5") && contador[2] < numAlter){
 				contador[2]++;
 				questoesFinais.add(questao);
 				todasQuestoes.remove(questao);
 			}
 		}
 		
-		//Falta fazer a modificação
-
-		return todasQuestoes;
+		for (Questao questao : todasQuestoes){
+			if(contador[0] < numSubj){
+				contador[0]++;
+				query = session.createQuery("from Questao where dificuldade='"+questao.getDificuldade()+"' and numero_alternativas=1");
+				Questao resultado = (Questao) query.list().get(0);
+				questoesFinais.add(resultado);
+				todasQuestoes.remove(questao);
+			} else if(contador[1] < numVerdFalsa){
+				contador[1]++;
+				query = session.createQuery("from Questao where dificuldade='"+questao.getDificuldade()+"' and numero_alternativas=2");
+				Questao resultado = (Questao) query.list().get(0);
+				questoesFinais.add(resultado);
+				todasQuestoes.remove(questao);
+			} else if(contador[2] < numAlter){
+				contador[2]++;
+				query = session.createQuery("from Questao where dificuldade='"+questao.getDificuldade()+"' and numero_alternativas=5");
+				Questao resultado = (Questao) query.list().get(0);
+				questoesFinais.add(resultado);
+				todasQuestoes.remove(questao);
+			}
+		}
+		
+		return questoesFinais;
 	}
 
 	@SuppressWarnings("unchecked")

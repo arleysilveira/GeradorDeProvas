@@ -27,6 +27,9 @@ public class GerarProvaBean implements Serializable {
 	private String[] questoesFaceis = new String[3];
 	private String[] questoesMedias = new String[3];
 	private String[] questoesDifíceis = new String[3];
+	private int[] verdFalso = new int[3];
+	private int[] alternativas = new int[3];
+	private int[] subjetivas = new int[3];
 	
 	
 
@@ -62,13 +65,13 @@ public class GerarProvaBean implements Serializable {
 		Questoes questoes = repositorios.getQuestoes();
 		this.questoesSelecionadas = questoes.listarPorDisciplina(
 				questoesFaceis[0], questoesMedias[0], questoesDifíceis[0],
-				prova.getDisciplinaSelecionada().getId().toString());
+				prova.getDisciplinaSelecionada().getId().toString(), verdFalso[0], subjetivas[0],alternativas[0]);
 		this.questoesSelecionadas2 = questoes.listarPorDisciplina(
 				questoesFaceis[1], questoesMedias[1], questoesDifíceis[1],
-				prova2.getDisciplinaSelecionada().getId().toString());
+				prova2.getDisciplinaSelecionada().getId().toString(), verdFalso[1], subjetivas[1],alternativas[1]);
 		this.questoesSelecionadas3 = questoes.listarEspecificas(
 				questoesFaceis[2], questoesMedias[2], questoesDifíceis[2],
-				prova3.getFuncaoSelecionada().getId().toString());
+				prova3.getFuncaoSelecionada().getId().toString(), verdFalso[2], subjetivas[2],alternativas[2]);
 
 		System.out.println(questoesFaceis[0]+questoesMedias[0]+ questoesDifíceis[0]);
 		
@@ -222,4 +225,30 @@ public class GerarProvaBean implements Serializable {
 		this.questoesDifíceis = questoesDifíceis;
 	}
 
+	public int[] getVerdFalso() {
+		return verdFalso;
+	}
+
+	public void setVerdFalso(int[] verdFalso) {
+		this.verdFalso = verdFalso;
+	}
+
+	public int[] getAlternativas() {
+		return alternativas;
+	}
+
+	public void setAlternativas(int[] alternativas) {
+		this.alternativas = alternativas;
+	}
+
+	public int[] getSubjetivas() {
+		return subjetivas;
+	}
+
+	public void setSubjetivas(int[] subjetivas) {
+		this.subjetivas = subjetivas;
+	}
+
+	
+	
 }
