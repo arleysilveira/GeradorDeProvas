@@ -12,6 +12,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+
+import org.primefaces.event.FileUploadEvent;
 //import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -56,9 +58,14 @@ public class CadastroQuestaoBean implements Serializable{
 		
 	}
 	
-/*	public void testeFile(FileUploadEvent event) throws IOException{
-	    byte[] conteudo = event.getFile().getContents();  
+	String nomeArquivo;
+	String arquivo;
+	
+	public void testeFile(FileUploadEvent event) throws IOException{
+		byte[] conteudo = event.getFile().getContents();  
 	    String localPath = System.getProperty("user.dir");  
+	    
+	    this.nomeArquivo = event.getFile().getFileName();
 	    
 	    String caminho = (localPath + "/git/GeradorDeProvas/WebContent/imagens/" + event.getFile().getFileName());  
 	    System.out.println(caminho);  
@@ -67,7 +74,14 @@ public class CadastroQuestaoBean implements Serializable{
 	    FileOutputStream fos = new FileOutputStream(caminho);  
 	    fos.write(conteudo);  
 	    fos.close();  
-	}*/
+	}
+	
+	public void uol(){
+		this.arquivo = "<img src=http://localhost:8080/GeradorPerguntas/imagens/" + this.nomeArquivo;
+		this.questao.setTitulo(questao.getTitulo() + arquivo);
+	}
+	
+	//"http://localhost:8080/GeradorPerguntas/imagens/teste.jpg">
 	
 	private void verificaTipoQuestao(){
 		if(this.questao.getNumeroAlternativas().equals("2")){
@@ -121,6 +135,14 @@ public class CadastroQuestaoBean implements Serializable{
 
 	public void setFile(UploadedFile file) {
 		this.file = file;
+	}
+
+	public String getArquivo() {
+		return arquivo;
+	}
+
+	public void setArquivo(String arquivo) {
+		this.arquivo = arquivo;
 	}
 	
 	

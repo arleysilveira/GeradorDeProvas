@@ -18,7 +18,7 @@
 
 	<h:form id="frm">
 		<p:outputLabel value="Questão:" />
-		<p:editor value="#{cadastroQuestaoBean.questao.titulo}" />
+		<p:editor id="titulo" value="#{cadastroQuestaoBean.questao.titulo}" />
 
 
 <p:panelGrid columns="2" >
@@ -112,6 +112,9 @@
 			</f:facet>
 		</p:panelGrid>
 </p:panelGrid>
+
+<p:fileUpload fileUploadListener="#{cadastroQuestaoBean.testeFile}" />
+<p:commandButton value="Submit" actionListener="#{cadastroQuestaoBean.uol}" update="titulo" process="@form" />
 	</h:form>
 
 </h:body>
