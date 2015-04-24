@@ -76,12 +76,10 @@ public class CadastroQuestaoBean implements Serializable{
 	    fos.close();  
 	}
 	
-	public void uol(){
-		this.arquivo = "<img src=http://localhost:8080/GeradorPerguntas/imagens/" + this.nomeArquivo;
+	public void inserirImagem(){
+		this.arquivo = "<img src=\"http://localhost:8080/GeradorPerguntas/imagens/" + this.nomeArquivo + "\">";
 		this.questao.setTitulo(questao.getTitulo() + arquivo);
 	}
-	
-	//"http://localhost:8080/GeradorPerguntas/imagens/teste.jpg">
 	
 	private void verificaTipoQuestao(){
 		if(this.questao.getNumeroAlternativas().equals("2")){

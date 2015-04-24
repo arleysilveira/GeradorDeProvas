@@ -1,7 +1,10 @@
 package br.com.rh.repository;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.jasperreports.engine.JRException;
 import br.com.rh.model.Questao;
 
 public interface Questoes {
@@ -29,4 +32,5 @@ public interface Questoes {
 	
 	public Questao modificarQuestaoFuncao(String idFuncao,
 			String dificuldade, int idQuestao);
+	
 }

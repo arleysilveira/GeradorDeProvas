@@ -29,10 +29,19 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-8-oracle">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.7.0_80">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jasperReports"/>
+	<classpathentry kind="lib" path="/home/arley/Programas/Programacao/JAVA/iReport-5.6.0/ireport/modules/ext/commons-beanutils-1.8.2.jar"/>
+	<classpathentry kind="lib" path="/home/arley/Programas/Programacao/JAVA/iReport-5.6.0/ireport/modules/ext/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="/home/arley/Programas/Programacao/JAVA/iReport-5.6.0/ireport/modules/ext/commons-digester-2.1.jar"/>
+	<classpathentry kind="lib" path="/home/arley/Programas/Programacao/JAVA/iReport-5.6.0/ireport/modules/ext/commons-javaflow-20060411.jar"/>
+	<classpathentry kind="lib" path="/home/arley/Programas/Programacao/JAVA/iReport-5.6.0/ireport/modules/ext/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="/home/arley/Programas/Programacao/JAVA/iReport-5.6.0/ireport/modules/ext/groovy-all-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/arley/Programas/Programacao/JAVA/iReport-5.6.0/ireport/modules/ext/iText-2.1.7.js2.jar"/>
+	<classpathentry kind="lib" path="/home/arley/Programas/Programacao/JAVA/iReport-5.6.0/ireport/modules/ext/jasperreports-5.6.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

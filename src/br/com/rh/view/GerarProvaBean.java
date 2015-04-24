@@ -1,6 +1,7 @@
 package br.com.rh.view;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,13 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import br.com.rh.model.Disciplina;
 import br.com.rh.model.Funcao;
 import br.com.rh.model.Prova;
@@ -15,12 +23,14 @@ import br.com.rh.model.Questao;
 import br.com.rh.repository.Disciplinas;
 import br.com.rh.repository.Funcoes;
 import br.com.rh.repository.Questoes;
+import br.com.rh.repository.infra.QuestoesHibernate;
 import br.com.rh.util.Repositorios;
+import bsh.This;
 
 @SuppressWarnings("serial")
 @ManagedBean
 @SessionScoped
-public class GerarProvaBean implements Serializable {
+public class GerarProvaBean implements Serializable  {
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 	private List<Funcao> funcoes = new ArrayList<Funcao>();
 
@@ -31,8 +41,6 @@ public class GerarProvaBean implements Serializable {
 	private int[] alternativas = new int[3];
 	private int[] subjetivas = new int[3];
 	
-	
-
 	private Repositorios repositorios = new Repositorios();
 	
 	private List<Questao> questoesSelecionadas = new ArrayList<Questao>();
@@ -42,7 +50,6 @@ public class GerarProvaBean implements Serializable {
 	private Prova prova, prova2, prova3;
 	private Questao questaoModificada, questaoSubjetiva;
 	private Boolean subjetiva = false;
-	
 	
 
 	public GerarProvaBean() {
@@ -100,7 +107,7 @@ public class GerarProvaBean implements Serializable {
 		
 	}
 
-	public void modificarQuestao3() {
+	public void modificarQuestao3() throws SQLException {
 		Questoes questoes = repositorios.getQuestoes();
 		int posicaoQuestao = this.questoesSelecionadas3
 				.indexOf(this.questaoModificada);
@@ -110,6 +117,24 @@ public class GerarProvaBean implements Serializable {
 						this.questaoModificada.getDificuldade(), this.questaoModificada.getId()));
 	}
 
+	public void gerarProva() throws SQLException {
+		JasperReport report;
+		try {
+			report = JasperCompileManager
+					.compileReport("/home/arley/git/GeradorDeProvas/WebContent/relatorios/report1.jrxml");
+			JasperPrint print = JasperFillManager.fillReport(report, null,
+					new JRBeanCollectionDataSource(this.questoesSelecionadas));
+			JasperExportManager.exportReportToPdfFile(print,
+					"/home/arley/git/GeradorDeProvas/WebContent/relatorios/RelatorioClientes.pdf");
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+	}
+	
+	
 	// Getters and Setters
 	public List<Disciplina> getDisciplinas() {
 		return disciplinas;
