@@ -35,6 +35,20 @@
 		<filter-name>PrimeFaces FileUpload Filter</filter-name>
 		<servlet-name>Faces Servlet</servlet-name>
 	</filter-mapping> 
+	
+	<filter>
+    <filter-name>SetCharacterEncoding</filter-name>  
+    <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>  
+    <init-param>
+        <param-name>encoding</param-name>
+        <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+        <param-name>ignore</param-name>  
+        <param-value>false</param-value>  
+    </init-param>
+</filter>
+
 
 
 </web-app>

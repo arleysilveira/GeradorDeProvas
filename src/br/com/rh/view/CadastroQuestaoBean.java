@@ -3,6 +3,7 @@ package br.com.rh.view;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-
 
 import org.primefaces.event.FileUploadEvent;
 //import org.primefaces.event.FileUploadEvent;
@@ -78,7 +78,9 @@ public class CadastroQuestaoBean implements Serializable{
 	
 	public void inserirImagem(){
 		this.arquivo = "<img src=\"http://localhost:8080/GeradorPerguntas/imagens/" + this.nomeArquivo + "\">";
-		this.questao.setTitulo(questao.getTitulo() + arquivo);
+		String titulo = questao.getTitulo() + arquivo;
+		Charset.forName("UTF-8").encode(titulo);
+		this.questao.setTitulo(titulo); 
 	}
 	
 	private void verificaTipoQuestao(){

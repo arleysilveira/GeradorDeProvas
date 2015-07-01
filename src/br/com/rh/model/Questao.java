@@ -250,6 +250,4 @@ public class Questao implements Serializable{
 		return true;
 	}
 	
-	
-	
 }
