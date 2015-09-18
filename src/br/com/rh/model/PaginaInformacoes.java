@@ -1,19 +1,19 @@
 package br.com.rh.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@SuppressWarnings("serial")
+
 @Entity
 @Table
-public class Cargo implements Serializable {
+public class PaginaInformacoes {
 	private Integer id;
-	private String nome, escolaridade;
+	private String texto;
+	private String titulo;
+	
 	
 	@Id
 	@GeneratedValue
@@ -25,30 +25,29 @@ public class Cargo implements Serializable {
 	}
 	
 	@Column
-	public String getNome() {
-		return nome;
+	public String getTexto() {
+		return texto;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setTexto(String texto) {
+		this.texto = texto;
 	}
+	
 	
 	@Column
-	public String getEscolaridade() {
-		return escolaridade;
-	}
-	public void setEscolaridade(String escolaridade) {
-		this.escolaridade = escolaridade;
+	public String getTitulo() {
+		return titulo;
 	}
 	
-	
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((escolaridade == null) ? 0 : escolaridade.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((texto == null) ? 0 : texto.hashCode());
+		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		return result;
 	}
 	@Override
@@ -59,25 +58,24 @@ public class Cargo implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cargo other = (Cargo) obj;
-		if (escolaridade == null) {
-			if (other.escolaridade != null)
-				return false;
-		} else if (!escolaridade.equals(other.escolaridade))
-			return false;
+		PaginaInformacoes other = (PaginaInformacoes) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (nome == null) {
-			if (other.nome != null)
+		if (texto == null) {
+			if (other.texto != null)
 				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!texto.equals(other.texto))
+			return false;
+		if (titulo == null) {
+			if (other.titulo != null)
+				return false;
+		} else if (!titulo.equals(other.titulo))
 			return false;
 		return true;
 	}
 	
-	
-	
+		
 }

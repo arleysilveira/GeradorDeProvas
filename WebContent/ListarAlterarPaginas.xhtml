@@ -2,62 +2,51 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Lista de Questões</title>
-
+	<title>Insert title here</title>
 	<h:outputStylesheet library="css" name="sistema.css" />
 	<h:outputStylesheet library="css" name="listar-alterar-excluir.css" />
 </h:head>
-
 <h:body>
-	<h1>Lista de Questões</h1>
+	<h1>Lista de Páginas</h1>
 	<div style="margin: 0 20px">
 		<h:form id="frm">
-
-			<p:dataTable var="questao"
-				value="#{listarAlterarQuestaoBean.questoes}" width="80%"
-				styleClass="grid"
-				columnClasses="codigo, disciplina-funcao, operacoes"
-				rowClasses="cor-sim, cor-nao" headerClass="cabecalho">
-
+			<p:dataTable var="pagina" value="#{listarAlterarPaginasBean.paginas}"
+				width="20%" styleClass="grid" headerClass="cabecalho">
 				<p:column>
 					<f:facet name="header">Codigo</f:facet>
-					<h:outputText value="#{questao.id}" />
+					<h:outputText value="#{pagina.id}" />
 				</p:column>
 
 				<p:column>
-					<f:facet name="header">Questão</f:facet>
-					<h:outputText value="#{questao.titulo}" escape="false"/>
+					<f:facet name="header">Titulo</f:facet>
+					<h:outputText value="#{pagina.titulo}" />
 				</p:column>
 
 				<p:column styleClass="operacoes">
 					<f:facet name="header">Operações</f:facet>
-					<h:link outcome="CadastroQuestao">
-						<f:param name="codigo" value="#{questao.id}" />
+					<h:link outcome="CadastroPaginaInformacoes">
+						<f:param name="codigo" value="#{pagina.id}" />
 						<h:graphicImage value="/resources/imagens/editar.png" />
 					</h:link>
 
-					<h:commandLink action="#{listarAlterarQuestaoBean.excluir}">
-						<f:setPropertyActionListener
-							target="#{listarAlterarQuestaoBean.questaoSelecionada}"
-							value="#{questao}" />
+					<h:commandLink action="#{listarAlterarPaginasBean.excluir}">
+						<f:setPropertyActionListener value="#{pagina}"
+							target="#{listarAlterarPaginasBean.paginaSelecionada}" />
 						<h:graphicImage value="/resources/imagens/excluir.png" />
 						<f:ajax render="@form" />
+
 					</h:commandLink>
 				</p:column>
+
 			</p:dataTable>
 			<br />
-			<p:button value="Tela Inicial" outcome="inicio"
-				icon="ui-icon-home" />
-
+			<p:button value="Tela Inicial" outcome="inicio" icon="ui-icon-home" />
 		</h:form>
-	</div>
-	
-</h:body>
 
+	</div>
+</h:body>
 </html>

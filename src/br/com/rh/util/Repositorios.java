@@ -7,10 +7,12 @@ import org.hibernate.Session;
 import br.com.rh.repository.Cargos;
 import br.com.rh.repository.Disciplinas;
 import br.com.rh.repository.Funcoes;
+import br.com.rh.repository.Paginas;
 import br.com.rh.repository.Questoes;
 import br.com.rh.repository.infra.CargosHibernate;
 import br.com.rh.repository.infra.DisciplinasHibernate;
 import br.com.rh.repository.infra.FuncoesHibernate;
+import br.com.rh.repository.infra.PaginasHibernate;
 import br.com.rh.repository.infra.QuestoesHibernate;
 
 @SuppressWarnings("serial")
@@ -19,6 +21,7 @@ public class Repositorios implements Serializable{
 	public Disciplinas getDisciplinas(){
 		return new DisciplinasHibernate(this.getSession());
 	}
+	
 	
 	public Funcoes getFuncoes(){
 		return new FuncoesHibernate(this.getSession());
@@ -30,6 +33,10 @@ public class Repositorios implements Serializable{
 	
 	public Questoes getQuestoes(){
 		return new QuestoesHibernate(this.getSession());
+	}
+	
+	public Paginas getPaginas(){
+		return new PaginasHibernate(this.getSession());
 	}
 	
 	private Session getSession(){

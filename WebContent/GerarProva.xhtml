@@ -112,8 +112,11 @@
 					<p:inputText size="1" value="#{gerarProvaBean.alternativas[2]}" />
 				</h:panelGroup>
 					
-				<p:outputLabel value="Possui Questão Subjetiva?" />
-				<p:selectBooleanCheckbox value="#{gerarProvaBean.subjetiva}" />
+				<p:outputLabel value="Selecione a Página de Informações:" />
+				<p:selectOneMenu value="#{gerarProvaBean.paginaSelecionada}">
+					<f:selectItems value="#{gerarProvaBean.paginas}" var="pagina"
+						itemValue="#{pagina}" itemLabel="#{pagina.titulo}"/>
+				</p:selectOneMenu>
 				<f:facet name="footer">
 					<p:commandButton value="Gerar Prova"
 						action="#{gerarProvaBean.listarQuestoes}" ajax="@this"

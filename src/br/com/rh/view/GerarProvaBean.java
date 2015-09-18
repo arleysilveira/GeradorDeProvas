@@ -1,7 +1,6 @@
 package br.com.rh.view;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,40 +15,35 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.xml.sax.SAXException;
-
-import sun.net.www.protocol.http.HttpURLConnection;
 
 import com.lowagie.text.DocumentException;
 
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import br.com.rh.model.Disciplina;
 import br.com.rh.model.Funcao;
+import br.com.rh.model.PaginaInformacoes;
 import br.com.rh.model.Prova;
 import br.com.rh.model.Questao;
 import br.com.rh.repository.Disciplinas;
 import br.com.rh.repository.Funcoes;
+import br.com.rh.repository.Paginas;
 import br.com.rh.repository.Questoes;
-import br.com.rh.repository.infra.QuestoesHibernate;
 import br.com.rh.util.Html2Pdf;
 import br.com.rh.util.Repositorios;
 //import bsh.This;
 
+/**
+ * @author arley
+ *
+ */
 @SuppressWarnings("serial")
 @ManagedBean
 @SessionScoped
 public class GerarProvaBean implements Serializable  {
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 	private List<Funcao> funcoes = new ArrayList<Funcao>();
+	private List<PaginaInformacoes> paginas = new ArrayList<PaginaInformacoes>();
 
 	private String[] questoesFaceis = new String[3];
 	private String[] questoesMedias = new String[3];
@@ -67,6 +61,7 @@ public class GerarProvaBean implements Serializable  {
 	private Prova prova, prova2, prova3;
 	private Questao questaoModificada, questaoSubjetiva;
 	private Boolean subjetiva = false;
+	private PaginaInformacoes paginaSelecionada;
 	
 
 	public GerarProvaBean() {
@@ -82,6 +77,9 @@ public class GerarProvaBean implements Serializable  {
 
 		Funcoes funcoes = repositorios.getFuncoes();
 		this.funcoes = funcoes.listarTodas();
+		
+		Paginas paginas = repositorios.getPaginas();
+		this.paginas = paginas.listarTodas();
 
 	}
 
@@ -162,6 +160,7 @@ public class GerarProvaBean implements Serializable  {
 		  codigoHtml += linha;  
 		}  
 		
+		codigoHtml = codigoHtml.replaceAll("pagina", this.paginaSelecionada.getTexto());
 		  
 		// Libera os recursos.  
 		reader.close();  
@@ -365,6 +364,26 @@ public class GerarProvaBean implements Serializable  {
 	public void setSubjetivas(int[] subjetivas) {
 		this.subjetivas = subjetivas;
 	}
+
+	public List<PaginaInformacoes> getPaginas() {
+		return paginas;
+	}
+	
+
+	public void setPaginas(List<PaginaInformacoes> paginas) {
+		this.paginas = paginas;
+	}
+
+	public PaginaInformacoes getPaginaSelecionada() {
+		return paginaSelecionada;
+	}
+	
+
+	public void setPaginaSelecionada(PaginaInformacoes paginaSelecionada) {
+		this.paginaSelecionada = paginaSelecionada;
+	}
+	
+	
 
 	
 	

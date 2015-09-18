@@ -5,21 +5,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import br.com.rh.model.Questao;
-import br.com.rh.repository.Questoes;
+import br.com.rh.model.PaginaInformacoes;
+import br.com.rh.repository.Paginas;
 import br.com.rh.util.Repositorios;
 
-@FacesConverter(forClass=Questao.class)
-public class QuestaoConverter implements Converter{
-	private Repositorios repositorios = new Repositorios();
+@FacesConverter(forClass=PaginaInformacoes.class)
+public class PaginaConverter implements Converter {
 
+
+	private Repositorios repositorios = new Repositorios();
+	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		Questao retorno = null;
+	PaginaInformacoes retorno = null;
 		
-		if(value !=null && !value.equals("")){
-			Questoes questoes = repositorios.getQuestoes();
-			retorno = questoes.porCodigo(new Integer(value));
+		if(value != null && !value.equals("")){
+			Paginas paginas = repositorios.getPaginas();
+			retorno = paginas.porCodigo(new Integer(value));
 		}
 		
 		return retorno;
@@ -27,11 +29,11 @@ public class QuestaoConverter implements Converter{
 
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
-		if(value!=null){
-			Integer codigo = ((Questao) value).getId();
+		if(value != null){
+			Integer codigo = ((PaginaInformacoes) value).getId();
 			return codigo == null ? "" : codigo.toString();
 		}
 		return null;
 	}
-
+	
 }
