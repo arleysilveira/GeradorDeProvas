@@ -2,16 +2,17 @@ package br.com.rh.view;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.FileUploadEvent;
 //import org.primefaces.event.FileUploadEvent;
@@ -35,6 +36,7 @@ public class CadastroQuestaoBean implements Serializable{
 	private Repositorios repositorios = new Repositorios();
 	private UploadedFile file;
 	
+
 	public CadastroQuestaoBean(){
 		this.questao = new Questao();
 	}
@@ -60,18 +62,22 @@ public class CadastroQuestaoBean implements Serializable{
 	
 	String nomeArquivo;
 	String arquivo;
+	String caminho;
 	
 	public void testeFile(FileUploadEvent event) throws IOException{
 		byte[] conteudo = event.getFile().getContents();  
 	    String localPath = System.getProperty("user.dir");  
 	    
 	    this.nomeArquivo = event.getFile().getFileName();
+	    //String thePath = request.getRealPath("/");
 	    
-	    String caminho = (localPath + "/git/GeradorDeProvas/WebContent/imagens/" + event.getFile().getFileName());  
-	    System.out.println(caminho);  
-	    FacesContext facesContext = FacesContext.getCurrentInstance();
-	    facesContext.addMessage(null, new FacesMessage("Sucesso"));
-	    FileOutputStream fos = new FileOutputStream(caminho);  
+	    /*Descomentar quando for para produção Tomcat
+	    HttpSession session = (HttpSession)    
+	    	    FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+	    caminho = session.getServletContext().getRealPath("/"+"imagens/" + event.getFile().getFileName());*/
+	   
+	    caminho = (localPath + "/git/GeradorDeProvas/WebContent/imagens/" + this.nomeArquivo);
+	    OutputStream fos = new FileOutputStream(caminho);  
 	    fos.write(conteudo);  
 	    fos.close();  
 	}

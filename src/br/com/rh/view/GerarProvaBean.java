@@ -1,6 +1,7 @@
 package br.com.rh.view;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,8 +31,8 @@ import br.com.rh.repository.Funcoes;
 import br.com.rh.repository.Paginas;
 import br.com.rh.repository.Questoes;
 import br.com.rh.util.Html2Pdf;
+import br.com.rh.util.MergePdf;
 import br.com.rh.util.Repositorios;
-//import bsh.This;
 
 /**
  * @author arley
@@ -83,6 +84,8 @@ public class GerarProvaBean implements Serializable  {
 
 	}
 
+
+	//Pega as questões do banco de acordo com os parâmetros passados pelo usuário
 	public String listarQuestoes() {
 		Questoes questoes = repositorios.getQuestoes();
 		this.questoesSelecionadas = questoes.listarPorDisciplina(
@@ -95,8 +98,6 @@ public class GerarProvaBean implements Serializable  {
 				questoesFaceis[2], questoesMedias[2], questoesDifíceis[2],
 				prova3.getFuncaoSelecionada().getId().toString(), verdFalso[2], subjetivas[2],alternativas[2]);
 
-		System.out.println(questoesFaceis[0]+questoesMedias[0]+ questoesDifíceis[0]);
-		
 		return "Prova.xhtml?faces-redirect=true";
 	}
 
@@ -133,7 +134,7 @@ public class GerarProvaBean implements Serializable  {
 	}
 
 	
-	private String codigoHtml;
+	
 	public void gerarProva() throws SQLException, DocumentException, IOException, SAXException {
 		/*JasperReport report;
 		try {
@@ -149,32 +150,39 @@ public class GerarProvaBean implements Serializable  {
 		}*/
 		
 		   		
-		
+		//Transforma todo o conteúdo html em String
 		URL url = new URL("http://localhost:8080/GeradorPerguntas/test.html");  
 		InputStream in = url.openStream();  
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));  
 		  
-		String codigoHtml = "";  
+		String questoes = "";  
+		String paginaInicial = "";
 		String linha;  
-		while ((linha = reader.readLine()) != null) {  
-		  codigoHtml += linha;  
-		}  
 		
-		codigoHtml = codigoHtml.replaceAll("pagina", this.paginaSelecionada.getTexto());
-		  
+		while (!(linha = reader.readLine()).equals("fim")) {  
+		  paginaInicial += linha;  
+		}  
+		while ((linha = reader.readLine()) != null) {  
+			  questoes += linha;  
+			}  
+		
+		paginaInicial = paginaInicial.replaceAll("pagina", this.paginaSelecionada.getTexto());
+		
 		// Libera os recursos.  
 		reader.close();  
 		in.close();  
+		
+		//Substitui os parâmetros da página html pelas questões
 		int i = 1;
 		for (Questao q : questoesSelecionadas) {
-			codigoHtml = codigoHtml.replaceAll("Q" + i, q.getTitulo());
+			questoes = questoes.replaceFirst("Q" + i, q.getTitulo());
 			if(q.getNumeroAlternativas().equals("5")){
-				codigoHtml = codigoHtml.replaceAll("alt" + i,"<br>" + "a) "+ q.getAlternativa1() + "<br>" + "b) "+ q.getAlternativa2()+ "<br>" +
+				questoes = questoes.replaceFirst("alt" + i,"<br>" + "a) "+ q.getAlternativa1() + "<br>" + "b) "+ q.getAlternativa2()+ "<br>" +
 						"c) " + q.getAlternativa3() + "<br>" + "d) " + q.getAlternativa4() + "<br>" + "e) "+ q.getAlternativa5() + "<br>");
 			} else if (q.getNumeroAlternativas().equals("2")){
-				codigoHtml = codigoHtml.replaceAll("alt" + i, "<br>Verdadeira" + "<br>" + "Falsa<br>");
+				questoes = questoes.replaceFirst("alt" + i, "<br>Verdadeira" + "<br>" + "Falsa<br>");
 			} else {
-				codigoHtml = codigoHtml.replaceAll("alt" + i, 
+				questoes = questoes.replaceFirst("alt" + i, 
 						"_____________________________________________________________________________________<br>" +
 						"_____________________________________________________________________________________");
 			}
@@ -183,40 +191,61 @@ public class GerarProvaBean implements Serializable  {
 		}
 		
 		for (Questao q : questoesSelecionadas2) {
-			codigoHtml = codigoHtml.replaceAll("Q" + i, q.getTitulo());
+			questoes = questoes.replaceFirst("Q" + i, q.getTitulo());
 			if(q.getNumeroAlternativas().equals("5")){
-				codigoHtml = codigoHtml.replaceAll("alt" + i,"<br>" + q.getAlternativa1() + "<br>" + q.getAlternativa2()+ "<br>" +
+				questoes = questoes.replaceFirst("alt" + i,"<br>" + q.getAlternativa1() + "<br>" + q.getAlternativa2()+ "<br>" +
 						q.getAlternativa3() + "<br>" + q.getAlternativa4() + "<br>" + q.getAlternativa5() + "<br>");
 			} else if (q.getNumeroAlternativas().equals("2")){
-				codigoHtml = codigoHtml.replaceAll("alt" + i, "<br>Verdadeira" + "<br>" + "Falsa<br>");
+				questoes = questoes.replaceFirst("alt" + i, "<br>Verdadeira" + "<br>" + "Falsa<br>");
 			} else {
-				codigoHtml = codigoHtml.replaceAll("alt" + i, 
+				questoes = questoes.replaceFirst("alt" + i, 
 						"_____________________________________________________________________________________<br>" +
 						"_____________________________________________________________________________________");
 			}
 			
 				i++;
 		}
+		
+		for (Questao q : questoesSelecionadas3) {
+			questoes = questoes.replaceFirst("Q" + i, q.getTitulo());
+			if(q.getNumeroAlternativas().equals("5")){
+				questoes = questoes.replaceFirst("alt" + i,"<br>" + q.getAlternativa1() + "<br>" + q.getAlternativa2()+ "<br>" +
+						q.getAlternativa3() + "<br>" + q.getAlternativa4() + "<br>" + q.getAlternativa5() + "<br>");
+			} else if (q.getNumeroAlternativas().equals("2")){
+				questoes = questoes.replaceFirst("alt" + i, "<br>Verdadeira" + "<br>" + "Falsa<br>");
+			} else {
+				questoes = questoes.replaceFirst("alt" + i, 
+						"_____________________________________________________________________________________<br>" +
+						"_____________________________________________________________________________________");
+			}
 			
-		// Escreve o html da página no console, porém, você pode fazer o que quiser o resultado.  
+				i++;
+		}
 		
-		System.out.println(codigoHtml);
-		this.codigoHtml = codigoHtml;
+		//Elimina os parâmetros que sobraram no arquivo Html 
+		while (i < 14){
+			questoes = questoes.replaceFirst("Q"+i, "");
+			questoes = questoes.replaceFirst("alt"+i, "");
+			i++;
+		}
 		
-		OutputStream os = new FileOutputStream("/home/arley/hello.pdf");  
-		Html2Pdf.convert(codigoHtml, os);
-		//Html2Pdf.convert("<h1 style=\"color:red\">Hello PDF</h1>", os);             
+		
+		OutputStream os = new FileOutputStream("/home/arley/perguntas.pdf");  
+		OutputStream os1 = new FileOutputStream("/home/arley/paginaInicial.pdf");
+		Html2Pdf.convert(questoes, os);
+		Html2Pdf.convert(paginaInicial, os1);
+		
+		
+		List<InputStream> pdfs = new ArrayList<InputStream>();
+		pdfs.add(new FileInputStream("/home/arley//home/arley/hello.pdf.pdf"));
+        pdfs.add(new FileInputStream("/home/arley/perguntas.pdf"));  
+        OutputStream output = new FileOutputStream("/home/arley/prova.pdf");  
+        MergePdf.concatPDFs(pdfs, output, true);  
+		
+		
 		os.close();
 
 	}
-	
-	/*public void testarPdf() throws DocumentException, IOException {
-		OutputStream os = new FileOutputStream("/home/arley/hello.pdf");  
-		Html2Pdf.convert(codigoHtml, os);
-		//Html2Pdf.convert("<h1 style=\"color:red\">Hello PDF</h1>", os);             
-		os.close();
-	}
-	*/
 	
 	// Getters and Setters
 	public List<Disciplina> getDisciplinas() {
@@ -279,14 +308,6 @@ public class GerarProvaBean implements Serializable  {
 
 	public List<Questao> getQuestoesSelecionadas3() {
 		return questoesSelecionadas3;
-	}
-
-	public String getCodigoHtml() {
-		return codigoHtml;
-	}
-
-	public void setCodigoHtml(String codigoHtml) {
-		this.codigoHtml = codigoHtml;
 	}
 
 	public void setQuestoesSelecionadas3(List<Questao> questoesSelecionadas3) {

@@ -41,5 +41,6 @@
 	<classpathentry kind="lib" path="/home/arley/Programas/Programacao/JAVA/Bibliotecas (Jars)/Html2PDF/libs/itext-155.jar"/>
 	<classpathentry kind="lib" path="/home/arley/Programas/Programacao/JAVA/Bibliotecas (Jars)/Html2PDF/libs/Tidy.jar"/>
 	<classpathentry kind="con" path="org.eclipse.datatools.connectivity.jdt.DRIVERLIBRARY/MySQL JDBC Driver"/>
+	<classpathentry kind="lib" path="/home/arley/Programas/Programacao/JAVA/Bibliotecas (Jars)/itextpdf-5.4.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

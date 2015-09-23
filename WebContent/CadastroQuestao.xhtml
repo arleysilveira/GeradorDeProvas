@@ -16,17 +16,19 @@
  
 
 <h:outputStylesheet library="css" name="sistema.css"/>
+<h:outputStylesheet library="css" name="listar-alterar-excluir.css"/>
 </h:head>
 
 <h:body>
 
 
 	<h:form id="frm" enctype="multipart/form-data" acceptcharset="utf-8">
-		<p:outputLabel value="Questão:" />
+		<h1>Questão:</h1>
 		<p:editor id="titulo" value="#{cadastroQuestaoBean.questao.titulo}" />
 
+<br/>
 
-<p:panelGrid columns="2" >
+<p:panelGrid columns="2" styleClass="semBorda">
 		<p:panelGrid columns="2" id="panel">
 			<p:outputLabel value="Disciplina:" />
 			<p:selectOneMenu value="#{cadastroQuestaoBean.questao.disciplina}">
@@ -63,7 +65,7 @@
 
 		</p:panelGrid>
 
-		<p:panelGrid columns="2" id="alternativas">
+		<p:panelGrid columns="2" id="alternativas"  >
 			<p:outputLabel value="a)"
 				rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
 			<p:inputTextarea rows="1"
@@ -106,22 +108,21 @@
 				<f:selectItem itemValue="1" itemLabel="Verdadeiro"/>
 				<f:selectItem itemValue="0" itemLabel="Falso"/>
 			</p:selectOneRadio>
-
-			<f:facet name="footer">
-				<p:commandButton value="Salvar"
-					action="#{cadastroQuestaoBean.cadastrar}" icon="ui-icon-disk"
-					ajax="@this" />
-				<p:button value="Tela Inicial" outcome="inicio" icon="ui-icon-home" />
-				<p:button value="Lista de Questões" outcome="ListarAlterarQuestao"
-					icon="ui-icon-grip-solid-horizontal" />
-			</f:facet>
+			
 		</p:panelGrid>
 		
 		
 </p:panelGrid>
 <p:panelGrid columns="2">
-			<p:fileUpload fileUploadListener="#{cadastroQuestaoBean.testeFile}" />
+			<p:fileUpload fileUploadListener="#{cadastroQuestaoBean.testeFile}" auto="true"/>
 			<p:commandButton value="Inserir Imagem" actionListener="#{cadastroQuestaoBean.inserirImagem}" update="titulo" process="@form" />
+			
+			<f:facet name="footer"><p:commandButton value="Salvar"
+					action="#{cadastroQuestaoBean.cadastrar}" icon="ui-icon-disk"
+					ajax="@this" />
+				<p:button value="Cancelar" outcome="inicio" icon="ui-icon-cancel" />
+				<p:button value="Lista de Questões" outcome="ListarAlterarQuestao"
+					icon="ui-icon-grip-solid-horizontal" /></f:facet>
 		</p:panelGrid>
 	
 	</h:form>

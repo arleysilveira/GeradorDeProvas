@@ -11,6 +11,7 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="css" name="sistema.css"/>
 	<title>Insert title here</title>
 </h:head>
 <h:body>
@@ -27,6 +28,7 @@
 		<p:commandButton value="Salvar" icon="ui-icon-disk"
 			action="#{cadastroPaginaInformacoesBean.cadastrar}" ajax="@this" />
 		<p:button value="Cancelar" outcome="inicio" icon="ui-icon-cancel" />
+		<p:button value="Lista de Páginas" outcome="ListarAlterarPaginas.xhtml" icon="ui-icon-grip-solid-horizontal"/>
 	</h:form>
 </h:body>
 </html>

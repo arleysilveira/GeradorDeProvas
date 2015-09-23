@@ -48,3 +48,11 @@ h1 {
 .grid .cor-nao {
 	background: #e6e6e6;
 }
+
+.semBorda td {  
+    border: none !important;  
+} 
+
+.panelPrincipal td {
+	border: none !important;
+}

@@ -34,14 +34,15 @@
 						itemValue="#{cargo}" itemLabel="#{cargo.nome}" />
 				</p:selectOneMenu>
 
+				
+				<f:facet name="footer">
 				<p:commandButton value="Salvar"
 					action="#{cadastroFuncaoBean.cadastrar}" ajax="@this"
 					icon="ui-icon-disk" />
-				<h:panelGroup>
-					<p:button value="Tela Inicial" outcome="inicio" icon="ui-icon-home" />
+					<p:button value="Cancelar" outcome="inicio" icon="ui-icon-cancel" />
 					<p:button value="Lista de Funções" outcome="ListarAlterarFuncao"
 						icon="ui-icon-grip-solid-horizontal" />
-				</h:panelGroup>
+				</f:facet>
 			</p:panelGrid>
 		</h:form>
 	</div>
