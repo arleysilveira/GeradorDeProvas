@@ -16,7 +16,7 @@
 
 <h:body>
 <div align="center" style="margin-top: 70px">
-	<h:messages />
+	<p:messages />
 	<h:form id="frm">
 		<p:panelGrid columns="2">
 			<f:facet name="header">Cadastro de Disciplinas</f:facet>
@@ -25,12 +25,12 @@
 			<h:panelGroup>
 				<p:inputText id="nome"
 					value="#{cadastroDisciplinaBean.disciplina.nome}" />
-				<h:message for="nome" />
+				<p:message for="nome" />
 			</h:panelGroup>
 
 			<f:facet name="footer">
 				<p:commandButton value="Salvar" icon="ui-icon-disk"
-					action="#{cadastroDisciplinaBean.cadastrar}" ajax="@this"/>
+					action="#{cadastroDisciplinaBean.cadastrar}"  ajax="@this"/>
 				<p:button value="Cancelar" outcome="inicio" icon="ui-icon-cancel"/>
 				<p:button value="Lista de Disciplinas"
 					outcome="ListarAlterarDisciplina"  icon="ui-icon-grip-solid-horizontal"/>

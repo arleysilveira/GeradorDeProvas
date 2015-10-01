@@ -16,9 +16,15 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.xml.sax.SAXException;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfContentByte;
 import com.lowagie.text.DocumentException;
 
 import br.com.rh.model.Disciplina;
@@ -133,7 +139,8 @@ public class GerarProvaBean implements Serializable  {
 						this.questaoModificada.getDificuldade(), this.questaoModificada.getId()));
 	}
 
-	
+	String caminho;
+
 	
 	public void gerarProva() throws SQLException, DocumentException, IOException, SAXException {
 		/*JasperReport report;
@@ -237,12 +244,37 @@ public class GerarProvaBean implements Serializable  {
 		
 		
 		List<InputStream> pdfs = new ArrayList<InputStream>();
-		pdfs.add(new FileInputStream("/home/arley//home/arley/hello.pdf.pdf"));
+		pdfs.add(new FileInputStream("/home/arley/paginaInicial.pdf"));
         pdfs.add(new FileInputStream("/home/arley/perguntas.pdf"));  
         OutputStream output = new FileOutputStream("/home/arley/prova.pdf");  
         MergePdf.concatPDFs(pdfs, output, true);  
-		
-		
+        InputStream arquivoPdf = new FileInputStream("/home/arley/prova.pdf");
+        byte[] b = IOUtils.toByteArray(arquivoPdf);
+        
+        /*Descomentar quando for para produção Tomcat
+	    HttpSession session = (HttpSession)    
+	    	    FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+	    caminho = session.getServletContext().getRealPath("/"+"provas/" );
+	    pdfs.add(new FileInputStream(this.caminho + "paginaInicial.pdf"));
+        pdfs.add(new FileInputStream(this.caminho + "perguntas.pdf"));  
+        OutputStream output = new FileOutputStream(this.caminho + "prova.pdf");  
+        MergePdf.concatPDFs(pdfs, output, true);  
+        InputStream arquivoPdf = new FileInputStream(this.caminho + "prova.pdf");
+        byte[] b = IOUtils.toByteArray(arquivoPdf);*/
+        
+        
+        HttpServletResponse res = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();  
+        res.setContentType("application/pdf");  
+         
+        //Código abaixo gerar o relatório e disponibiliza para o cliente baixar ou visualizar  
+        res.setHeader("Content-disposition", "attachment;filename=prova.pdf"); 
+
+        //Código abaixo gerar o relatório e disponibiliza diretamente na página 
+        //res.setHeader("Content-disposition", "inline;filename=arquivo.pdf");  
+        res.getOutputStream().write(b);  
+        res.getCharacterEncoding();  
+        FacesContext.getCurrentInstance().responseComplete();
+        
 		os.close();
 
 	}

@@ -84,6 +84,6 @@ public class MergePdf {
             } catch (IOException ioe) {  
                 ioe.printStackTrace();  
             }  
-        }  
+        }
     }  
 }

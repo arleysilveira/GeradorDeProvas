@@ -31,11 +31,15 @@ public class CadastroDisciplinaBean implements Serializable{
 			FacesUtil.mensagemDetalhada("frm:nome", FacesMessage.SEVERITY_ERROR, "Nome incompleto",
 					"A disciplina deve possuir no mínimo 5 letras");
 		} else {
+			if(this.disciplina.getId() != null){
+				FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Alteração concluída com sucesso");
+			} else {
+				FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Cadastro concluído com sucesso");
+			}
 			Disciplinas disciplinas = this.repositorios.getDisciplinas();
 			disciplinas.guardar(this.disciplina);
 
 			this.disciplina = new Disciplina();
-			FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Cadastro concluído");
 		}
 	}
 	

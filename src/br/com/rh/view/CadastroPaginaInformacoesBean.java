@@ -19,11 +19,16 @@ public class CadastroPaginaInformacoesBean {
 	}
 	
 	public void cadastrar() {
+		if(this.pagina.getId() != null){
+			FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Página alterada com sucesso");
+		} else {
+			FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Página cadastrada com sucesso");
+		}
+		
 		Paginas paginas = this.repositorios.getPaginas();
 		paginas.guardar(this.pagina);
 		
 		this.pagina = new PaginaInformacoes();
-		FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Cadastro concluído");
 	}
 
 	public PaginaInformacoes getPagina() {

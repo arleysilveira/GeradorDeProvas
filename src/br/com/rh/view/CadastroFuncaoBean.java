@@ -43,11 +43,15 @@ public class CadastroFuncaoBean implements Serializable{
 			FacesUtil.mensagemDetalhada("frm:nome", FacesMessage.SEVERITY_ERROR, "Nome incompleto",
 					"A função deve possuir no mínimo 5 letras");
 		} else {
+			if(this.funcao.getId() != null){
+				FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Alteração concluída com sucesso");
+			} else {
+				FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Cadastro concluído com sucesso");
+			}
 			Funcoes funcao = this.repositorios.getFuncoes();
 			funcao.guardar(this.funcao);
 
 			this.funcao = new Funcao();
-			FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Cadastro concluído");
 		}
 	}
 	

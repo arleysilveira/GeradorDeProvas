@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -24,6 +26,7 @@ import br.com.rh.model.Questao;
 import br.com.rh.repository.Disciplinas;
 import br.com.rh.repository.Funcoes;
 import br.com.rh.repository.Questoes;
+import br.com.rh.util.FacesUtil;
 import br.com.rh.util.Repositorios;
 
 @SuppressWarnings("serial")
@@ -53,6 +56,11 @@ public class CadastroQuestaoBean implements Serializable{
 
 	public void cadastrar() {
 		verificaTipoQuestao();
+		if(this.questao.getId() != null){
+			FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Questão alterada com sucesso");
+		} else {
+			FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Questão cadastrada com sucesso");
+		}
 		Questoes questoes = this.repositorios.getQuestoes();
 		questoes.guardar(this.questao);
 		
@@ -69,21 +77,20 @@ public class CadastroQuestaoBean implements Serializable{
 	    String localPath = System.getProperty("user.dir");  
 	    
 	    this.nomeArquivo = event.getFile().getFileName();
-	    //String thePath = request.getRealPath("/");
 	    
 	    /*Descomentar quando for para produção Tomcat
 	    HttpSession session = (HttpSession)    
 	    	    FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-	    caminho = session.getServletContext().getRealPath("/"+"imagens/" + event.getFile().getFileName());*/
+	    caminho = session.getServletContext().getRealPath("/"+"imagens-prova/" + event.getFile().getFileName());*/
 	   
-	    caminho = (localPath + "/git/GeradorDeProvas/WebContent/imagens/" + this.nomeArquivo);
+	    caminho = (localPath + "/git/GeradorDeProvas/WebContent/imagens-prova/" + this.nomeArquivo);
 	    OutputStream fos = new FileOutputStream(caminho);  
 	    fos.write(conteudo);  
 	    fos.close();  
 	}
 	
 	public void inserirImagem(){
-		this.arquivo = "<img src=\"http://localhost:8080/GeradorPerguntas/imagens/" + this.nomeArquivo + "\">";
+		this.arquivo = "<img src=\"http://localhost:8080/GeradorPerguntas/imagens-prova/" + this.nomeArquivo + "\">";
 		String titulo = questao.getTitulo() + arquivo;
 		Charset.forName("UTF-8").encode(titulo);
 		this.questao.setTitulo(titulo); 
