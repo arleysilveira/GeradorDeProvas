@@ -6,29 +6,39 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <f:metadata>
-	<f:viewParam name="codigo" value="#{cadastroPaginaInformacoesBean.pagina}" />
+	<f:viewParam name="codigo"
+		value="#{cadastroPaginaInformacoesBean.pagina}" />
 </f:metadata>
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<h:outputStylesheet library="css" name="sistema.css"/>
+	<h:outputStylesheet library="css" name="sistema.css" />
+	<h:outputStylesheet library="css" name="geral.css" />
 	<title>Insert title here</title>
 </h:head>
 <h:body>
 	<h2>Cadastro Página de Informação</h2>
 	<p:messages />
 	<h:form>
-		<p:outputLabel value="Titulo: "/>
-		<p:inputText value="#{cadastroPaginaInformacoesBean.pagina.titulo}"/>
-		<br/><br/>
-		
-		<p:editor id="titulo" height="500"
-			value="#{cadastroPaginaInformacoesBean.pagina.texto}" />
-		<br/>
-		<p:commandButton value="Salvar" icon="ui-icon-disk"
-			action="#{cadastroPaginaInformacoesBean.cadastrar}" ajax="@this" />
-		<p:button value="Cancelar" outcome="inicio" icon="ui-icon-cancel" />
-		<p:button value="Lista de Páginas" outcome="ListarAlterarPaginas.xhtml" icon="ui-icon-grip-solid-horizontal"/>
+		<b><p:outputLabel value="Titulo:" for="titulo"/></b>
+		<p:inputText value="#{cadastroPaginaInformacoesBean.pagina.titulo}" id="titulo" 
+			label="Titulo" required="true"/>
+		<br /><br />
+		<b><p:outputLabel value="Página: "/></b>
+		<p:panelGrid columns="2">
+			<p:editor height="500" 
+				value="#{cadastroPaginaInformacoesBean.pagina.texto}" />
+
+			<f:facet name="footer">
+				<p:commandButton value="Salvar" icon="ui-icon-disk"
+					action="#{cadastroPaginaInformacoesBean.cadastrar}" ajax="@this" />
+				<p:button value="Cancelar" outcome="inicio" icon="ui-icon-cancel" />
+				<p:button value="Lista de Páginas"
+					outcome="ListarAlterarPaginas.xhtml"
+					icon="ui-icon-grip-solid-horizontal" />
+			</f:facet>
+		</p:panelGrid>
+
 	</h:form>
 </h:body>
 </html>

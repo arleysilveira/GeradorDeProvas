@@ -13,22 +13,29 @@ public class CadastroPaginaInformacoesBean {
 
 	private PaginaInformacoes pagina;
 	private Repositorios repositorios = new Repositorios();
-	
-	public CadastroPaginaInformacoesBean(){
+
+	public CadastroPaginaInformacoesBean() {
 		this.pagina = new PaginaInformacoes();
 	}
-	
+
 	public void cadastrar() {
-		if(this.pagina.getId() != null){
-			FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Página alterada com sucesso");
+		if (this.pagina.getTexto().equals("") || this.pagina.getTexto() == null ||
+				this.pagina.getTexto().equals("<br>")) {
+			FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_ERROR, "O campo Página é obrigatório");
+			System.out.println(this.pagina.getTexto());
 		} else {
-			FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Página cadastrada com sucesso");
+			System.out.println(this.pagina.getTexto());
+			if (this.pagina.getId() != null) {
+				FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Página alterada com sucesso");
+			} else {
+				FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Página cadastrada com sucesso");
+			}
+			Paginas paginas = this.repositorios.getPaginas();
+			paginas.guardar(this.pagina);
+
+			this.pagina = new PaginaInformacoes();
 		}
-		
-		Paginas paginas = this.repositorios.getPaginas();
-		paginas.guardar(this.pagina);
-		
-		this.pagina = new PaginaInformacoes();
+
 	}
 
 	public PaginaInformacoes getPagina() {
@@ -37,11 +44,9 @@ public class CadastroPaginaInformacoesBean {
 
 	public void setPagina(PaginaInformacoes pagina) {
 		this.pagina = pagina;
-		if(this.pagina == null){
+		if (this.pagina == null) {
 			this.pagina = new PaginaInformacoes();
 		}
 	}
-	
-	
-	
+
 }

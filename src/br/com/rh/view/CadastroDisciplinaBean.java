@@ -23,13 +23,12 @@ public class CadastroDisciplinaBean implements Serializable{
 	}
 
 	public void cadastrar() {
-		System.out.println(System.getProperty("user.dir"));
 		if (this.disciplina.getNome() == "") {
 			FacesUtil.mensagemDetalhada("frm:nome", FacesMessage.SEVERITY_ERROR, "Campo Obrigatório",
 					"Favor informar o nome da disciplina");
-		} else if (this.disciplina.getNome().length() < 5) {
+		} else if (this.disciplina.getNome().length() < 3) {
 			FacesUtil.mensagemDetalhada("frm:nome", FacesMessage.SEVERITY_ERROR, "Nome incompleto",
-					"A disciplina deve possuir no mínimo 5 letras");
+					"A disciplina deve possuir no mínimo 3 letras");
 		} else {
 			if(this.disciplina.getId() != null){
 				FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Alteração concluída com sucesso");

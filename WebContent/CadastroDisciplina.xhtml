@@ -12,31 +12,34 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Cadastro de Disciplinas</title>
+	<h:outputStylesheet library="css" name="geral.css"></h:outputStylesheet>
 </h:head>
 
 <h:body>
-<div align="center" style="margin-top: 70px">
-	<p:messages />
-	<h:form id="frm">
-		<p:panelGrid columns="2">
-			<f:facet name="header">Cadastro de Disciplinas</f:facet>
+	<div align="center" style="margin-top: 70px">
+		<p:messages />
+		<h:form id="frm">
+			<p:panelGrid columns="2">
+				<f:facet name="header">Cadastro de Disciplinas</f:facet>
 
-			<p:outputLabel value="Disciplina: " />
-			<h:panelGroup>
-				<p:inputText id="nome"
-					value="#{cadastroDisciplinaBean.disciplina.nome}" />
-				<p:message for="nome" />
-			</h:panelGroup>
+				<p:outputLabel value="Disciplina: " />
+				<h:panelGroup>
+					<p:inputText id="nome"
+						value="#{cadastroDisciplinaBean.disciplina.nome}" />
+					<p:message for="nome" />
+				</h:panelGroup>
 
-			<f:facet name="footer">
-				<p:commandButton value="Salvar" icon="ui-icon-disk"
-					action="#{cadastroDisciplinaBean.cadastrar}"  ajax="@this"/>
-				<p:button value="Cancelar" outcome="inicio" icon="ui-icon-cancel"/>
-				<p:button value="Lista de Disciplinas"
-					outcome="ListarAlterarDisciplina"  icon="ui-icon-grip-solid-horizontal"/>
-			</f:facet>
-		</p:panelGrid>
-	</h:form>
+				<f:facet name="footer">
+					<p:commandButton value="Salvar" icon="ui-icon-disk"
+						action="#{cadastroDisciplinaBean.cadastrar}" ajax="@this" />
+					<p:button value="Cancelar" outcome="inicio" icon="ui-icon-cancel" />
+					<p:button value="Lista de Disciplinas"
+						outcome="ListarAlterarDisciplina"
+						icon="ui-icon-grip-solid-horizontal" />
+				</f:facet>
+			</p:panelGrid>
+
+		</h:form>
 	</div>
 </h:body>
 </html>

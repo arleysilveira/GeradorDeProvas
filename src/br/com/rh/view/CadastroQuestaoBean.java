@@ -10,11 +10,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.FileUploadEvent;
 //import org.primefaces.event.FileUploadEvent;
@@ -38,6 +35,7 @@ public class CadastroQuestaoBean implements Serializable{
 	private List<Funcao> funcoes = new ArrayList<Funcao>();
 	private Repositorios repositorios = new Repositorios();
 	private UploadedFile file;
+	private Boolean funcao, disciplina;
 	
 
 	public CadastroQuestaoBean(){
@@ -54,17 +52,34 @@ public class CadastroQuestaoBean implements Serializable{
 		
 	}
 
+	public void desabilitarFuncao(){
+		this.funcao = true;
+	}
+	
+	public void desabilitarDisciplina(){
+		this.disciplina = true;
+	}
+	
 	public void cadastrar() {
 		verificaTipoQuestao();
-		if(this.questao.getId() != null){
-			FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Questão alterada com sucesso");
+		if(this.questao.getTitulo().equals("") || this.questao.getTitulo() == null ||
+				this.questao.getTitulo().equals("<br>")){
+			FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_ERROR, "O campo questão é obrigatório");
 		} else {
-			FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Questão cadastrada com sucesso");
+			Questoes questoes = this.repositorios.getQuestoes();
+			questoes.guardar(this.questao);
+			
+			this.questao = new Questao();	
+			this.funcao = false;
+			this.disciplina = false;
+			
+			if(this.questao.getId() != null){
+				FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Questão alterada com sucesso");
+			} else {
+				FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Questão cadastrada com sucesso");
+			}
 		}
-		Questoes questoes = this.repositorios.getQuestoes();
-		questoes.guardar(this.questao);
 		
-		this.questao = new Questao();
 		
 	}
 	
@@ -157,6 +172,26 @@ public class CadastroQuestaoBean implements Serializable{
 	public void setArquivo(String arquivo) {
 		this.arquivo = arquivo;
 	}
+
+	public Boolean getFuncao() {
+		return funcao;
+	}
+	
+
+	public void setFuncao(Boolean funcao) {
+		this.funcao = funcao;
+	}
+
+	public Boolean getDisciplina() {
+		return disciplina;
+	}
+	
+
+	public void setDisciplina(Boolean disciplina) {
+		this.disciplina = disciplina;
+	}
+	
+	
 	
 	
 	

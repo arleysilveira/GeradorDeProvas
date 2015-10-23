@@ -13,3 +13,12 @@ thead{
 	margin: 5px 5px 5px 10px;
 }
 
+.ui-panelgrid-footer tr td{
+	text-align: center;
+}
+
+.ui-button {
+	margin-right: 5px !important;
+	margin-left: 5px !important;
+}
+

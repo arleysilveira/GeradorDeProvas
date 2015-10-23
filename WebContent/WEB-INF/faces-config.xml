@@ -14,6 +14,13 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	<application>
+	<message-bundle>br.com.rh.util.Messages</message-bundle>
+	
+		<locale-config>
+			<default-locale>pt_BR</default-locale>
+		</locale-config>
+	</application>
 	
 
 </faces-config>
