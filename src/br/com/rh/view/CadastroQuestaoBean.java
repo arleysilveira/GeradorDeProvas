@@ -54,10 +54,16 @@ public class CadastroQuestaoBean implements Serializable{
 
 	public void desabilitarFuncao(){
 		this.funcao = true;
+		if(this.questao.getDisciplina() == null ){
+			this.funcao = false;
+		}
 	}
 	
 	public void desabilitarDisciplina(){
 		this.disciplina = true;
+		if(this.questao.getFuncao() == null ){
+			this.disciplina = false;
+		}
 	}
 	
 	public void cadastrar() {

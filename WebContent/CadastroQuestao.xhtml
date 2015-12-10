@@ -32,24 +32,22 @@
 				<p:outputLabel value="Disciplina:" />
 				<p:selectOneMenu id="disciplina"
 					value="#{cadastroQuestaoBean.questao.disciplina}"
-					valueChangeListener="#{cadastroQuestaoBean.desabilitarFuncao}"
 					disabled="#{cadastroQuestaoBean.disciplina}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{cadastroQuestaoBean.disciplinas}"
 						var="disciplina" itemValue="#{disciplina}"
 						itemLabel="#{disciplina.nome}" />
-					<p:ajax update="funcoes" />
+					<p:ajax update="funcoes" listener="#{cadastroQuestaoBean.desabilitarFuncao}" />
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Funções:" />
 				<p:selectOneMenu id="funcoes"
-					valueChangeListener="#{cadastroQuestaoBean.desabilitarDisciplina}"
 					value="#{cadastroQuestaoBean.questao.funcao}"
 					disabled="#{cadastroQuestaoBean.funcao}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{cadastroQuestaoBean.funcoes}" var="funcao"
 						itemLabel="#{funcao.nome}" itemValue="#{funcao}" />
-					<p:ajax update="disciplina" />
+					<p:ajax update="disciplina" listener="#{cadastroQuestaoBean.desabilitarDisciplina}"/>
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Dificuldade:" />
