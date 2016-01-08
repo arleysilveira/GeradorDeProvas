@@ -22,12 +22,21 @@
 
 	<p:messages />
 	<h:form id="frm" enctype="multipart/form-data" acceptcharset="utf-8">
-		<h1>Questão:</h1>
-		<p:editor id="titulo" value="#{cadastroQuestaoBean.questao.titulo}" />
+		<h1>Questão:*</h1>
+		<p:editor id="titulo" value="#{cadastroQuestaoBean.questao.titulo}"/>
 
-		<br />
+		<p:panelGrid columns="2">
+			<p:fileUpload fileUploadListener="#{cadastroQuestaoBean.testeFile}"
+				auto="true" />
+			<p:commandButton value="Inserir Imagem"
+				actionListener="#{cadastroQuestaoBean.inserirImagem}"
+				update="@this, titulo" process="@this, titulo" />
+		</p:panelGrid>
+
+	<br />
 
 		<p:panelGrid columns="2" styleClass="semBorda">
+			
 			<p:panelGrid columns="2" id="panel">
 				<p:outputLabel value="Disciplina:" />
 				<p:selectOneMenu id="disciplina"
@@ -37,7 +46,8 @@
 					<f:selectItems value="#{cadastroQuestaoBean.disciplinas}"
 						var="disciplina" itemValue="#{disciplina}"
 						itemLabel="#{disciplina.nome}" />
-					<p:ajax update="funcoes" listener="#{cadastroQuestaoBean.desabilitarFuncao}" />
+					<p:ajax update="funcoes"
+						listener="#{cadastroQuestaoBean.desabilitarFuncao}" />
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Funções:" />
@@ -47,7 +57,8 @@
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{cadastroQuestaoBean.funcoes}" var="funcao"
 						itemLabel="#{funcao.nome}" itemValue="#{funcao}" />
-					<p:ajax update="disciplina" listener="#{cadastroQuestaoBean.desabilitarDisciplina}"/>
+					<p:ajax update="disciplina"
+						listener="#{cadastroQuestaoBean.desabilitarDisciplina}" />
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Dificuldade:" />
@@ -57,11 +68,11 @@
 					<f:selectItem itemLabel="Difícil" itemValue="D" />
 				</p:selectOneMenu>
 
-				<p:outputLabel value="Tipo de Questão" />
+				<p:outputLabel value="Tipo de Questão:" for="tipoQuestao"/>
 
-				<p:selectOneRadio immediate="true" required="true"
-					label="Tipo de Questão"
-					value="#{cadastroQuestaoBean.questao.numeroAlternativas}">
+				<p:selectOneRadio id="tipoQuestao" immediate="true"
+					value="#{cadastroQuestaoBean.questao.numeroAlternativas}"
+					required="true">
 					<f:selectItem itemValue="2" itemLabel="Verdadeiro/Falso" />
 					<f:selectItem itemValue="5" itemLabel="Alternativas" />
 					<f:selectItem itemValue="1" itemLabel="Subjetiva" />
@@ -104,31 +115,23 @@
 
 				<p:outputLabel value="Alternativa Correta:" for="alternativaCorreta"
 					rendered="#{cadastroQuestaoBean.questao.numeroAlternativas != 1 and 
-				cadastroQuestaoBean.questao.numeroAlternativas != null}" />
+				cadastroQuestaoBean.questao.numeroAlternativas != null and 
+				cadastroQuestaoBean.questao.numeroAlternativas != ''}" />
+				
 				<p:inputText required="true" id="alternativaCorreta"
-					label="Alternativa Correta"
 					value="#{cadastroQuestaoBean.questao.alternativaCorreta}"
 					rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 5}" />
 
 				<p:selectOneRadio
 					value="#{cadastroQuestaoBean.questao.alternativaCorreta}"
-					label="Alternativa Correta"
 					rendered="#{cadastroQuestaoBean.questao.numeroAlternativas == 2}"
+					label="Alternativa Correta"
 					required="true">
 					<f:selectItem itemValue="1" itemLabel="Verdadeiro" />
 					<f:selectItem itemValue="0" itemLabel="Falso" />
 				</p:selectOneRadio>
 
 			</p:panelGrid>
-
-
-		</p:panelGrid>
-		<p:panelGrid columns="2">
-			<p:fileUpload fileUploadListener="#{cadastroQuestaoBean.testeFile}"
-				auto="true" />
-			<p:commandButton value="Inserir Imagem"
-				actionListener="#{cadastroQuestaoBean.inserirImagem}"
-				update="titulo" process="@form" />
 
 			<f:facet name="footer">
 				<p:commandButton value="Salvar"
@@ -139,6 +142,7 @@
 					icon="ui-icon-grip-solid-horizontal" />
 			</f:facet>
 		</p:panelGrid>
+
 
 	</h:form>
 

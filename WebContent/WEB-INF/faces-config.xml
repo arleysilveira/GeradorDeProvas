@@ -14,6 +14,14 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>GerarProva</from-outcome>
+			<to-view-id>/GerarProva.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
 	<application>
 	<message-bundle>br.com.rh.util.Messages</message-bundle>
 	

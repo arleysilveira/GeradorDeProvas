@@ -29,112 +29,116 @@ import br.com.rh.util.Repositorios;
 @SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
-public class CadastroQuestaoBean implements Serializable{
+public class CadastroQuestaoBean implements Serializable {
 	private Questao questao;
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 	private List<Funcao> funcoes = new ArrayList<Funcao>();
 	private Repositorios repositorios = new Repositorios();
 	private UploadedFile file;
 	private Boolean funcao, disciplina;
-	
 
-	public CadastroQuestaoBean(){
+	public CadastroQuestaoBean() {
 		this.questao = new Questao();
 	}
-	
+
 	@PostConstruct
-	public void init(){
+	public void init() {
 		Disciplinas disciplinas = this.repositorios.getDisciplinas();
 		this.disciplinas = disciplinas.listarTodas();
-		
+
 		Funcoes funcoes = this.repositorios.getFuncoes();
 		this.funcoes = funcoes.listarTodas();
-		
+
 	}
 
-	public void desabilitarFuncao(){
+	public void desabilitarFuncao() {
 		this.funcao = true;
-		if(this.questao.getDisciplina() == null ){
+		if (this.questao.getDisciplina() == null) {
 			this.funcao = false;
 		}
 	}
-	
-	public void desabilitarDisciplina(){
+
+	public void desabilitarDisciplina() {
 		this.disciplina = true;
-		if(this.questao.getFuncao() == null ){
+		if (this.questao.getFuncao() == null) {
 			this.disciplina = false;
 		}
 	}
-	
+
 	public void cadastrar() {
 		verificaTipoQuestao();
-		if(this.questao.getTitulo().equals("") || this.questao.getTitulo() == null ||
-				this.questao.getTitulo().equals("<br>")){
-			FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_ERROR, "O campo questão é obrigatório");
+		if (this.questao.getTitulo() == null || this.questao.getTitulo().equals("")
+				|| this.questao.getTitulo().equals("<br>")) {
+			FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_ERROR, "O campo Questão é obrigatório");
+		} else if(this.questao.getDisciplina() == null && this.questao.getFuncao() == null){
+			FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_ERROR, "É necessário selecionar ao menos um dos campos:"
+					+ " Disciplina ou Função.");
 		} else {
 			Questoes questoes = this.repositorios.getQuestoes();
 			questoes.guardar(this.questao);
-			
-			this.questao = new Questao();	
+
+			this.questao = new Questao();
 			this.funcao = false;
 			this.disciplina = false;
-			
-			if(this.questao.getId() != null){
+
+			if (this.questao.getId() != null) {
 				FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Questão alterada com sucesso");
 			} else {
 				FacesUtil.adicionaMensagem(FacesMessage.SEVERITY_INFO, "Questão cadastrada com sucesso");
 			}
 		}
-		
-		
+
 	}
-	
+
 	String nomeArquivo;
 	String arquivo;
 	String caminho;
-	
-	public void testeFile(FileUploadEvent event) throws IOException{
-		byte[] conteudo = event.getFile().getContents();  
-	    String localPath = System.getProperty("user.dir");  
-	    
-	    this.nomeArquivo = event.getFile().getFileName();
-	    
-	    /*Descomentar quando for para produção Tomcat
-	    HttpSession session = (HttpSession)    
-	    	    FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-	    caminho = session.getServletContext().getRealPath("/"+"imagens-prova/" + event.getFile().getFileName());*/
-	   
-	    caminho = (localPath + "/git/GeradorDeProvas/WebContent/imagens-prova/" + this.nomeArquivo);
-	    OutputStream fos = new FileOutputStream(caminho);  
-	    fos.write(conteudo);  
-	    fos.close();  
+
+	public void testeFile(FileUploadEvent event) throws IOException {
+		byte[] conteudo = event.getFile().getContents();
+		String localPath = System.getProperty("user.dir");
+
+		this.nomeArquivo = event.getFile().getFileName();
+
+		/*
+		 * Descomentar quando for para produção Tomcat HttpSession session =
+		 * (HttpSession)
+		 * FacesContext.getCurrentInstance().getExternalContext().getSession(
+		 * false); caminho =
+		 * session.getServletContext().getRealPath("/"+"imagens-prova/" +
+		 * event.getFile().getFileName());
+		 */
+
+		caminho = (localPath + "/git/GeradorDeProvas/WebContent/imagens-prova/" + this.nomeArquivo);
+		OutputStream fos = new FileOutputStream(caminho);
+		fos.write(conteudo);
+		fos.close();
 	}
-	
-	public void inserirImagem(){
+
+	public void inserirImagem() {
 		this.arquivo = "<img src=\"http://localhost:8080/GeradorPerguntas/imagens-prova/" + this.nomeArquivo + "\">";
 		String titulo = questao.getTitulo() + arquivo;
 		Charset.forName("UTF-8").encode(titulo);
-		this.questao.setTitulo(titulo); 
+		this.questao.setTitulo(titulo);
 	}
-	
-	private void verificaTipoQuestao(){
-		if(this.questao.getNumeroAlternativas().equals("2")){
-			this.questao.setAlternativa1("1"); //Representa Verdadeira
-			this.questao.setAlternativa2("0"); //Representa o Falsa
+
+	private void verificaTipoQuestao() {
+		if (this.questao.getNumeroAlternativas().equals("2")) {
+			this.questao.setAlternativa1("1"); // Representa Verdadeira
+			this.questao.setAlternativa2("0"); // Representa o Falsa
 			this.questao.setAlternativa3(null);
 			this.questao.setAlternativa4(null);
 			this.questao.setAlternativa5(null);
 		}
 	}
-	
-	
+
 	public Questao getQuestao() {
 		return questao;
 	}
 
 	public void setQuestao(Questao questao) {
 		this.questao = questao;
-		if(this.questao == null){
+		if (this.questao == null) {
 			this.questao = new Questao();
 		}
 	}
@@ -182,7 +186,6 @@ public class CadastroQuestaoBean implements Serializable{
 	public Boolean getFuncao() {
 		return funcao;
 	}
-	
 
 	public void setFuncao(Boolean funcao) {
 		this.funcao = funcao;
@@ -191,14 +194,9 @@ public class CadastroQuestaoBean implements Serializable{
 	public Boolean getDisciplina() {
 		return disciplina;
 	}
-	
 
 	public void setDisciplina(Boolean disciplina) {
 		this.disciplina = disciplina;
 	}
-	
-	
-	
-	
-	
+
 }

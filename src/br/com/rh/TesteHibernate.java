@@ -1,3 +1,4 @@
+package br.com.rh;
 import java.util.List;
 
 import org.hibernate.Session;

@@ -108,7 +108,7 @@ public class GerarProvaBean implements Serializable {
 				questoesDificeis[2], prova3.getFuncaoSelecionada().getId().toString(), verdFalso[2], subjetivas[2],
 				alternativas[2]);
 		
-		return "ListaDeQuestoes.xhtml.xhtml?faces-redirect=true";
+		return "questao/ListaDeQuestoes.xhtml?faces-redirect=true";
 	}
 
 	// Função para modificar a Questão
